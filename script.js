@@ -15,8 +15,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 window.addEventListener("DOMContentLoaded", async function () {
 
-    
-
     // Pharmacy locations
     let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
     let pharmacyData = pharmacyResponse.data
@@ -33,8 +31,5 @@ window.addEventListener("DOMContentLoaded", async function () {
         let pharmacyLocation = pharmacy.geometry.coordinates
         L.marker([pharmacyLocation[1], pharmacyLocation[0]]).addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
     }
-
-
-
 
 })
