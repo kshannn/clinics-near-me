@@ -16,12 +16,19 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 window.addEventListener("DOMContentLoaded", async function () {
 
     // Clinic locations
-
     let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
     let clinicsData = clinicsResponse.data
 
+    // Clinic Icon
+    let clinicIcon = L.icon({
+        iconUrl: 'images/clinic.png',
+        iconSize:     [38, 38], // size of the icon
+        iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+        popupAnchor:  [20, -10] // point from which the popup should open relative to the iconAnchor
+    });
 
-    // Create pharmacy cluster layer
+
+    // Create clinic cluster layer
     let clinicClusterLayer = L.markerClusterGroup();
     clinicClusterLayer.addTo(map);
 
@@ -31,45 +38,49 @@ window.addEventListener("DOMContentLoaded", async function () {
         clinicName = clinicName[0]
 
         let clinicLocation = clinic.geometry.coordinates
-        L.marker([clinicLocation[1], clinicLocation[0]]).addTo(clinicClusterLayer).bindPopup(clinicName)
+        L.marker([clinicLocation[1], clinicLocation[0]],{icon:clinicIcon}).addTo(clinicClusterLayer).bindPopup(clinicName)
     }
 
 
+    // Pharmacy locations
+    let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
+    let pharmacyData = pharmacyResponse.data
+
+     // Pharmacy Icon
+     let pharmacyIcon = L.icon({
+        iconUrl: 'images/pharmacy.png',
+        iconSize:     [38, 38], // size of the icon
+        iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+        popupAnchor:  [20, -10] // point from which the popup should open relative to the iconAnchor
+    });
 
 
+    // Create pharmacy cluster layer
+    let pharmacyClusterLayer = L.markerClusterGroup();
+    pharmacyClusterLayer.addTo(map);
+
+    // Create pharmacy layer group
+    // let pharmacyGroup = L.layerGroup();
+    // pharmacyGroup.addTo(map);
 
 
-
-    // // Pharmacy locations
-    // let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
-    // let pharmacyData = pharmacyResponse.data
-
-    // // Create pharmacy cluster layer
-    // let pharmacyClusterLayer = L.markerClusterGroup();
-    // pharmacyClusterLayer.addTo(map);
-
-    // // Create pharmacy layer group
-    // // let pharmacyGroup = L.layerGroup();
-    // // pharmacyGroup.addTo(map);
-
-
-    // //Create baselayer/overlays(s) and add to map
-    // // let baseLayers = {
-    // //     "Pharmacies": pharmacyGroup
-    // // }
-
-    // // L.control.layers(baseLayers).addTo(map);
-
-    // for (let pharmacy of pharmacyData.features) {
-
-    //     let pharmacyName = pharmacy.properties.Description.split("<td>")
-    //     pharmacyName = pharmacyName[7].split("</td>")
-    //     pharmacyName = pharmacyName[0]
-
-    //     let pharmacyLocation = pharmacy.geometry.coordinates
-    //     L.marker([pharmacyLocation[1], pharmacyLocation[0]]).addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
-    //     // L.marker([pharmacyLocation[1], pharmacyLocation[0]]).addTo(pharmacyGroup);
+    //Create baselayer/overlays(s) and add to map
+    // let baseLayers = {
+    //     "Pharmacies": pharmacyGroup
     // }
+
+    // L.control.layers(baseLayers).addTo(map);
+
+    for (let pharmacy of pharmacyData.features) {
+
+        let pharmacyName = pharmacy.properties.Description.split("<td>")
+        pharmacyName = pharmacyName[7].split("</td>")
+        pharmacyName = pharmacyName[0]
+
+        let pharmacyLocation = pharmacy.geometry.coordinates
+        L.marker([pharmacyLocation[1], pharmacyLocation[0]],{icon:pharmacyIcon}).addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
+        // L.marker([pharmacyLocation[1], pharmacyLocation[0]]).addTo(pharmacyGroup);
+    }
 
 })
 
