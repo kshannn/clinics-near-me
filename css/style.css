@@ -4,13 +4,8 @@ body {
     padding: 0;
 }
 
-#map {
-    height: 100vh;
-    background: black;
-    z-index: -1;
-  }
 
-
+/* main searchbox */
 #contentContainer {
     height: 100vh;
     width: 100%;
@@ -20,6 +15,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
 }
 
 #content {
@@ -29,9 +26,38 @@ body {
     border-radius: 24px;
 }
 
+#textBox {
+    width: 60%;
+}
+
+#instruction {
+    width: 65%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.671);
+    font-size: 2rem;
+}
+
 #searchBox {
     height:100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* map */
+#map {
+    height: 100vh;
+    background: black;
+    z-index: -1;
+}
+
+#layerToggle {
+    height: 50px;
+    width: 150px;
+    border-radius: 14px;
+    background-color: salmon;
+    position:absolute;
+    top: 2%;
+    right: 2%;
+    padding: 20px;
 }

@@ -20,12 +20,21 @@
 <body>
     <div>
         <div id="map"></div>
+        <div id="layerToggle">
+            <input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible">
+            <label>Toggle pharmacies</label>
+            <input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible">
+            <label>Toggle clinics</label>
+        </div>
         <div id="contentContainer">
             <div id="content">
                 <div id="searchBox">
-                    <input type="text" id="text" name="text" placeholder="Search for a clinic">
+                    <input type="text" id="textBox" name="text" placeholder="Search for a clinic">
                     <button>Search</button>
                 </div>
+            </div>
+            <div id="instruction">
+                <p>Click/tap on anywhere outside to close search</p>
             </div>
         </div>
     </div>
