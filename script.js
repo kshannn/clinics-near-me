@@ -33,3 +33,18 @@ window.addEventListener("DOMContentLoaded", async function () {
     }
 
 })
+
+
+
+document.querySelector("#contentContainer").addEventListener("click",function(event){
+    if (document.querySelector("#content").contains(event.target)){
+        // pass
+    } else {
+        // hide div
+        document.querySelector("#content").style.display="none";
+        document.querySelector("#contentContainer").style.display="none";
+        document.querySelector("#map").style.zIndex = "1";
+        
+    }
+    
+})
