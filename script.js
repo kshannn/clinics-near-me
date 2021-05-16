@@ -105,3 +105,18 @@ document.querySelector("#contentContainer").addEventListener("click", function (
 // pharmacyBtn.addEventListener("change", function{
 
 // })
+
+
+// Inner search box nav button
+document.querySelector("#navBtn").addEventListener("click",function(){
+    // document.querySelector("#toggleLayer").style.display = "none";
+
+    
+    if (document.querySelector("#toggleLayer").classList.contains("hidden")){
+        document.querySelector("#toggleLayer").classList.remove("hidden");
+        document.querySelector("#toggleLayer").classList.add("show");
+    } else {
+        document.querySelector("#toggleLayer").classList.remove("show");
+        document.querySelector("#toggleLayer").classList.add("hidden");
+    }
+})

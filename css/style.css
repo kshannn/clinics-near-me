@@ -66,11 +66,11 @@ body {
     position: absolute;
 }
 #innerContentBox {
-    margin: 5px auto;
-    width: 90%;
+    margin: 15px auto;
+    width: 85%;
     min-height: 50px;
     line-height:50px;
-    background-color: rgb(32, 131, 134);
+    /* background-color: rgb(32, 131, 134); */
     display: flex;
     flex-wrap: wrap;
 }
@@ -88,14 +88,25 @@ body {
     width: 50px;
     height: 50px;
     background-color: rgb(92, 83, 83);
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
 }
 
 #toggleLayer {
     width: 100%;
-    height: 40px;
+    height: 45px;
     background-color: gold;
     display: flex;
     justify-content: center;
+}
+
+.hidden {
+    transform: translateX(-110%);
+}
+
+.show {
+    transform: translateX(0);
 }
 
 /* ############## TABLET DISPLAY ############## */
