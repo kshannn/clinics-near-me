@@ -1,3 +1,4 @@
+/* ############## MOBILE DISPLAY ############## */
 body {
     box-sizing: border-box;
     margin: 0;
@@ -57,15 +58,19 @@ body {
     bottom: -95vh;
 }
 
+/* inner content box */
 
+#innerContainer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
 #innerContentBox {
-    width: 350px;
+    margin: 5px auto;
+    width: 90%;
     min-height: 50px;
     line-height:50px;
     background-color: rgb(32, 131, 134);
-    position: absolute;
-    top: 20px;
-    left: 20px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -93,8 +98,8 @@ body {
     justify-content: center;
 }
 
-/* ############## MOBILE RESPONSIVE ############## */
-
+/* ############## TABLET DISPLAY ############## */
+/* 
 @media screen and (max-width:300px){
     #innerContentBox {
         width: 250px;
@@ -113,4 +118,4 @@ body {
         height: 50px;
         background-color: rgb(92, 83, 83);
     }
-}
+} */
