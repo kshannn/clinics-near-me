@@ -51,13 +51,20 @@ body {
     z-index: -1;
 }
 
+/* toggle box */
 #layerToggle {
-    height: 50px;
-    width: 150px;
+    height: 100px;
+    width: 200px;
     border-radius: 14px;
+    font-size: 1rem;
     background-color: salmon;
     position:absolute;
     top: 2%;
     right: 2%;
     padding: 20px;
+}
+
+/* zoom buttons */
+.leaflet-top .leaflet-control {
+    margin-top: 80px;
 }

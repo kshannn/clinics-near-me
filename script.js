@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     let clinicIcon = L.icon({
         iconUrl: 'images/clinic.png',
         iconSize:     [38, 38], // size of the icon
-        iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+        iconAnchor:   [-5, -5], // point of the icon which will correspond to marker's location
         popupAnchor:  [20, -10] // point from which the popup should open relative to the iconAnchor
     });
 
@@ -50,7 +50,7 @@ window.addEventListener("DOMContentLoaded", async function () {
      let pharmacyIcon = L.icon({
         iconUrl: 'images/pharmacy.png',
         iconSize:     [38, 38], // size of the icon
-        iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+        iconAnchor:   [5, 5], // point of the icon which will correspond to marker's location
         popupAnchor:  [20, -10] // point from which the popup should open relative to the iconAnchor
     });
 
