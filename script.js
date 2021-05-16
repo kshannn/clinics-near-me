@@ -22,9 +22,9 @@ window.addEventListener("DOMContentLoaded", async function () {
     // Clinic Icon
     let clinicIcon = L.icon({
         iconUrl: 'images/clinic.png',
-        iconSize:     [38, 38], // size of the icon
-        iconAnchor:   [-5, -5], // point of the icon which will correspond to marker's location
-        popupAnchor:  [20, -10] // point from which the popup should open relative to the iconAnchor
+        iconSize: [38, 38], // size of the icon
+        iconAnchor: [-5, -5], // point of the icon which will correspond to marker's location
+        popupAnchor: [20, -10] // point from which the popup should open relative to the iconAnchor
     });
 
 
@@ -38,7 +38,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         clinicName = clinicName[0]
 
         let clinicLocation = clinic.geometry.coordinates
-        L.marker([clinicLocation[1], clinicLocation[0]],{icon:clinicIcon}).addTo(clinicClusterLayer).bindPopup(clinicName)
+        L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon }).addTo(clinicClusterLayer).bindPopup(clinicName)
     }
 
 
@@ -46,12 +46,12 @@ window.addEventListener("DOMContentLoaded", async function () {
     let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
     let pharmacyData = pharmacyResponse.data
 
-     // Pharmacy Icon
-     let pharmacyIcon = L.icon({
+    // Pharmacy Icon
+    let pharmacyIcon = L.icon({
         iconUrl: 'images/pharmacy.png',
-        iconSize:     [38, 38], // size of the icon
-        iconAnchor:   [5, 5], // point of the icon which will correspond to marker's location
-        popupAnchor:  [20, -10] // point from which the popup should open relative to the iconAnchor
+        iconSize: [38, 38], // size of the icon
+        iconAnchor: [5, 5], // point of the icon which will correspond to marker's location
+        popupAnchor: [20, -10] // point from which the popup should open relative to the iconAnchor
     });
 
 
@@ -78,8 +78,33 @@ window.addEventListener("DOMContentLoaded", async function () {
         pharmacyName = pharmacyName[0]
 
         let pharmacyLocation = pharmacy.geometry.coordinates
-        L.marker([pharmacyLocation[1], pharmacyLocation[0]],{icon:pharmacyIcon}).addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
+        let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
+        pharmacyMarker.addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
         // L.marker([pharmacyLocation[1], pharmacyLocation[0]]).addTo(pharmacyGroup);
+
+        let buildingName = pharmacy.properties.Description.split("<td>")
+        buildingName = buildingName[2].split("</td>")
+        buildingName = buildingName[0]
+
+        let roadName = pharmacy.properties.Description.split("<td>")
+        roadName = roadName[5].split("</td>")
+        roadName = roadName[0]
+
+        let levelNum = pharmacy.properties.Description.split("<td>")
+        levelNum = levelNum[4].split("</td>")
+        levelNum = levelNum[0]
+
+        // Description pop up when marker is clicked
+        pharmacyMarker.addEventListener("click",function(){
+            document.querySelector("#descriptionBox").innerHTML = `
+            <p>${pharmacyName}</p>
+            <p>${buildingName}, ${levelNum}</p>
+            <p>${roadName}</p>
+            `
+            console.log(pharmacyName, buildingName, roadName, levelNum)
+
+        })
+
     }
 
 })
@@ -94,6 +119,7 @@ document.querySelector("#contentContainer").addEventListener("click", function (
         document.querySelector("#content").style.display = "none";
         document.querySelector("#contentContainer").style.display = "none";
         document.querySelector("#map").style.zIndex = "0";
+        document.querySelector("#descriptionBox").style.zIndex = "1";
         document.querySelector("#innerContainer").style.zIndex = "1";
         document.querySelector("#innerContentBox").style.zIndex = "1";
     }
@@ -108,11 +134,11 @@ document.querySelector("#contentContainer").addEventListener("click", function (
 
 
 // Inner search box nav button
-document.querySelector("#navBtn").addEventListener("click",function(){
+document.querySelector("#navBtn").addEventListener("click", function () {
     // document.querySelector("#toggleLayer").style.display = "none";
 
-    
-    if (document.querySelector("#toggleLayer").classList.contains("hidden")){
+
+    if (document.querySelector("#toggleLayer").classList.contains("hidden")) {
         document.querySelector("#toggleLayer").classList.remove("hidden");
         document.querySelector("#toggleLayer").classList.add("show");
     } else {
@@ -120,3 +146,8 @@ document.querySelector("#navBtn").addEventListener("click",function(){
         document.querySelector("#toggleLayer").classList.add("hidden");
     }
 })
+
+
+
+
+

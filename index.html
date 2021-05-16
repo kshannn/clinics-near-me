@@ -24,16 +24,19 @@
     <div>
         <div id="innerContainer">
             <div id="innerContentBox">
-                <button id="navBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <input type="text" id="innerTextBox">
+                <a href="#">
+                    <div id="navBtn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </a>
+
+                <input type="text" id="innerTextBox" name="innerSearchText" placeholder="Search for a clinic">
                 <a href="#">
                     <div id="innerSearchBtn">
                         <i class="fas fa-search"></i>
                     </div>
                 </a>
-    
+
                 <div id="toggleLayer">
                     <div>
                         <input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible">
@@ -43,11 +46,11 @@
                         <input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible">
                         <label>Toggle clinics</label>
                     </div>
-    
                 </div>
+
+                <div id="descriptionBox"></div>
             </div>
         </div>
-        
 
         <div id="map"></div>
 
@@ -59,7 +62,7 @@
                 </div>
             </div>
             <div id="instruction">
-                <p>Click/tap on anywhere outside to close search</p>
+                <p>Click/tap on anywhere outside to close current window</p>
             </div>
         </div>
     </div>
