@@ -94,7 +94,7 @@ document.querySelector("#contentContainer").addEventListener("click", function (
         document.querySelector("#content").style.display = "none";
         document.querySelector("#contentContainer").style.display = "none";
         document.querySelector("#map").style.zIndex = "0";
-
+        document.querySelector("#innerSearchBox").style.zIndex = "1";
     }
 
 })
