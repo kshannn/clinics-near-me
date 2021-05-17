@@ -15,31 +15,36 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 window.addEventListener("DOMContentLoaded", async function () {
 
-    // // Clinic locations
-    // let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
-    // let clinicsData = clinicsResponse.data
+    // Clinic locations
+    let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
+    let clinicsData = clinicsResponse.data
 
-    // // Clinic Icon
-    // let clinicIcon = L.icon({
-    //     iconUrl: 'images/clinic.png',
-    //     iconSize: [38, 38], // size of the icon
-    //     iconAnchor: [-5, -5], // point of the icon which will correspond to marker's location
-    //     popupAnchor: [20, -10] // point from which the popup should open relative to the iconAnchor
-    // });
+    // Clinic Icon
+    let clinicIcon = L.icon({
+        iconUrl: 'images/clinic.png',
+        iconSize: [38, 38], // size of the icon
+        iconAnchor: [-5, -5], // point of the icon which will correspond to marker's location
+        popupAnchor: [20, -10] // point from which the popup should open relative to the iconAnchor
+    });
 
 
-    // // Create clinic cluster layer
-    // let clinicClusterLayer = L.markerClusterGroup();
-    // clinicClusterLayer.addTo(map);
+    // Create clinic cluster layer
+    let clinicClusterLayer = L.markerClusterGroup();
+    clinicClusterLayer.addTo(map);
 
-    // for (let clinic of clinicsData.features) {
-    //     let clinicName = clinic.properties.Description.split("<td>")
-    //     clinicName = clinicName[2].split("</td>")
-    //     clinicName = clinicName[0]
+     // Create clinic layer group
+     let clinicGroup = L.layerGroup();
+     clinicGroup.addTo(map);
+     clinicClusterLayer.addTo(clinicGroup);
 
-    //     let clinicLocation = clinic.geometry.coordinates
-    //     L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon }).addTo(clinicClusterLayer).bindPopup(clinicName)
-    // }
+    for (let clinic of clinicsData.features) {
+        let clinicName = clinic.properties.Description.split("<td>")
+        clinicName = clinicName[2].split("</td>")
+        clinicName = clinicName[0]
+
+        let clinicLocation = clinic.geometry.coordinates
+        L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon }).addTo(clinicClusterLayer).bindPopup(clinicName)
+    }
 
 
     // Pharmacy locations
@@ -54,10 +59,8 @@ window.addEventListener("DOMContentLoaded", async function () {
         popupAnchor: [20, -10] // point from which the popup should open relative to the iconAnchor
     });
 
-
     // Create pharmacy cluster layer
     let pharmacyClusterLayer = L.markerClusterGroup();
-    // pharmacyClusterLayer.addTo(map);
 
     // Create pharmacy layer group
     let pharmacyGroup = L.layerGroup();
@@ -112,6 +115,18 @@ window.addEventListener("DOMContentLoaded", async function () {
     }
 
     // Toggle buttons
+
+    let clinicBtn = document.querySelector("#toggleClinicBtn")
+    clinicBtn.addEventListener("change", function () {
+        if (map.hasLayer(clinicGroup)) {
+            map.removeLayer(clinicGroup)
+        } else {
+            map.addLayer(clinicGroup)
+        }
+    })
+
+    map.removeLayer(pharmacyGroup); // hide pharmacy markers by default
+
     let pharmacyBtn = document.querySelector("#togglePharmacyBtn")
     pharmacyBtn.addEventListener("change", function () {
         if (map.hasLayer(pharmacyGroup)) {
@@ -120,6 +135,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             map.addLayer(pharmacyGroup)
         }
     })
+
 
 })
 
