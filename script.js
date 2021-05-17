@@ -4,7 +4,7 @@ let map = L.map('map').setView(singapore, 12);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
+    maxZoom: 20,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
@@ -32,10 +32,10 @@ window.addEventListener("DOMContentLoaded", async function () {
     let clinicClusterLayer = L.markerClusterGroup();
     clinicClusterLayer.addTo(map);
 
-     // Create clinic layer group
-     let clinicGroup = L.layerGroup();
-     clinicGroup.addTo(map);
-     clinicClusterLayer.addTo(clinicGroup);
+    // Create clinic layer group
+    let clinicGroup = L.layerGroup();
+    clinicGroup.addTo(map);
+    clinicClusterLayer.addTo(clinicGroup);
 
     for (let clinic of clinicsData.features) {
         let clinicName = clinic.properties.Description.split("<td>")
@@ -113,7 +113,19 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         })
 
-    }
+        console.log(pharmacyName)
+        // if search matches name, return coordinates
+        document.querySelector("#innerSearchBtn").addEventListener("click", function () {
+            let innerSearch = document.querySelector("#innerTextBox").value;
+            if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
+                map.flyTo([pharmacyLocation[1], pharmacyLocation[0]],20);
+            } 
+
+        })
+
+
+
+    } // end of loop
 
     // Toggle buttons
 
@@ -158,7 +170,7 @@ document.querySelector("#contentContainer").addEventListener("click", function (
 
 })
 
-document.querySelector("#closeBtn").addEventListener("click",function(){
+document.querySelector("#closeBtn").addEventListener("click", function () {
     document.querySelector("#content").style.display = "none";
     document.querySelector("#contentContainer").style.display = "none";
     document.querySelector("#map").style.zIndex = "0";
@@ -171,28 +183,28 @@ document.querySelector("#closeBtn").addEventListener("click",function(){
 
 // Inner search box nav button
 document.querySelector("#navBtn").addEventListener("click", function () {
-    
+
     // if both are hidden, show both
     if (document.querySelector("#toggleLayer").classList.contains("hidden") && document.querySelector("#descriptionBox").classList.contains("hidden") && document.querySelector("#descriptionBox").classList.contains("statusShown")) {
         document.querySelector("#toggleLayer").classList.remove("hidden");
         document.querySelector("#toggleLayer").classList.add("show");
         document.querySelector("#descriptionBox").classList.remove("hidden");
         document.querySelector("#descriptionBox").classList.add("show");
-    } 
+    }
 
     else if (document.querySelector("#toggleLayer").classList.contains("show") && document.querySelector("#descriptionBox").classList.contains("hidden")) {
         document.querySelector("#toggleLayer").classList.remove("show");
         document.querySelector("#toggleLayer").classList.add("hidden");
-    } 
+    }
 
 
     // if toggle and description are shown, hide both.
-    else if (document.querySelector("#toggleLayer").classList.contains("show") && document.querySelector("#descriptionBox").classList.contains("show")&& document.querySelector("#descriptionBox").classList.contains("statusShown")) {
+    else if (document.querySelector("#toggleLayer").classList.contains("show") && document.querySelector("#descriptionBox").classList.contains("show") && document.querySelector("#descriptionBox").classList.contains("statusShown")) {
         document.querySelector("#toggleLayer").classList.remove("show");
         document.querySelector("#toggleLayer").classList.add("hidden");
         document.querySelector("#descriptionBox").classList.remove("show");
         document.querySelector("#descriptionBox").classList.add("hidden");
-    } 
+    }
 
     else {
         document.querySelector("#toggleLayer").classList.remove("hidden");
@@ -201,3 +213,6 @@ document.querySelector("#navBtn").addEventListener("click", function () {
 
 
 })
+
+
+
