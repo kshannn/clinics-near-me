@@ -75,6 +75,11 @@ body {
     flex-wrap: wrap;
 }
 
+#expandibleDropdown {
+    width: 100%;
+    min-height: 0;
+}
+
 #innerTextBox {
     flex:1;
     border: none;
@@ -109,10 +114,9 @@ body {
 }
 
 #descriptionBox {
-    width: 200px;
     min-height: 100px;
     padding: 20px;
-    background-color: rgba(255, 208, 0, 0.671);
+    background-color: rgba(255, 102, 0, 0.671);
 
 }
 

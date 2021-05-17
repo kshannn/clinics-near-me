@@ -101,7 +101,12 @@ window.addEventListener("DOMContentLoaded", async function () {
             <p>${buildingName}, ${levelNum}</p>
             <p>${roadName}</p>
             `
-            console.log(pharmacyName, buildingName, roadName, levelNum)
+
+            if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
+                document.querySelector("#descriptionBox").classList.remove("hidden");
+                document.querySelector("#descriptionBox").classList.add("show");
+                document.querySelector("#toggleLayer").classList.add("show")
+            } 
 
         })
 
@@ -137,6 +142,15 @@ document.querySelector("#contentContainer").addEventListener("click", function (
 document.querySelector("#navBtn").addEventListener("click", function () {
     // document.querySelector("#toggleLayer").style.display = "none";
 
+    // if toggle is show and description is showed, show both.
+    if (document.querySelector("#toggleLayer").classList.contains("show") && document.querySelector("#toggleLayer").classList.contains("show")){
+        document.querySelector("#expandibleDropdown").classList.remove("show");
+        document.querySelector("#expandibleDropdown").classList.add("hidden");
+    } else {
+        document.querySelector("#expandibleDropdown").classList.remove("hidden");
+        document.querySelector("#expandibleDropdown").classList.add("show");
+    }
+
 
     if (document.querySelector("#toggleLayer").classList.contains("hidden")) {
         document.querySelector("#toggleLayer").classList.remove("hidden");
@@ -145,9 +159,6 @@ document.querySelector("#navBtn").addEventListener("click", function () {
         document.querySelector("#toggleLayer").classList.remove("show");
         document.querySelector("#toggleLayer").classList.add("hidden");
     }
+
+
 })
-
-
-
-
-

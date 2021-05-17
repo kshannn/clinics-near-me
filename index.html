@@ -24,12 +24,12 @@
     <div>
         <div id="innerContainer">
             <div id="innerContentBox">
+                <!-- search bar -->
                 <a href="#">
                     <div id="navBtn">
                         <i class="fas fa-bars"></i>
                     </div>
                 </a>
-
                 <input type="text" id="innerTextBox" name="innerSearchText" placeholder="Search for a clinic">
                 <a href="#">
                     <div id="innerSearchBtn">
@@ -37,18 +37,22 @@
                     </div>
                 </a>
 
-                <div id="toggleLayer">
-                    <div>
-                        <input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible">
-                        <label>Toggle pharmacies</label>
+                <div id="expandibleDropdown">
+                    <!-- toggling clinic and pharmacy layer -->
+                    <div id="toggleLayer">
+                        <div>
+                            <input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible">
+                            <label>Toggle pharmacies</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible">
+                            <label>Toggle clinics</label>
+                        </div>
                     </div>
-                    <div>
-                        <input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible">
-                        <label>Toggle clinics</label>
-                    </div>
-                </div>
 
-                <div id="descriptionBox"></div>
+                    <!-- description of clinic/pharmacy -->
+                    <div id="descriptionBox" class="hidden"></div>
+                </div>
             </div>
         </div>
 
