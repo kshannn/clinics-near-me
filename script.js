@@ -57,19 +57,13 @@ window.addEventListener("DOMContentLoaded", async function () {
 
     // Create pharmacy cluster layer
     let pharmacyClusterLayer = L.markerClusterGroup();
-    pharmacyClusterLayer.addTo(map);
+    // pharmacyClusterLayer.addTo(map);
 
-    // // Create pharmacy layer group
-    // let pharmacyGroup = L.layerGroup();
-    // pharmacyGroup.addTo(map);
+    // Create pharmacy layer group
+    let pharmacyGroup = L.layerGroup();
+    pharmacyGroup.addTo(map);
+    pharmacyClusterLayer.addTo(pharmacyGroup);
 
-
-    // // Create baselayer/overlays(s) and add to map
-    // let baseLayers = {
-    //     "Pharmacies": pharmacyGroup
-    // }
-
-    // L.control.layers(baseLayers).addTo(map);
 
     for (let pharmacy of pharmacyData.features) {
 
@@ -80,7 +74,6 @@ window.addEventListener("DOMContentLoaded", async function () {
         let pharmacyLocation = pharmacy.geometry.coordinates
         let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
         pharmacyMarker.addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
-        // L.marker([pharmacyLocation[1], pharmacyLocation[0]]).addTo(pharmacyGroup);
 
         let buildingName = pharmacy.properties.Description.split("<td>")
         buildingName = buildingName[2].split("</td>")
@@ -95,7 +88,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         levelNum = levelNum[0]
 
         // Description pop up when marker is clicked
-        pharmacyMarker.addEventListener("click",function(){
+        pharmacyMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
             <p>${pharmacyName}</p>
             <p>${buildingName}, ${levelNum}</p>
@@ -118,6 +111,16 @@ window.addEventListener("DOMContentLoaded", async function () {
 
     }
 
+    // Toggle buttons
+    let pharmacyBtn = document.querySelector("#togglePharmacyBtn")
+    pharmacyBtn.addEventListener("change", function () {
+        if (map.hasLayer(pharmacyGroup)) {
+            map.removeLayer(pharmacyGroup)
+        } else {
+            map.addLayer(pharmacyGroup)
+        }
+    })
+
 })
 
 
@@ -137,11 +140,7 @@ document.querySelector("#contentContainer").addEventListener("click", function (
 
 })
 
-// Toggle buttons
-// let pharmacyBtn = document.querySelector("#togglePharmacyBtn")
-// pharmacyBtn.addEventListener("change", function{
 
-// })
 
 
 // Inner search box nav button
@@ -149,7 +148,7 @@ document.querySelector("#navBtn").addEventListener("click", function () {
     // document.querySelector("#toggleLayer").style.display = "none";
 
     // if toggle and description is shown, show both.
-    if (document.querySelector("#toggleLayer").classList.contains("show") && document.querySelector("#toggleLayer").classList.contains("show")){
+    if (document.querySelector("#toggleLayer").classList.contains("show") && document.querySelector("#toggleLayer").classList.contains("show")) {
         document.querySelector("#expandibleDropdown").classList.remove("show");
         document.querySelector("#expandibleDropdown").classList.add("hidden");
     } else {
