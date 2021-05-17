@@ -15,31 +15,31 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 window.addEventListener("DOMContentLoaded", async function () {
 
-    // Clinic locations
-    let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
-    let clinicsData = clinicsResponse.data
+    // // Clinic locations
+    // let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
+    // let clinicsData = clinicsResponse.data
 
-    // Clinic Icon
-    let clinicIcon = L.icon({
-        iconUrl: 'images/clinic.png',
-        iconSize: [38, 38], // size of the icon
-        iconAnchor: [-5, -5], // point of the icon which will correspond to marker's location
-        popupAnchor: [20, -10] // point from which the popup should open relative to the iconAnchor
-    });
+    // // Clinic Icon
+    // let clinicIcon = L.icon({
+    //     iconUrl: 'images/clinic.png',
+    //     iconSize: [38, 38], // size of the icon
+    //     iconAnchor: [-5, -5], // point of the icon which will correspond to marker's location
+    //     popupAnchor: [20, -10] // point from which the popup should open relative to the iconAnchor
+    // });
 
 
-    // Create clinic cluster layer
-    let clinicClusterLayer = L.markerClusterGroup();
-    clinicClusterLayer.addTo(map);
+    // // Create clinic cluster layer
+    // let clinicClusterLayer = L.markerClusterGroup();
+    // clinicClusterLayer.addTo(map);
 
-    for (let clinic of clinicsData.features) {
-        let clinicName = clinic.properties.Description.split("<td>")
-        clinicName = clinicName[2].split("</td>")
-        clinicName = clinicName[0]
+    // for (let clinic of clinicsData.features) {
+    //     let clinicName = clinic.properties.Description.split("<td>")
+    //     clinicName = clinicName[2].split("</td>")
+    //     clinicName = clinicName[0]
 
-        let clinicLocation = clinic.geometry.coordinates
-        L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon }).addTo(clinicClusterLayer).bindPopup(clinicName)
-    }
+    //     let clinicLocation = clinic.geometry.coordinates
+    //     L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon }).addTo(clinicClusterLayer).bindPopup(clinicName)
+    // }
 
 
     // Pharmacy locations
@@ -59,12 +59,12 @@ window.addEventListener("DOMContentLoaded", async function () {
     let pharmacyClusterLayer = L.markerClusterGroup();
     pharmacyClusterLayer.addTo(map);
 
-    // Create pharmacy layer group
+    // // Create pharmacy layer group
     // let pharmacyGroup = L.layerGroup();
     // pharmacyGroup.addTo(map);
 
 
-    //Create baselayer/overlays(s) and add to map
+    // // Create baselayer/overlays(s) and add to map
     // let baseLayers = {
     //     "Pharmacies": pharmacyGroup
     // }
@@ -105,8 +105,14 @@ window.addEventListener("DOMContentLoaded", async function () {
             if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
                 document.querySelector("#descriptionBox").classList.remove("hidden");
                 document.querySelector("#descriptionBox").classList.add("show");
+                document.querySelector("#toggleLayer").classList.remove("hidden");
                 document.querySelector("#toggleLayer").classList.add("show")
-            } 
+            } else {
+                document.querySelector("#descriptionBox").classList.remove("show");
+                document.querySelector("#descriptionBox").classList.add("hidden");
+                document.querySelector("#toggleLayer").classList.remove("show");
+                document.querySelector("#toggleLayer").classList.add("hidden")
+            }
 
         })
 
@@ -142,7 +148,7 @@ document.querySelector("#contentContainer").addEventListener("click", function (
 document.querySelector("#navBtn").addEventListener("click", function () {
     // document.querySelector("#toggleLayer").style.display = "none";
 
-    // if toggle is show and description is showed, show both.
+    // if toggle and description is shown, show both.
     if (document.querySelector("#toggleLayer").classList.contains("show") && document.querySelector("#toggleLayer").classList.contains("show")){
         document.querySelector("#expandibleDropdown").classList.remove("show");
         document.querySelector("#expandibleDropdown").classList.add("hidden");
