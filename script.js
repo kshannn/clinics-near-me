@@ -11,8 +11,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw' //demo access token
 }).addTo(map);
 
-
-
 window.addEventListener("DOMContentLoaded", async function () {
 
     // Clinic locations
@@ -113,16 +111,26 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         })
 
-        console.log(pharmacyName)
+        // console.log(pharmacyName)
         // if search matches name, return coordinates
         document.querySelector("#innerSearchBtn").addEventListener("click", function () {
             let innerSearch = document.querySelector("#innerTextBox").value;
             if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
-                map.flyTo([pharmacyLocation[1], pharmacyLocation[0]],20);
+                map.setView([pharmacyLocation[1], pharmacyLocation[0]],20);
             } 
 
         })
 
+        // if part of search matches name, return coordinates
+        document.querySelector("#innerTextBox").addEventListener("change", function () {
+            let innerSearch = document.querySelector("#innerTextBox").value;
+            if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1){
+                newElement = document.createElement("li")
+                newElement.innerHTML = pharmacyName
+                document.querySelector("#suggestedList").appendChild(newElement);
+            }
+
+        })
 
 
     } // end of loop
