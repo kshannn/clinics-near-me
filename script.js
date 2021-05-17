@@ -101,6 +101,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
                 document.querySelector("#descriptionBox").classList.remove("hidden");
                 document.querySelector("#descriptionBox").classList.add("show");
+                document.querySelector("#descriptionBox").classList.add("statusShown");
                 document.querySelector("#toggleLayer").classList.remove("hidden");
                 document.querySelector("#toggleLayer").classList.add("show")
             } else {
@@ -137,7 +138,8 @@ window.addEventListener("DOMContentLoaded", async function () {
     })
 
 
-})
+}) //end of DOMContentLoaded
+
 
 
 // Main search box disappear when clicked away
@@ -158,27 +160,34 @@ document.querySelector("#contentContainer").addEventListener("click", function (
 
 
 
-
 // Inner search box nav button
 document.querySelector("#navBtn").addEventListener("click", function () {
-    // document.querySelector("#toggleLayer").style.display = "none";
-
-    // if toggle and description is shown, show both.
-    if (document.querySelector("#toggleLayer").classList.contains("show") && document.querySelector("#toggleLayer").classList.contains("show")) {
-        document.querySelector("#expandibleDropdown").classList.remove("show");
-        document.querySelector("#expandibleDropdown").classList.add("hidden");
-    } else {
-        document.querySelector("#expandibleDropdown").classList.remove("hidden");
-        document.querySelector("#expandibleDropdown").classList.add("show");
-    }
-
-
-    if (document.querySelector("#toggleLayer").classList.contains("hidden")) {
+    
+    // if both are hidden, show both
+    if (document.querySelector("#toggleLayer").classList.contains("hidden") && document.querySelector("#descriptionBox").classList.contains("hidden") && document.querySelector("#descriptionBox").classList.contains("statusShown")) {
         document.querySelector("#toggleLayer").classList.remove("hidden");
         document.querySelector("#toggleLayer").classList.add("show");
-    } else {
+        document.querySelector("#descriptionBox").classList.remove("hidden");
+        document.querySelector("#descriptionBox").classList.add("show");
+    } 
+
+    else if (document.querySelector("#toggleLayer").classList.contains("show") && document.querySelector("#descriptionBox").classList.contains("hidden")) {
         document.querySelector("#toggleLayer").classList.remove("show");
         document.querySelector("#toggleLayer").classList.add("hidden");
+    } 
+
+
+    // if toggle and description are shown, hide both.
+    else if (document.querySelector("#toggleLayer").classList.contains("show") && document.querySelector("#descriptionBox").classList.contains("show")&& document.querySelector("#descriptionBox").classList.contains("statusShown")) {
+        document.querySelector("#toggleLayer").classList.remove("show");
+        document.querySelector("#toggleLayer").classList.add("hidden");
+        document.querySelector("#descriptionBox").classList.remove("show");
+        document.querySelector("#descriptionBox").classList.add("hidden");
+    } 
+
+    else {
+        document.querySelector("#toggleLayer").classList.remove("hidden");
+        document.querySelector("#toggleLayer").classList.add("show");
     }
 
 

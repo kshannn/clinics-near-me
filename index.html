@@ -37,22 +37,23 @@
                     </div>
                 </a>
 
-                <div id="expandibleDropdown">
-                    <!-- toggling clinic and pharmacy layer -->
-                    <div id="toggleLayer">
-                        <div>
-                            <input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible" checked="checked">
-                            <label>Show clinics</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible">
-                            <label>Show pharmacies</label>
-                        </div>
-                    </div>
+            
+                <!-- toggling clinic and pharmacy layer -->
+                <div id="toggleLayer" class="show">
+                    <div>
+                        <input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible" checked="checked">
+                        <label>Show clinics</label>
 
-                    <!-- description of clinic/pharmacy -->
-                    <div id="descriptionBox" class="hidden"></div>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible">
+                        <label>Show pharmacies</label>
+                    </div>
                 </div>
+
+                <!-- description of clinic/pharmacy -->
+                <div id="descriptionBox" class="hidden"></div>
+               
             </div>
         </div>
 
