@@ -78,11 +78,6 @@ body {
     flex-wrap: wrap;
 }
 
-/* #expandibleDropdown {
-    width: 100%;
-    min-height: 0;
-} */
-
 #innerTextBox {
     flex:1;
     border: none;
@@ -110,7 +105,7 @@ body {
 
 #toggleLayer {
     width: 100%;
-    height: 45px;
+    min-height: 0;
     background-color: gold;
     display: flex;
     justify-content: space-around;
@@ -125,6 +120,7 @@ body {
 }
 
 .hidden {
+    display: none;
     transform: translateX(-110%);
 }
 
