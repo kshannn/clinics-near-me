@@ -158,6 +158,15 @@ document.querySelector("#contentContainer").addEventListener("click", function (
 
 })
 
+document.querySelector("#closeBtn").addEventListener("click",function(){
+    document.querySelector("#content").style.display = "none";
+    document.querySelector("#contentContainer").style.display = "none";
+    document.querySelector("#map").style.zIndex = "0";
+    document.querySelector("#descriptionBox").style.zIndex = "1";
+    document.querySelector("#innerContainer").style.zIndex = "1";
+    document.querySelector("#innerContentBox").style.zIndex = "1";
+})
+
 
 
 // Inner search box nav button

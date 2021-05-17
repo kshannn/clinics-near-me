@@ -29,6 +29,7 @@ body {
     height: 50vh;
     background-color: white;
     border-radius: 24px;
+    position: relative;
 }
 
 #textBox {
@@ -40,6 +41,17 @@ body {
     text-align: center;
     color: rgba(255, 255, 255, 0.671);
     font-size: 2rem;
+}
+
+#closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    color: grey;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 #searchBox {
