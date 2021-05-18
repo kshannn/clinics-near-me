@@ -35,13 +35,70 @@ window.addEventListener("DOMContentLoaded", async function () {
     clinicGroup.addTo(map);
     clinicClusterLayer.addTo(clinicGroup);
 
+
     for (let clinic of clinicsData.features) {
+
+        // Clinic location detail
         let clinicName = clinic.properties.Description.split("<td>")
         clinicName = clinicName[2].split("</td>")
         clinicName = clinicName[0]
 
+        let clinicTelephone = clinic.properties.Description.split("<td>")
+        clinicTelephone = clinicTelephone[4].split("</td>")
+        clinicTelephone = clinicTelephone[0]
+
+        let clinicPostal = clinic.properties.Description.split("<td>")
+        clinicPostal = clinicPostal[5].split("</td>")
+        clinicPostal = clinicPostal[0]
+
+        let clinicBlock = clinic.properties.Description.split("<td>")
+        clinicBlock = clinicBlock[7].split("</td>")
+        clinicBlock = clinicBlock[0]
+
+        let clinicFloor = clinic.properties.Description.split("<td>")
+        clinicFloor = clinicFloor[8].split("</td>")
+        clinicFloor = clinicFloor[0]
+
+        let clinicUnit = clinic.properties.Description.split("<td>")
+        clinicUnit = clinicUnit[9].split("</td>")
+        clinicUnit = clinicUnit[0]
+
+        let clinicStreetName = clinic.properties.Description.split("<td>")
+        clinicStreetName = clinicStreetName[10].split("</td>")
+        clinicStreetName = clinicStreetName[0]
+
         let clinicLocation = clinic.geometry.coordinates
-        L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon }).addTo(clinicClusterLayer).bindPopup(clinicName)
+        let clinicMarker = L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon })
+        clinicMarker.addTo(clinicClusterLayer).bindPopup(clinicName)
+        
+
+        // Description pop up when clinic marker is clicked
+        clinicMarker.addEventListener("click", function () {
+            document.querySelector("#descriptionBox").innerHTML = `
+            <p>${clinicName}</p>
+            <p>${clinicTelephone}</p>
+            <p>${clinicPostal}</p>
+            <p>${clinicBlock}</p>
+            <p>${clinicFloor}-${clinicUnit}.</p>
+            <p>${clinicPostal}</p>
+            <p>${clinicStreetName}</p>
+            `
+
+            if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
+                document.querySelector("#descriptionBox").classList.remove("hidden");
+                document.querySelector("#descriptionBox").classList.add("show");
+                document.querySelector("#descriptionBox").classList.add("statusShown");
+                document.querySelector("#toggleLayer").classList.remove("hidden");
+                document.querySelector("#toggleLayer").classList.add("show")
+            } else {
+                document.querySelector("#descriptionBox").classList.remove("show");
+                document.querySelector("#descriptionBox").classList.add("hidden");
+                document.querySelector("#toggleLayer").classList.remove("show");
+                document.querySelector("#toggleLayer").classList.add("hidden")
+            }
+
+        })
+
     }
 
 
@@ -68,14 +125,12 @@ window.addEventListener("DOMContentLoaded", async function () {
 
     for (let pharmacy of pharmacyData.features) {
 
+        // Pharmacy location details
         let pharmacyName = pharmacy.properties.Description.split("<td>")
         pharmacyName = pharmacyName[7].split("</td>")
         pharmacyName = pharmacyName[0]
 
-        let pharmacyLocation = pharmacy.geometry.coordinates
-        let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
-        pharmacyMarker.addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
-
+        
         let buildingName = pharmacy.properties.Description.split("<td>")
         buildingName = buildingName[2].split("</td>")
         buildingName = buildingName[0]
@@ -88,7 +143,12 @@ window.addEventListener("DOMContentLoaded", async function () {
         levelNum = levelNum[4].split("</td>")
         levelNum = levelNum[0]
 
-        // Description pop up when marker is clicked
+        let pharmacyLocation = pharmacy.geometry.coordinates
+        let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
+        pharmacyMarker.addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
+    
+
+        // Description pop up when pharmacy marker is clicked
         pharmacyMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
             <p>${pharmacyName}</p>
@@ -116,24 +176,41 @@ window.addEventListener("DOMContentLoaded", async function () {
         document.querySelector("#innerSearchBtn").addEventListener("click", function () {
             let innerSearch = document.querySelector("#innerTextBox").value;
             if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
-                map.setView([pharmacyLocation[1], pharmacyLocation[0]],20);
-            } 
-
-        })
-
-        // if part of search matches name, return coordinates
-        document.querySelector("#innerTextBox").addEventListener("change", function () {
-            let innerSearch = document.querySelector("#innerTextBox").value;
-            if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1){
-                newElement = document.createElement("li")
-                newElement.innerHTML = pharmacyName
-                document.querySelector("#suggestedList").appendChild(newElement);
+                map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
             }
 
         })
 
+        // !!! unable to reset search suggestions
+        document.querySelector("#suggestedList").innerHTML = ""
+
+        // if part of search matches name, return coordinates
+
+        document.querySelector("#innerSearchBtn").addEventListener("click", function () {
+
+            let innerSearch = document.querySelector("#innerTextBox").value;
+
+            if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
+                newElement = document.createElement("li")
+                newElement.classList.add("suggestedResults")
+                newElement.innerHTML = pharmacyName
+                document.querySelector("#suggestedList").appendChild(newElement);
+            }
+
+
+        })
+
+        //click result brings you to coordinate
+        // !!! unable to select class
+        // document.querySelectorAll(".suggestedResults")
+       
+
+
+
+
 
     } // end of loop
+
 
     // Toggle buttons
 
