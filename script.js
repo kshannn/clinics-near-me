@@ -172,7 +172,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         })
 
         // console.log(pharmacyName)
-        // if search matches name, return coordinates
+        // if search matches name, return coordinates (immediate search)
         // document.querySelector("#innerSearchBtn").addEventListener("click", function () {
         //     let innerSearch = document.querySelector("#innerTextBox").value;
         //     if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
@@ -213,9 +213,21 @@ window.addEventListener("DOMContentLoaded", async function () {
             }
         }
 
-         //click result brings you to coordinate
-        // !!! unable to select class
+         //click result brings you to coordinate (not done yet)
         console.log(document.querySelectorAll(".suggestedResults"))
+        for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")){
+            console.log(each_suggestedResult.innerHTML)
+            each_suggestedResult.addEventListener("mouseover",function(event){
+                event.target.style.color = "red"
+                event.target.style.cursor = "pointer"
+            })
+            each_suggestedResult.addEventListener("mouseout",function(event){
+                event.target.style.color = "black"
+            })
+            each_suggestedResult.addEventListener("click",function(){
+                alert("Hi")
+            })
+        }
 
     })
 
