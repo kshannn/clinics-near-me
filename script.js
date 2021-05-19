@@ -104,7 +104,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
     // Pharmacy locations
     let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
-    let pharmacyData = pharmacyResponse.data
+    var pharmacyData = pharmacyResponse.data
 
     // Pharmacy Icon
     let pharmacyIcon = L.icon({
@@ -173,23 +173,33 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         // console.log(pharmacyName)
         // if search matches name, return coordinates
-        document.querySelector("#innerSearchBtn").addEventListener("click", function () {
-            let innerSearch = document.querySelector("#innerTextBox").value;
-            if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
-                map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
-            }
+        // document.querySelector("#innerSearchBtn").addEventListener("click", function () {
+        //     let innerSearch = document.querySelector("#innerTextBox").value;
+        //     if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
+        //         map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
+        //     }
 
-        })
+        // })
 
-        // !!! unable to reset search suggestions
-        document.querySelector("#suggestedList").innerHTML = ""
 
-        // if part of search matches name, return coordinates
+    } // end of loop
 
-        document.querySelector("#innerSearchBtn").addEventListener("click", function () {
 
-            let innerSearch = document.querySelector("#innerTextBox").value;
 
+
+    // if part of search matches name, return name and coordinates
+
+    document.querySelector("#innerSearchBtn").addEventListener("click", function () {
+        document.querySelector("#suggestedList").innerHTML = "";
+        
+        let innerSearch = document.querySelector("#innerTextBox").value;
+        
+        for (let pharmacy of pharmacyData.features) {
+
+            // Pharmacy location details
+            let pharmacyName = pharmacy.properties.Description.split("<td>")
+            pharmacyName = pharmacyName[7].split("</td>")
+            pharmacyName = pharmacyName[0]
             if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
                 newElement = document.createElement("li")
                 newElement.classList.add("suggestedResults")
@@ -197,19 +207,17 @@ window.addEventListener("DOMContentLoaded", async function () {
                 document.querySelector("#suggestedList").appendChild(newElement);
             }
 
+            let pharmacyLocation = pharmacy.geometry.coordinates
+            if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
+                map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
+            }
+        }
 
-        })
-
-        //click result brings you to coordinate
+         //click result brings you to coordinate
         // !!! unable to select class
-        // document.querySelectorAll(".suggestedResults")
-       
+        console.log(document.querySelectorAll(".suggestedResults"))
 
-
-
-
-
-    } // end of loop
+    })
 
 
     // Toggle buttons
