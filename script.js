@@ -142,7 +142,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         let levelNum = pharmacy.properties.Description.split("<td>")
         levelNum = levelNum[4].split("</td>")
         levelNum = levelNum[0]
-
+        
         let pharmacyLocation = pharmacy.geometry.coordinates
         let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
         pharmacyMarker.addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
@@ -204,6 +204,8 @@ window.addEventListener("DOMContentLoaded", async function () {
                 newElement = document.createElement("li")
                 newElement.classList.add("suggestedResults")
                 newElement.innerHTML = pharmacyName
+                newElement.setAttribute('data-lat', pharmacy.geometry.coordinates[1]);
+                newElement.setAttribute('data-lon', pharmacy.geometry.coordinates[0]);
                 document.querySelector("#suggestedList").appendChild(newElement);
             }
 
@@ -213,8 +215,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             }
         }
 
-         //click result brings you to coordinate (not done yet)
-        console.log(document.querySelectorAll(".suggestedResults"))
+         //click result brings you to coordinate
         for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")){
             console.log(each_suggestedResult.innerHTML)
             each_suggestedResult.addEventListener("mouseover",function(event){
@@ -224,8 +225,9 @@ window.addEventListener("DOMContentLoaded", async function () {
             each_suggestedResult.addEventListener("mouseout",function(event){
                 event.target.style.color = "black"
             })
-            each_suggestedResult.addEventListener("click",function(){
-                alert("Hi")
+            each_suggestedResult.addEventListener("click",function(e){
+                map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
+                document.querySelector("#suggestedList").innerHTML = ""
             })
         }
 
