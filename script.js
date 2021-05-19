@@ -70,7 +70,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         let clinicLocation = clinic.geometry.coordinates
         let clinicMarker = L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon })
         clinicMarker.addTo(clinicClusterLayer).bindPopup(clinicName)
-        
+
 
         // Description pop up when clinic marker is clicked
         clinicMarker.addEventListener("click", function () {
@@ -130,7 +130,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         pharmacyName = pharmacyName[7].split("</td>")
         pharmacyName = pharmacyName[0]
 
-        
+
         let buildingName = pharmacy.properties.Description.split("<td>")
         buildingName = buildingName[2].split("</td>")
         buildingName = buildingName[0]
@@ -142,11 +142,11 @@ window.addEventListener("DOMContentLoaded", async function () {
         let levelNum = pharmacy.properties.Description.split("<td>")
         levelNum = levelNum[4].split("</td>")
         levelNum = levelNum[0]
-        
+
         let pharmacyLocation = pharmacy.geometry.coordinates
         let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
         pharmacyMarker.addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
-    
+
 
         // Description pop up when pharmacy marker is clicked
         pharmacyMarker.addEventListener("click", function () {
@@ -187,20 +187,24 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 
 
-    // if part of search matches name, return name and coordinates
+    
 
+    //Clicking on search suggestion leads to map location
     document.querySelector("#innerSearchBtn").addEventListener("click", function () {
         document.querySelector("#suggestedList").innerHTML = "";
-        
+
         let innerSearch = document.querySelector("#innerTextBox").value;
-        
+
         for (let pharmacy of pharmacyData.features) {
 
             // Pharmacy location details
             let pharmacyName = pharmacy.properties.Description.split("<td>")
             pharmacyName = pharmacyName[7].split("</td>")
             pharmacyName = pharmacyName[0]
-            if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
+            let pharmacyLocation = pharmacy.geometry.coordinates
+            if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
+                map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
+            } else if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
                 newElement = document.createElement("li")
                 newElement.classList.add("suggestedResults")
                 newElement.innerHTML = pharmacyName
@@ -208,24 +212,18 @@ window.addEventListener("DOMContentLoaded", async function () {
                 newElement.setAttribute('data-lon', pharmacy.geometry.coordinates[0]);
                 document.querySelector("#suggestedList").appendChild(newElement);
             }
-
-            let pharmacyLocation = pharmacy.geometry.coordinates
-            if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
-                map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
-            }
         }
 
-         //click result brings you to coordinate
-        for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")){
-            console.log(each_suggestedResult.innerHTML)
-            each_suggestedResult.addEventListener("mouseover",function(event){
+        
+        for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")) {
+            each_suggestedResult.addEventListener("mouseover", function (event) {
                 event.target.style.color = "red"
                 event.target.style.cursor = "pointer"
             })
-            each_suggestedResult.addEventListener("mouseout",function(event){
+            each_suggestedResult.addEventListener("mouseout", function (event) {
                 event.target.style.color = "black"
             })
-            each_suggestedResult.addEventListener("click",function(e){
+            each_suggestedResult.addEventListener("click", function (e) {
                 map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
                 document.querySelector("#suggestedList").innerHTML = ""
             })
@@ -235,7 +233,6 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 
     // Toggle buttons
-
     let clinicBtn = document.querySelector("#toggleClinicBtn")
     clinicBtn.addEventListener("change", function () {
         if (map.hasLayer(clinicGroup)) {
