@@ -146,12 +146,18 @@ body {
 #descriptionBox {
     width: 100%;
     min-height: 0;
-    line-height: 1;
-    padding: 20px;
+    line-height: 0.8;
+    padding: 10px 20px;
     background-color: rgba(255, 102, 0, 0.671);
     position:absolute;
     bottom: 0;
+    font-size: 0.7rem;
+}
 
+#descriptionBox h2 {
+    line-height: 1.5;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
 }
 
 .hidden {
@@ -162,6 +168,7 @@ body {
 .show {
     transform: translateX(0);
 }
+
 
 /* ############## TABLET DISPLAY ############## */
 

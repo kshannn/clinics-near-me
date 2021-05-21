@@ -156,6 +156,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             `
             map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
 
+
             if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
                 document.querySelector("#descriptionBox").classList.remove("hidden");
                 document.querySelector("#descriptionBox").classList.add("show");
@@ -175,7 +176,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 
 
-    
+
 
     //Clicking on search suggestion leads to map location
     document.querySelector("#innerSearchBtn").addEventListener("click", function () {
@@ -183,13 +184,18 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         let innerSearch = document.querySelector("#innerTextBox").value;
 
+
         for (let pharmacy of pharmacyData.features) {
             // Pharmacy location details
             let pharmacyName = pharmacy.properties.Description.split("<td>")
             pharmacyName = pharmacyName[7].split("</td>")
             pharmacyName = pharmacyName[0]
             let pharmacyLocation = pharmacy.geometry.coordinates
-            if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
+
+            // validation check
+            if (innerSearch == "") {
+
+            } else if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
                 map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
             } else if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
                 newElement = document.createElement("li")
@@ -207,7 +213,10 @@ window.addEventListener("DOMContentLoaded", async function () {
             clinicName = clinicName[2].split("</td>")
             clinicName = clinicName[0]
             let clinicLocation = clinic.geometry.coordinates
-            if (innerSearch.toUpperCase() == clinicName.toUpperCase()) {
+            // validation check
+            if (innerSearch == "") {
+
+            } else if (innerSearch.toUpperCase() == clinicName.toUpperCase()) {
                 map.setView([clinicLocation[1], clinicLocation[0]], 20);
             } else if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
                 newElement = document.createElement("li")
