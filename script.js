@@ -235,11 +235,11 @@ window.addEventListener("DOMContentLoaded", async function () {
         // Clicking on suggestions brings you to location
         for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")) {
             each_suggestedResult.addEventListener("mouseover", function (event) {
-                event.target.style.color = "red"
+                event.target.style.backgroundColor = "rgba(0,0,0,0.2)"
                 event.target.style.cursor = "pointer"
             })
             each_suggestedResult.addEventListener("mouseout", function (event) {
-                event.target.style.color = "black"
+                event.target.style.backgroundColor = "white"
             })
             each_suggestedResult.addEventListener("click", function (e) {
                 map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
