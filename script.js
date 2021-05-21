@@ -182,7 +182,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         // })
 
 
-    } // end of loop
+    } // end of pharmacy loop
 
 
 
@@ -196,7 +196,6 @@ window.addEventListener("DOMContentLoaded", async function () {
         let innerSearch = document.querySelector("#innerTextBox").value;
 
         for (let pharmacy of pharmacyData.features) {
-
             // Pharmacy location details
             let pharmacyName = pharmacy.properties.Description.split("<td>")
             pharmacyName = pharmacyName[7].split("</td>")
@@ -208,13 +207,32 @@ window.addEventListener("DOMContentLoaded", async function () {
                 newElement = document.createElement("li")
                 newElement.classList.add("suggestedResults")
                 newElement.innerHTML = pharmacyName
-                newElement.setAttribute('data-lat', pharmacy.geometry.coordinates[1]);
-                newElement.setAttribute('data-lon', pharmacy.geometry.coordinates[0]);
+                newElement.setAttribute('data-lat', pharmacyLocation[1]);
+                newElement.setAttribute('data-lon', pharmacyLocation[0]);
                 document.querySelector("#suggestedList").appendChild(newElement);
             }
         }
 
-        
+        for (let clinic of clinicsData.features) {
+            // Pharmacy location details
+            let clinicName = clinic.properties.Description.split("<td>")
+            clinicName = clinicName[2].split("</td>")
+            clinicName = clinicName[0]
+            let clinicLocation = clinic.geometry.coordinates
+            if (innerSearch.toUpperCase() == clinicName.toUpperCase()) {
+                map.setView([clinicLocation[1], clinicLocation[0]], 20);
+            } else if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
+                newElement = document.createElement("li")
+                newElement.classList.add("suggestedResults")
+                newElement.innerHTML = clinicName
+                newElement.setAttribute('data-lat', clinicLocation[1]);
+                newElement.setAttribute('data-lon', clinicLocation[0]);
+                document.querySelector("#suggestedList").appendChild(newElement);
+            }
+        }
+
+        // CSS styling of search suggestions upon interaction
+        // Clicking on suggestions brings you to location
         for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")) {
             each_suggestedResult.addEventListener("mouseover", function (event) {
                 event.target.style.color = "red"
