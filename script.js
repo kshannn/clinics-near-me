@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         // Description pop up when clinic marker is clicked
         clinicMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
-            <p>${clinicName}</p>
+            <h2>${clinicName}</h2>
             <p>${clinicTelephone}</p>
             <p>${clinicPostal}</p>
             <p>${clinicBlock}</p>
@@ -83,6 +83,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             <p>${clinicPostal}</p>
             <p>${clinicStreetName}</p>
             `
+            map.setView([clinicLocation[1], clinicLocation[0]], 20);
 
             if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
                 document.querySelector("#descriptionBox").classList.remove("hidden");
@@ -91,8 +92,6 @@ window.addEventListener("DOMContentLoaded", async function () {
                 document.querySelector("#toggleLayer").classList.remove("hidden");
                 document.querySelector("#toggleLayer").classList.add("show")
             } else {
-                document.querySelector("#descriptionBox").classList.remove("show");
-                document.querySelector("#descriptionBox").classList.add("hidden");
                 document.querySelector("#toggleLayer").classList.remove("show");
                 document.querySelector("#toggleLayer").classList.add("hidden")
             }
@@ -151,10 +150,11 @@ window.addEventListener("DOMContentLoaded", async function () {
         // Description pop up when pharmacy marker is clicked
         pharmacyMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
-            <p>${pharmacyName}</p>
+            <h2>${pharmacyName}</h2>
             <p>${buildingName}, ${levelNum}</p>
             <p>${roadName}</p>
             `
+            map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
 
             if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
                 document.querySelector("#descriptionBox").classList.remove("hidden");
@@ -163,23 +163,11 @@ window.addEventListener("DOMContentLoaded", async function () {
                 document.querySelector("#toggleLayer").classList.remove("hidden");
                 document.querySelector("#toggleLayer").classList.add("show")
             } else {
-                document.querySelector("#descriptionBox").classList.remove("show");
-                document.querySelector("#descriptionBox").classList.add("hidden");
                 document.querySelector("#toggleLayer").classList.remove("show");
                 document.querySelector("#toggleLayer").classList.add("hidden")
             }
 
         })
-
-        // console.log(pharmacyName)
-        // if search matches name, return coordinates (immediate search)
-        // document.querySelector("#innerSearchBtn").addEventListener("click", function () {
-        //     let innerSearch = document.querySelector("#innerTextBox").value;
-        //     if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
-        //         map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
-        //     }
-
-        // })
 
 
     } // end of pharmacy loop
