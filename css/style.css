@@ -158,19 +158,11 @@ body {
 #descriptionBox h2 {
     line-height: 1.5;
     margin-block-start: 0em;
-    margin-block-end: 0em;
+    margin-block-end: 0.3em;
 }
 
-#descriptionBox i {
-    margin-right: 10px;
-}
-
-#descriptionBox .fa-map-marker-alt {
-    margin-right: 13px;
-}
-
-#descriptionBox p:nth-child(3) {
-    margin-left: 21px;
+#descriptionBox p {
+    line-height: 1.5;
 }
 
 .hidden {
@@ -182,13 +174,30 @@ body {
     transform: translateX(0);
 }
 
+.locationInfo {
+    display: flex;
+}
+.icon {
+    height: 40px;
+    min-width: 20px;
+    flex:1;
+    line-height: 40px;
+}
+
+.details {
+    height: 40px;
+    flex: 19;
+}
+
 
 /* ############## TABLET DISPLAY ############## */
 
 @media screen and (min-width:768px){
     
     #innerContentBox {
-        width: 35%;
+        width: 30%;
+        top: 20px;
+        left: 10px;
     }
     
     #navBtn {
@@ -198,4 +207,16 @@ body {
     #innerSearchBtn {
         border-radius: 0 5px 5px 0;
     }
+
+    #descriptionBox {
+        width: 30%;
+        height: 150px;
+        position:absolute;
+        bottom: 0;
+        box-shadow: 0px 0px 10px #888888;
+        left: 10px;
+        top:130px;
+        border-radius: 10px;
+    }
+
 }

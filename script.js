@@ -55,14 +55,6 @@ window.addEventListener("DOMContentLoaded", async function () {
         clinicBlock = clinicBlock[7].split("</td>")
         clinicBlock = clinicBlock[0]
 
-        let clinicFloor = clinic.properties.Description.split("<td>")
-        clinicFloor = clinicFloor[8].split("</td>")
-        clinicFloor = clinicFloor[0]
-
-        let clinicUnit = clinic.properties.Description.split("<td>")
-        clinicUnit = clinicUnit[9].split("</td>")
-        clinicUnit = clinicUnit[0]
-
         let clinicStreetName = clinic.properties.Description.split("<td>")
         clinicStreetName = clinicStreetName[10].split("</td>")
         clinicStreetName = clinicStreetName[0]
@@ -76,10 +68,28 @@ window.addEventListener("DOMContentLoaded", async function () {
         clinicMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
             <h2>${clinicName}</h2>
-            <p><i class="fas fa-map-marker-alt"></i>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
-            <p>#${clinicFloor}-${clinicUnit}</p>
-            <p><i class="fas fa-phone-alt"></i>${clinicTelephone}</p>
+            
+            <div class="locationInfo">
+                <div class="icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="details">
+                    <p>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
+                </div>
+            </div>
+            <div class="locationInfo">
+                <div class="icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="details">
+                    <p>${clinicTelephone}</p>     
+                </div>
+        </div>
+            
+         
             `
+            // <p><i class="fas fa-map-marker-alt"></i>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
+            // <p><i class="fas fa-phone-alt"></i>${clinicTelephone}</p>
             map.setView([clinicLocation[1], clinicLocation[0]], 20);
 
             if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
@@ -143,7 +153,14 @@ window.addEventListener("DOMContentLoaded", async function () {
         pharmacyMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
             <h2>${pharmacyName}</h2>
-            <p><i class="fas fa-map-marker-alt"></i>${roadName}, Singapore ${postalCode}</p>
+            <div class="locationInfo">
+                <div class="icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="details">
+                    <p>${roadName}, Singapore ${postalCode}</p>
+                </div>
+            </div>
             `
             map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
 
