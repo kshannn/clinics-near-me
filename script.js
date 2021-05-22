@@ -76,12 +76,9 @@ window.addEventListener("DOMContentLoaded", async function () {
         clinicMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
             <h2>${clinicName}</h2>
-            <p>${clinicTelephone}</p>
-            <p>${clinicPostal}</p>
-            <p>${clinicBlock}</p>
-            <p>${clinicFloor}-${clinicUnit}.</p>
-            <p>${clinicPostal}</p>
-            <p>${clinicStreetName}</p>
+            <p><i class="fas fa-map-marker-alt"></i>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
+            <p>#${clinicFloor}-${clinicUnit}</p>
+            <p><i class="fas fa-phone-alt"></i>${clinicTelephone}</p>
             `
             map.setView([clinicLocation[1], clinicLocation[0]], 20);
 
@@ -129,18 +126,13 @@ window.addEventListener("DOMContentLoaded", async function () {
         pharmacyName = pharmacyName[7].split("</td>")
         pharmacyName = pharmacyName[0]
 
-
-        let buildingName = pharmacy.properties.Description.split("<td>")
-        buildingName = buildingName[2].split("</td>")
-        buildingName = buildingName[0]
+        let postalCode = pharmacy.properties.Description.split("<td>")
+        postalCode = postalCode[1].split("</td>")
+        postalCode = postalCode[0]
 
         let roadName = pharmacy.properties.Description.split("<td>")
         roadName = roadName[5].split("</td>")
         roadName = roadName[0]
-
-        let levelNum = pharmacy.properties.Description.split("<td>")
-        levelNum = levelNum[4].split("</td>")
-        levelNum = levelNum[0]
 
         let pharmacyLocation = pharmacy.geometry.coordinates
         let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
@@ -151,8 +143,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         pharmacyMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
             <h2>${pharmacyName}</h2>
-            <p>${buildingName}, ${levelNum}</p>
-            <p>${roadName}</p>
+            <p><i class="fas fa-map-marker-alt"></i>${roadName}, Singapore ${postalCode}</p>
             `
             map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
 

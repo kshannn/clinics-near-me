@@ -148,16 +148,29 @@ body {
     min-height: 0;
     line-height: 0.8;
     padding: 10px 20px;
-    background-color: rgba(255, 102, 0, 0.671);
+    background-color: rgb(255, 255, 255);
     position:absolute;
     bottom: 0;
     font-size: 0.7rem;
+    box-shadow: 0px 0px 10px #888888;
 }
 
 #descriptionBox h2 {
     line-height: 1.5;
     margin-block-start: 0em;
     margin-block-end: 0em;
+}
+
+#descriptionBox i {
+    margin-right: 10px;
+}
+
+#descriptionBox .fa-map-marker-alt {
+    margin-right: 13px;
+}
+
+#descriptionBox p:nth-child(3) {
+    margin-left: 21px;
 }
 
 .hidden {
