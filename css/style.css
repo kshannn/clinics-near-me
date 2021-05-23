@@ -147,6 +147,10 @@ body {
     color: white;
 }
 
+#innerSearchBtn:hover {
+    background-color: #ae95bd;
+}
+
 #suggestions {
     width: 100%;
     min-height: 0;
@@ -220,7 +224,12 @@ input[type="text" i] {
     align-items: center;
     justify-content: center;
     border-radius: 24px;
+    cursor: pointer;
     /* box-shadow: 0 0 3px #63585E; */
+}
+
+#toggleLayerBtn:hover {
+    background-color: #ae95bd;
 }
 
 #smallClinicToggle, #smallPharmacyToggle {

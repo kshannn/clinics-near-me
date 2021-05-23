@@ -8,7 +8,7 @@ document.querySelector("#contentContainer").addEventListener("click", function (
         document.querySelector("#contentContainer").style.display = "none";
         document.querySelector("#map").style.zIndex = "0";
         document.querySelector("#descriptionBox").style.zIndex = "1";
-        document.querySelector("#innerContainer").style.zIndex = "1";
+        document.querySelector("#innerContainer").style.zIndex = "2";
         document.querySelector("#innerContentBox").style.zIndex = "1";
         document.querySelector("#toggleLayerTest").style.zIndex = "1";
         document.querySelector("#brandBar").style.zIndex = "1";
@@ -21,8 +21,10 @@ document.querySelector("#closeBtn").addEventListener("click", function () {
     document.querySelector("#contentContainer").style.display = "none";
     document.querySelector("#map").style.zIndex = "0";
     document.querySelector("#descriptionBox").style.zIndex = "1";
-    document.querySelector("#innerContainer").style.zIndex = "1";
+    document.querySelector("#innerContainer").style.zIndex = "2";
     document.querySelector("#innerContentBox").style.zIndex = "1";
+    document.querySelector("#toggleLayerTest").style.zIndex = "1";
+    document.querySelector("#brandBar").style.zIndex = "1";
 })
 
 
@@ -397,9 +399,6 @@ document.querySelector("#toggleLayerBtn").addEventListener("click", function () 
 })
 
 
-// function toggle() {
-//     // document.querySelector("#expandedToggle").style.width = "50px"
-// }
 
 
 
