@@ -9,11 +9,27 @@ body {
     padding: 0;
 }
 
+#mainContainer {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.hidden {
+    display: none;
+    transform: translateX(-110%);
+}
+
+.show {
+    transform: translateX(0);
+}
+
+/* ========== Brand ========== */
 #brandBar {
     width: 100%;
     height: 50px;
-    background-color: rgb(119, 44, 44);
-    position: relative;
+    background-color: #63585E;
+    position: absolute;
     display: flex;
 }
 
@@ -25,18 +41,17 @@ body {
     cursor: pointer;
 }
 
+#brandIcon img {
+    width:100%;
+}
+
 #brandBar p {
     color: white;
     cursor: pointer;
 }
 
 
-#brandIcon img {
-    width:100%;
-}
-
-
-/* main searchbox */
+/* ========== Outer searchbox ========== */
 #contentContainer {
     height: 100vh;
     width: 100%;
@@ -87,7 +102,7 @@ body {
     align-items: center;
 }
 
-/* map */
+/* ========== Map ========== */
 #map {
     height: 100vh;
     background: black;
@@ -100,7 +115,7 @@ body {
     bottom: -95vh;
 }
 
-/* inner content box */
+/* ========== Inner Search Box/Suggestions ========== */
 
 #innerContainer {
     width: 100%;
@@ -114,7 +129,8 @@ body {
     line-height:50px;
     display: flex;
     flex-wrap: wrap;
-    position:relative;
+    position:absolute;
+    top: 50px;
 }
 
 #innerTextBox {
@@ -127,14 +143,14 @@ body {
     height: 50px;
     font-size: 1.3rem;
     text-align: center;
-    background-color: rgb(92, 83, 83);
+    background-color: #998DA0;
     color: white;
 }
 
 #innerSearchBtn {
     width: 50px;
     height: 50px;
-    background-color: rgb(92, 83, 83);
+    background-color: #998DA0;
     text-align: center;
     font-size: 1.5rem;
     color: white;
@@ -160,28 +176,30 @@ body {
     border: 1px black solid;
     padding-left: 20px;
 }
-/* Toggle layers */
-#toggleLayer {
+
+input[type="text" i] {
+    padding: 0px 20px;
+}
+
+/* ========== Toggle layers ========== */
+
+/* old toggle layer to be deleted */
+/* #toggleLayer {
     width: 100%;
     min-height: 0;
     background-color: rgb(216, 193, 164);
     display: flex;
     justify-content: space-around;
-}
+} */
 
-#mainContainer {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-}
-
+/* new toggle layer */
 #toggleLayerTest {
     width: 100%;
     height: 50px;
-    background-color: rgb(56, 255, 6);
+    /* background-color: rgb(56, 255, 6); */
     position: absolute;
     right:0px;
-    top: 60px;
+    top: 110px;
     border-radius: 24px;
 }
 
@@ -208,7 +226,7 @@ body {
     border-radius: 24px;
 }
 
-/* Description Box Popup */
+/* ========== Big Description Box ========== */
 #descriptionBox {
     width: 100%;
     min-height: 0;
@@ -222,6 +240,7 @@ body {
 }
 
 #descriptionBox h2 {
+    font-size: 1.3rem;
     line-height: 1.5;
     margin-block-start: 0em;
     margin-block-end: 0.3em;
@@ -231,18 +250,10 @@ body {
     line-height: 1.5;
 }
 
-.hidden {
-    display: none;
-    transform: translateX(-110%);
-}
-
-.show {
-    transform: translateX(0);
-}
-
 .locationInfo {
     display: flex;
 }
+
 .icon {
     height: 40px;
     min-width: 20px;
@@ -255,17 +266,16 @@ body {
     flex: 19;
 }
 
-input[type="text" i] {
-    padding: 0px 20px;
-}
+
 
 /* ############## TABLET DISPLAY ############## */
 
 @media screen and (min-width:768px){
     
+    /* ========== Inner Search Box/Suggestions ========== */
     #innerContentBox {
         width: 30%;
-        top: 20px;
+        top: 70px;
         left: 10px;
     }
     
@@ -277,6 +287,7 @@ input[type="text" i] {
         border-radius: 0 5px 5px 0;
     }
 
+    /* ========== Big Description Box ========== */
     #descriptionBox {
         width: 30%;
         height: 150px;

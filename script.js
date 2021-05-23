@@ -1,16 +1,3 @@
-// Singapore map
-let singapore = [1.35, 103.81];
-let map = L.map('map').setView(singapore, 12);
-
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 20,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw' //demo access token
-}).addTo(map);
-
 window.addEventListener("DOMContentLoaded", async function () {
 
     // Clinic locations
@@ -84,12 +71,9 @@ window.addEventListener("DOMContentLoaded", async function () {
                 <div class="details">
                     <p>${clinicTelephone}</p>     
                 </div>
-        </div>
-            
-         
+            </div>
+        
             `
-            // <p><i class="fas fa-map-marker-alt"></i>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
-            // <p><i class="fas fa-phone-alt"></i>${clinicTelephone}</p>
             map.setView([clinicLocation[1], clinicLocation[0]], 20);
 
             if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
@@ -294,6 +278,7 @@ document.querySelector("#contentContainer").addEventListener("click", function (
         document.querySelector("#innerContainer").style.zIndex = "1";
         document.querySelector("#innerContentBox").style.zIndex = "1";
         document.querySelector("#toggleLayerTest").style.zIndex = "1";
+        document.querySelector("#brandBar").style.zIndex = "1";
     }
 
 })
@@ -343,7 +328,7 @@ document.querySelector("#navBtn").addEventListener("click", function () {
 })
 
 //Toggle Layer Button
-document.querySelector("#toggleLayerBtn").addEventListener("click",function(){
+document.querySelector("#toggleLayerBtn").addEventListener("click", function () {
     if (document.querySelector("#expandedToggle").classList.contains("show")) {
         document.querySelector("#expandedToggle").classList.remove("show")
         document.querySelector("#expandedToggle").classList.add("hidden")
@@ -354,6 +339,6 @@ document.querySelector("#toggleLayerBtn").addEventListener("click",function(){
 })
 
 
-function toggle(){
+function toggle() {
     // document.querySelector("#expandedToggle").style.width = "50px"
 }
