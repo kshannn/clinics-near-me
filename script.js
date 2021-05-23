@@ -197,6 +197,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 
 
+    
     //Clicking on search suggestion zooms to map location
     document.querySelector("#innerSearchBtn").addEventListener("click", function () {
         document.querySelector("#suggestedList").innerHTML = "";
@@ -347,8 +348,6 @@ window.addEventListener("DOMContentLoaded", async function () {
             each_suggestedResult.addEventListener("click", function (e) {
                 map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
                 document.querySelector("#suggestedList").innerHTML = ""
-                // start of duplicated code
-                
             })
         }
 
@@ -400,6 +399,77 @@ document.querySelector("#toggleLayerBtn").addEventListener("click", function () 
 
 
 
+async function filter(){
+    document.querySelector("#suggestedList").innerHTML = "";
+
+    let innerSearch = document.querySelector("#innerTextBox").value;
+
+    // Clinic geojson data
+    let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
+    let clinicsData = clinicsResponse.data.features
+
+    
+    for (let clinic of clinicsData) {
+        // Clinic details
+        let clinicName = clinic.properties.Description.split("<td>")
+        clinicName = clinicName[2].split("</td>")
+        clinicName = clinicName[0]
+
+        let clinicLocation = clinic.geometry.coordinates
+
+        if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1){
+            newElement = document.createElement("li")
+            newElement.classList.add("suggestedResults")
+            newElement.innerHTML = clinicName
+            newElement.setAttribute('data-lat', clinicLocation[1]);
+            newElement.setAttribute('data-lon', clinicLocation[0]);
+            document.querySelector("#suggestedList").appendChild(newElement);
+        }
+    } 
+
+    // // Pharmacy geojson Data
+    // let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
+    // let pharmacyData = pharmacyResponse.data.features
+
+    // for (let pharmacy of pharmacyData) {
+
+    //     // Pharmacy details
+    //     let pharmacyName = pharmacy.properties.Description.split("<td>")
+    //     pharmacyName = pharmacyName[7].split("</td>")
+    //     pharmacyName = pharmacyName[0]
+
+    //     let pharmacyLocation = pharmacy.geometry.coordinates
+        
+    //     if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1){
+    //         console.log(pharmacyName)
+    //         newElement = document.createElement("li")
+    //         newElement.classList.add("suggestedResults")
+    //         newElement.innerHTML = pharmacyName
+    //         newElement.setAttribute('data-lat', pharmacyLocation[1]);
+    //         newElement.setAttribute('data-lon', pharmacyLocation[0]);
+    //         document.querySelector("#suggestedList").appendChild(newElement);
+    //     }
+
+    // }
+
+    // CSS styling of search suggestions upon interaction
+        // Clicking on suggestions zooms to location
+        for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")) {
+            each_suggestedResult.addEventListener("mouseover", function (event) {
+                event.target.style.backgroundColor = "rgba(0,0,0,0.2)"
+                event.target.style.cursor = "pointer"
+            })
+            each_suggestedResult.addEventListener("mouseout", function (event) {
+                event.target.style.backgroundColor = "white"
+            })
+            each_suggestedResult.addEventListener("click", function (e) {
+                map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
+                document.querySelector("#suggestedList").innerHTML = ""
+                document.querySelector("#innerTextBox").value = each_suggestedResult.innerHTML
+            })
+        }
+
+}
 
 
 
