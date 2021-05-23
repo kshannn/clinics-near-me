@@ -223,6 +223,20 @@ input[type="text" i] {
     /* box-shadow: 0 0 3px #63585E; */
 }
 
+#smallClinicToggle, #smallPharmacyToggle {
+    width:25px;
+    height: 25px;
+    display: inline-block;
+    position: relative;
+    margin-right: 5px;
+}
+
+#smallClinicToggle img, #smallPharmacyToggle img {
+    width:100%;
+    position: absolute;
+    top: 5px
+}
+
 #toggleLayerBtn i {
     color: white;
 }

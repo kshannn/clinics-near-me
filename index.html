@@ -55,10 +55,22 @@
            
             <div id="expandedToggle" class="hidden">
                 <div>
-                    <label><input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible" checked="checked">Show CHAS clinics</label>
+                    <label>
+                        <input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible" checked="checked">
+                        <div id="smallClinicToggle">
+                            <img src="images/clinic.png" alt="clinic toggle icon">
+                        </div>
+                        CHAS clinics
+                    </label>
                 </div>
                 <div>
-                    <label><input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible" checked="checked">Show pharmacies</label>
+                    <label>
+                        <input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible" checked="checked">
+                        <div id="smallPharmacyToggle">
+                            <img src="images/pharmacy.png" alt="pharmacy toggle icon">
+                        </div>
+                        Pharmacies
+                    </label>
                 </div>
             </div>
             <div id="toggleLayerBtn" onclick="toggle()">
