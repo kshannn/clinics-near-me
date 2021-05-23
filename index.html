@@ -28,21 +28,12 @@
                 <img src="images/brand.png" alt="brand icon">
             </div>
             <p>CHAS Clinic Finder</p>
-            <!-- <div id="brandName">
-                <p>hello</p>
-            </div> -->
-    
         </div>
 
         <!-- Search bar -->
         <div id="innerContainer">
             <div id="innerContentBox">
                 <!-- search bar -->
-                <a href="#">
-                    <div id="navBtn">
-                        <i class="fas fa-bars"></i>
-                    </div>
-                </a>
                 <input type="text" id="innerTextBox" name="innerSearchText" placeholder="Search for a clinic">
                 <a href="#">
                     <div id="innerSearchBtn">
@@ -56,31 +47,18 @@
                     <ul id="suggestedList"></ul>
                 </div>
 
-
-            
-                <!-- toggling clinic and pharmacy layer -->
-                <!-- <div id="toggleLayer" class="show">
-                    <div>
-                        <label><input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible" checked="checked">Show clinics</label>
-
-                    </div>
-                    <div>
-                        <label><input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible">Show pharmacies</label>
-                    </div>
-                </div> -->
-
             </div>
         </div>
 
         <!-- Layer Toggle -->
         <div id="toggleLayerTest">
            
-            <div id="expandedToggle" class="show">
+            <div id="expandedToggle" class="hidden">
                 <div>
-                    <label><input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible" checked="checked">Show clinics</label>
+                    <label><input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible" checked="checked">Show CHAS clinics</label>
                 </div>
                 <div>
-                    <label><input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible">Show pharmacies</label>
+                    <label><input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible" checked="checked">Show pharmacies</label>
                 </div>
             </div>
             <div id="toggleLayerBtn" onclick="toggle()">
