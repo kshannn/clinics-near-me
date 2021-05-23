@@ -293,6 +293,7 @@ document.querySelector("#contentContainer").addEventListener("click", function (
         document.querySelector("#descriptionBox").style.zIndex = "1";
         document.querySelector("#innerContainer").style.zIndex = "1";
         document.querySelector("#innerContentBox").style.zIndex = "1";
+        document.querySelector("#toggleLayerTest").style.zIndex = "1";
     }
 
 })
@@ -341,5 +342,18 @@ document.querySelector("#navBtn").addEventListener("click", function () {
 
 })
 
+//Toggle Layer Button
+document.querySelector("#toggleLayerBtn").addEventListener("click",function(){
+    if (document.querySelector("#expandedToggle").classList.contains("show")) {
+        document.querySelector("#expandedToggle").classList.remove("show")
+        document.querySelector("#expandedToggle").classList.add("hidden")
+    } else {
+        document.querySelector("#expandedToggle").classList.remove("hidden")
+        document.querySelector("#expandedToggle").classList.add("show")
+    }
+})
 
 
+function toggle(){
+    // document.querySelector("#expandedToggle").style.width = "50px"
+}

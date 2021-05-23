@@ -21,7 +21,20 @@
 </head>
 
 <body>
-    <div>
+    <div id="mainContainer">
+        <!-- Brand -->
+        <div id="brandBar">
+            <div id="brandIcon">
+                <img src="images/brand.png" alt="brand icon">
+            </div>
+            <p>CHAS Clinic Finder</p>
+            <!-- <div id="brandName">
+                <p>hello</p>
+            </div> -->
+    
+        </div>
+
+        <!-- Search bar -->
         <div id="innerContainer">
             <div id="innerContentBox">
                 <!-- search bar -->
@@ -46,7 +59,7 @@
 
             
                 <!-- toggling clinic and pharmacy layer -->
-                <div id="toggleLayer" class="show">
+                <!-- <div id="toggleLayer" class="show">
                     <div>
                         <label><input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible" checked="checked">Show clinics</label>
 
@@ -54,16 +67,31 @@
                     <div>
                         <label><input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible">Show pharmacies</label>
                     </div>
-                </div>
+                </div> -->
 
-                
-               
             </div>
         </div>
 
-        <!-- description of clinic/pharmacy -->
+        <!-- Layer Toggle -->
+        <div id="toggleLayerTest">
+           
+            <div id="expandedToggle" class="show">
+                <div>
+                    <label><input type="checkbox" id="toggleClinicBtn" name="currentView" value="clinic_visible" checked="checked">Show clinics</label>
+                </div>
+                <div>
+                    <label><input type="checkbox" id="togglePharmacyBtn" name="currentView" value="pharmacy_visible">Show pharmacies</label>
+                </div>
+            </div>
+            <div id="toggleLayerBtn" onclick="toggle()">
+                <i class="fas fa-layer-group"></i>
+            </div>
+        </div>
+
+        <!-- Clinic/pharmacy description -->
         <div id="descriptionBox" class="hidden"></div>
 
+        <!-- Map -->
         <div id="map"></div>
 
         <div id="contentContainer">
