@@ -10,7 +10,7 @@ document.querySelector("#contentContainer").addEventListener("click", function (
         document.querySelector("#descriptionBox").style.zIndex = "1";
         document.querySelector("#innerContainer").style.zIndex = "2";
         document.querySelector("#innerContentBox").style.zIndex = "1";
-        document.querySelector("#toggleLayerTest").style.zIndex = "1";
+        document.querySelector("#toggleLayer").style.zIndex = "1";
         document.querySelector("#brandBar").style.zIndex = "1";
     }
 
@@ -23,7 +23,7 @@ document.querySelector("#closeBtn").addEventListener("click", function () {
     document.querySelector("#descriptionBox").style.zIndex = "1";
     document.querySelector("#innerContainer").style.zIndex = "2";
     document.querySelector("#innerContentBox").style.zIndex = "1";
-    document.querySelector("#toggleLayerTest").style.zIndex = "1";
+    document.querySelector("#toggleLayer").style.zIndex = "1";
     document.querySelector("#brandBar").style.zIndex = "1";
 })
 
@@ -102,6 +102,7 @@ window.addEventListener("DOMContentLoaded", async function () {
                     <p>${clinicTelephone}</p>     
                 </div>
             </div>
+            <button id="distanceBtn">500m</button>
             `
             // Focus on clicked clinic 
             map.setView([clinicLocation[1], clinicLocation[0]], 20);
@@ -117,56 +118,83 @@ window.addEventListener("DOMContentLoaded", async function () {
                 // document.querySelector("#toggleLayer").classList.add("hidden")
             }
 
+            // 1. Click on distance e.g. "500m"
+            let circleLayer = L.layerGroup();
+
+                let circle = L.circle([clinicLocation[1], clinicLocation[0]], {
+                    color: 'red',
+                    fillColor: "orange",
+                    fillOpacity: 0.3,
+                    radius: 50
+                }).addTo(circleLayer);
+
+            document.querySelector("#distanceBtn").addEventListener("click", function () {
+                // 2. For a selected coordinate, execute function to add circle around it
+                
+                
+
+                // add circle to the map
+               console.log(map.hasLayer(circleLayer));
+                if (map.hasLayer(circleLayer)) {
+                    
+                    map.removeLayer(circleLayer);
+                } else {
+                    console.log(2);
+                    map.addLayer(circleLayer);
+                }
+            })
+
+            // circle.addTo(map);
         })
 
     }
 
 
-    // Pharmacy geojson Data
-    let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
-    var pharmacyData = pharmacyResponse.data.features
+// Pharmacy geojson Data
+let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
+var pharmacyData = pharmacyResponse.data.features
 
-    // Customize pharmacy icon
-    let pharmacyIcon = L.icon({
-        iconUrl: 'images/pharmacy.png',
-        iconSize: [38, 38], // size of the icon
-        iconAnchor: [5, 5], // point of the icon which will correspond to marker's location
-        popupAnchor: [20, -10] // point from which the popup should open relative to the iconAnchor
-    });
+// Customize pharmacy icon
+let pharmacyIcon = L.icon({
+    iconUrl: 'images/pharmacy.png',
+    iconSize: [38, 38], // size of the icon
+    iconAnchor: [5, 5], // point of the icon which will correspond to marker's location
+    popupAnchor: [20, -10] // point from which the popup should open relative to the iconAnchor
+});
 
-    // Create pharmacy cluster layer
-    let pharmacyClusterLayer = L.markerClusterGroup();
+// Create pharmacy cluster layer
+let pharmacyClusterLayer = L.markerClusterGroup();
 
-    // Add pharmacy cluster to pharmacy layer
-    let pharmacyGroup = L.layerGroup();
-    pharmacyClusterLayer.addTo(pharmacyGroup);
-    pharmacyGroup.addTo(map);
-
-
-    for (let pharmacy of pharmacyData) {
-
-        // Pharmacy details
-        let pharmacyName = pharmacy.properties.Description.split("<td>")
-        pharmacyName = pharmacyName[7].split("</td>")
-        pharmacyName = pharmacyName[0]
-
-        let postalCode = pharmacy.properties.Description.split("<td>")
-        postalCode = postalCode[1].split("</td>")
-        postalCode = postalCode[0]
-
-        let roadName = pharmacy.properties.Description.split("<td>")
-        roadName = roadName[5].split("</td>")
-        roadName = roadName[0]
-
-        // Add pharmacies into map via coordinates
-        let pharmacyLocation = pharmacy.geometry.coordinates
-        let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
-        pharmacyMarker.addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
+// Add pharmacy cluster to pharmacy layer
+let pharmacyGroup = L.layerGroup();
+pharmacyClusterLayer.addTo(pharmacyGroup);
+pharmacyGroup.addTo(map);
 
 
-        // Show big description and focus on pharmacy when it is clicked
-        pharmacyMarker.addEventListener("click", function () {
-            document.querySelector("#descriptionBox").innerHTML = `
+for (let pharmacy of pharmacyData) {
+
+    // Pharmacy details
+    let pharmacyName = pharmacy.properties.Description.split("<td>")
+    pharmacyName = pharmacyName[7].split("</td>")
+    pharmacyName = pharmacyName[0]
+
+    let postalCode = pharmacy.properties.Description.split("<td>")
+    postalCode = postalCode[1].split("</td>")
+    postalCode = postalCode[0]
+
+    let roadName = pharmacy.properties.Description.split("<td>")
+    roadName = roadName[5].split("</td>")
+    roadName = roadName[0]
+
+    // Add pharmacies into map via coordinates
+    let pharmacyLocation = pharmacy.geometry.coordinates
+    let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
+    pharmacyMarker.addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
+
+
+    // Show big description and focus on pharmacy when it is clicked
+    pharmacyMarker.addEventListener("click", function () {
+        document.querySelector("#descriptionBox").innerHTML = `
             <h2>${pharmacyName}</h2>
             <div class="locationInfo">
                 <div class="icon">
@@ -178,61 +206,61 @@ window.addEventListener("DOMContentLoaded", async function () {
             </div>
             `
 
-            // Focus on clicked pharmacy
-            map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
+        // Focus on clicked pharmacy
+        map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
 
 
-            if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
-                document.querySelector("#descriptionBox").classList.remove("hidden");
-                document.querySelector("#descriptionBox").classList.add("show");
-                document.querySelector("#descriptionBox").classList.add("statusShown");
-                // document.querySelector("#toggleLayer").classList.remove("hidden");
-                // document.querySelector("#toggleLayer").classList.add("show")
-            } else {
-                // document.querySelector("#toggleLayer").classList.remove("show");
-                // document.querySelector("#toggleLayer").classList.add("hidden")
-            }
-        })
-    } // end of pharmacy loop
+        if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
+            document.querySelector("#descriptionBox").classList.remove("hidden");
+            document.querySelector("#descriptionBox").classList.add("show");
+            document.querySelector("#descriptionBox").classList.add("statusShown");
+            // document.querySelector("#toggleLayer").classList.remove("hidden");
+            // document.querySelector("#toggleLayer").classList.add("show")
+        } else {
+            // document.querySelector("#toggleLayer").classList.remove("show");
+            // document.querySelector("#toggleLayer").classList.add("hidden")
+        }
+    })
+} // end of pharmacy loop
 
 
 
-    
-    //Clicking on search suggestion zooms to map location
-    document.querySelector("#innerSearchBtn").addEventListener("click", function () {
-        document.querySelector("#suggestedList").innerHTML = "";
 
-        let innerSearch = document.querySelector("#innerTextBox").value;
+//Clicking on search suggestion zooms to map location
+document.querySelector("#innerSearchBtn").addEventListener("click", function () {
+    document.querySelector("#suggestedList").innerHTML = "";
 
-        for (let clinic of clinicsData) {
-            // Clinic details
-            let clinicName = clinic.properties.Description.split("<td>")
-            clinicName = clinicName[2].split("</td>")
-            clinicName = clinicName[0]
+    let innerSearch = document.querySelector("#innerTextBox").value;
 
-            let clinicTelephone = clinic.properties.Description.split("<td>")
-            clinicTelephone = clinicTelephone[4].split("</td>")
-            clinicTelephone = clinicTelephone[0]
+    for (let clinic of clinicsData) {
+        // Clinic details
+        let clinicName = clinic.properties.Description.split("<td>")
+        clinicName = clinicName[2].split("</td>")
+        clinicName = clinicName[0]
 
-            let clinicPostal = clinic.properties.Description.split("<td>")
-            clinicPostal = clinicPostal[5].split("</td>")
-            clinicPostal = clinicPostal[0]
+        let clinicTelephone = clinic.properties.Description.split("<td>")
+        clinicTelephone = clinicTelephone[4].split("</td>")
+        clinicTelephone = clinicTelephone[0]
 
-            let clinicBlock = clinic.properties.Description.split("<td>")
-            clinicBlock = clinicBlock[7].split("</td>")
-            clinicBlock = clinicBlock[0]
+        let clinicPostal = clinic.properties.Description.split("<td>")
+        clinicPostal = clinicPostal[5].split("</td>")
+        clinicPostal = clinicPostal[0]
 
-            let clinicStreetName = clinic.properties.Description.split("<td>")
-            clinicStreetName = clinicStreetName[10].split("</td>")
-            clinicStreetName = clinicStreetName[0]
-            let clinicLocation = clinic.geometry.coordinates
+        let clinicBlock = clinic.properties.Description.split("<td>")
+        clinicBlock = clinicBlock[7].split("</td>")
+        clinicBlock = clinicBlock[0]
 
-            // validation check
-            if (innerSearch == "") {
+        let clinicStreetName = clinic.properties.Description.split("<td>")
+        clinicStreetName = clinicStreetName[10].split("</td>")
+        clinicStreetName = clinicStreetName[0]
+        let clinicLocation = clinic.geometry.coordinates
 
-            } else if (innerSearch.toUpperCase() == clinicName.toUpperCase()) {
-                map.setView([clinicLocation[1], clinicLocation[0]], 20);
-                document.querySelector("#descriptionBox").innerHTML = `
+        // validation check
+        if (innerSearch == "") {
+
+        } else if (innerSearch.toUpperCase() == clinicName.toUpperCase()) {
+            map.setView([clinicLocation[1], clinicLocation[0]], 20);
+            document.querySelector("#descriptionBox").innerHTML = `
             <h2>${clinicName}</h2>
             <div class="locationInfo">
                 <div class="icon">
@@ -264,40 +292,40 @@ window.addEventListener("DOMContentLoaded", async function () {
                 // document.querySelector("#toggleLayer").classList.remove("show");
                 // document.querySelector("#toggleLayer").classList.add("hidden")
             }
-                
-            } else if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
-                newElement = document.createElement("li")
-                newElement.classList.add("suggestedResults")
-                newElement.innerHTML = clinicName
-                newElement.setAttribute('data-lat', clinicLocation[1]);
-                newElement.setAttribute('data-lon', clinicLocation[0]);
-                document.querySelector("#suggestedList").appendChild(newElement);
-            }
+
+        } else if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
+            newElement = document.createElement("li")
+            newElement.classList.add("suggestedResults")
+            newElement.innerHTML = clinicName
+            newElement.setAttribute('data-lat', clinicLocation[1]);
+            newElement.setAttribute('data-lon', clinicLocation[0]);
+            document.querySelector("#suggestedList").appendChild(newElement);
         }
+    }
 
-        for (let pharmacy of pharmacyData) {
-            // Pharmacy details
-            let pharmacyName = pharmacy.properties.Description.split("<td>")
-            pharmacyName = pharmacyName[7].split("</td>")
-            pharmacyName = pharmacyName[0]
+    for (let pharmacy of pharmacyData) {
+        // Pharmacy details
+        let pharmacyName = pharmacy.properties.Description.split("<td>")
+        pharmacyName = pharmacyName[7].split("</td>")
+        pharmacyName = pharmacyName[0]
 
-            let postalCode = pharmacy.properties.Description.split("<td>")
-            postalCode = postalCode[1].split("</td>")
-            postalCode = postalCode[0]
+        let postalCode = pharmacy.properties.Description.split("<td>")
+        postalCode = postalCode[1].split("</td>")
+        postalCode = postalCode[0]
 
-            let roadName = pharmacy.properties.Description.split("<td>")
-            roadName = roadName[5].split("</td>")
-            roadName = roadName[0]
+        let roadName = pharmacy.properties.Description.split("<td>")
+        roadName = roadName[5].split("</td>")
+        roadName = roadName[0]
 
 
-            let pharmacyLocation = pharmacy.geometry.coordinates
+        let pharmacyLocation = pharmacy.geometry.coordinates
 
-            // validation check
-            if (innerSearch == "") {
+        // validation check
+        if (innerSearch == "") {
 
-            } else if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
-                map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
-                document.querySelector("#descriptionBox").innerHTML = `
+        } else if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
+            map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
+            document.querySelector("#descriptionBox").innerHTML = `
                 <h2>${pharmacyName}</h2>
                 <div class="locationInfo">
                     <div class="icon">
@@ -308,72 +336,73 @@ window.addEventListener("DOMContentLoaded", async function () {
                     </div>
                 </div>
                 `
-    
-                // Focus on clicked pharmacy
-                map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
-    
-    
-                if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
-                    document.querySelector("#descriptionBox").classList.remove("hidden");
-                    document.querySelector("#descriptionBox").classList.add("show");
-                    document.querySelector("#descriptionBox").classList.add("statusShown");
-                    // document.querySelector("#toggleLayer").classList.remove("hidden");
-                    // document.querySelector("#toggleLayer").classList.add("show")
-                } else {
-                    // document.querySelector("#toggleLayer").classList.remove("show");
-                    // document.querySelector("#toggleLayer").classList.add("hidden")
-                }
-            } else if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
-                newElement = document.createElement("li")
-                newElement.classList.add("suggestedResults")
-                newElement.innerHTML = pharmacyName
-                newElement.setAttribute('data-lat', pharmacyLocation[1]);
-                newElement.setAttribute('data-lon', pharmacyLocation[0]);
-                document.querySelector("#suggestedList").appendChild(newElement);
+
+            // Focus on clicked pharmacy
+            map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
+
+
+            if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
+                document.querySelector("#descriptionBox").classList.remove("hidden");
+                document.querySelector("#descriptionBox").classList.add("show");
+                document.querySelector("#descriptionBox").classList.add("statusShown");
+                // document.querySelector("#toggleLayer").classList.remove("hidden");
+                // document.querySelector("#toggleLayer").classList.add("show")
+            } else {
+                // document.querySelector("#toggleLayer").classList.remove("show");
+                // document.querySelector("#toggleLayer").classList.add("hidden")
             }
+        } else if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
+            newElement = document.createElement("li")
+            newElement.classList.add("suggestedResults")
+            newElement.innerHTML = pharmacyName
+            newElement.setAttribute('data-lat', pharmacyLocation[1]);
+            newElement.setAttribute('data-lon', pharmacyLocation[0]);
+            document.querySelector("#suggestedList").appendChild(newElement);
         }
-
-       
-
-        // CSS styling of search suggestions upon interaction
-        // Clicking on suggestions zooms to location
-        for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")) {
-            each_suggestedResult.addEventListener("mouseover", function (event) {
-                event.target.style.backgroundColor = "rgba(0,0,0,0.2)"
-                event.target.style.cursor = "pointer"
-            })
-            each_suggestedResult.addEventListener("mouseout", function (event) {
-                event.target.style.backgroundColor = "white"
-            })
-            each_suggestedResult.addEventListener("click", function (e) {
-                map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
-                document.querySelector("#suggestedList").innerHTML = ""
-            })
-        }
-
-    })
+    }
 
 
-    // Toggle buttons
-    let clinicBtn = document.querySelector("#toggleClinicBtn")
-    clinicBtn.addEventListener("change", function () {
-        if (map.hasLayer(clinicGroup)) {
-            map.removeLayer(clinicGroup)
-        } else {
-            map.addLayer(clinicGroup)
-        }
-    })
 
-    // map.removeLayer(pharmacyGroup); // hide pharmacy markers by default
+    // CSS styling of search suggestions upon interaction
+    // Clicking on suggestions zooms to location
+    for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")) {
+        each_suggestedResult.addEventListener("mouseover", function (event) {
+            event.target.style.backgroundColor = "rgba(0,0,0,0.2)"
+            event.target.style.cursor = "pointer"
+        })
+        each_suggestedResult.addEventListener("mouseout", function (event) {
+            event.target.style.backgroundColor = "white"
+        })
+        each_suggestedResult.addEventListener("click", function (e) {
+            map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
+            document.querySelector("#suggestedList").innerHTML = ""
+            document.querySelector("#innerTextBox").value = each_suggestedResult.innerHTML
+        })
+    }
 
-    let pharmacyBtn = document.querySelector("#togglePharmacyBtn")
-    pharmacyBtn.addEventListener("change", function () {
-        if (map.hasLayer(pharmacyGroup)) {
-            map.removeLayer(pharmacyGroup)
-        } else {
-            map.addLayer(pharmacyGroup)
-        }
-    })
+})
+
+
+// Toggle buttons
+let clinicBtn = document.querySelector("#toggleClinicBtn")
+clinicBtn.addEventListener("change", function () {
+    if (map.hasLayer(clinicGroup)) {
+        map.removeLayer(clinicGroup)
+    } else {
+        map.addLayer(clinicGroup)
+    }
+})
+
+// map.removeLayer(pharmacyGroup); // hide pharmacy markers by default
+
+let pharmacyBtn = document.querySelector("#togglePharmacyBtn")
+pharmacyBtn.addEventListener("change", function () {
+    if (map.hasLayer(pharmacyGroup)) {
+        map.removeLayer(pharmacyGroup)
+    } else {
+        map.addLayer(pharmacyGroup)
+    }
+})
 
 
 }) //end of DOMContentLoaded
@@ -399,7 +428,32 @@ document.querySelector("#toggleLayerBtn").addEventListener("click", function () 
 
 
 
-async function filter(){
+// Search on key change
+// Testing debounce
+
+const debounce = (fn, delay) => {
+    let timeOutId;
+    return function (...args) {
+
+        if (timeOutId) {
+            clearTimeout(timeOutId)
+        }
+        timeOutID = setTimeout(() => {
+            console.log(" function ran")
+            fn(...args)
+        }, delay)
+    }
+}
+
+document.querySelector("#innerTextBox").addEventListener("keyup", debounce(filter, 500))
+
+
+
+// Search on key change
+// document.querySelector("#innerTextBox").addEventListener("keyup", filter)
+
+
+async function filter() {
     document.querySelector("#suggestedList").innerHTML = "";
 
     let innerSearch = document.querySelector("#innerTextBox").value;
@@ -408,7 +462,7 @@ async function filter(){
     let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
     let clinicsData = clinicsResponse.data.features
 
-    
+
     for (let clinic of clinicsData) {
         // Clinic details
         let clinicName = clinic.properties.Description.split("<td>")
@@ -417,7 +471,7 @@ async function filter(){
 
         let clinicLocation = clinic.geometry.coordinates
 
-        if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1){
+        if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
             newElement = document.createElement("li")
             newElement.classList.add("suggestedResults")
             newElement.innerHTML = clinicName
@@ -425,7 +479,7 @@ async function filter(){
             newElement.setAttribute('data-lon', clinicLocation[0]);
             document.querySelector("#suggestedList").appendChild(newElement);
         }
-    } 
+    }
 
     // // Pharmacy geojson Data
     // let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
@@ -439,7 +493,7 @@ async function filter(){
     //     pharmacyName = pharmacyName[0]
 
     //     let pharmacyLocation = pharmacy.geometry.coordinates
-        
+
     //     if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1){
     //         console.log(pharmacyName)
     //         newElement = document.createElement("li")
@@ -453,23 +507,37 @@ async function filter(){
     // }
 
     // CSS styling of search suggestions upon interaction
-        // Clicking on suggestions zooms to location
-        for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")) {
-            each_suggestedResult.addEventListener("mouseover", function (event) {
-                event.target.style.backgroundColor = "rgba(0,0,0,0.2)"
-                event.target.style.cursor = "pointer"
-            })
-            each_suggestedResult.addEventListener("mouseout", function (event) {
-                event.target.style.backgroundColor = "white"
-            })
-            each_suggestedResult.addEventListener("click", function (e) {
-                map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
-                document.querySelector("#suggestedList").innerHTML = ""
-                document.querySelector("#innerTextBox").value = each_suggestedResult.innerHTML
-            })
-        }
+    // Clicking on suggestions zooms to location
+    for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")) {
+        each_suggestedResult.addEventListener("mouseover", function (event) {
+            event.target.style.backgroundColor = "rgba(0,0,0,0.2)"
+            event.target.style.cursor = "pointer"
+        })
+        each_suggestedResult.addEventListener("mouseout", function (event) {
+            event.target.style.backgroundColor = "white"
+        })
+        each_suggestedResult.addEventListener("click", function (e) {
+            map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
+            document.querySelector("#suggestedList").innerHTML = ""
+            document.querySelector("#innerTextBox").value = each_suggestedResult.innerHTML
+        })
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
