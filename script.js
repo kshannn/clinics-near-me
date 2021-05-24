@@ -125,7 +125,7 @@ window.addEventListener("DOMContentLoaded", async function () {
                     color: 'red',
                     fillColor: "orange",
                     fillOpacity: 0.3,
-                    radius: 50
+                    radius: 500
                 }).addTo(circleLayer);
 
             document.querySelector("#distanceBtn").addEventListener("click", function () {
@@ -139,12 +139,16 @@ window.addEventListener("DOMContentLoaded", async function () {
                     
                     map.removeLayer(circleLayer);
                 } else {
-                    console.log(2);
                     map.addLayer(circleLayer);
                 }
+
+
+                //3. zoom out
+                map.setView([clinicLocation[1], clinicLocation[0]], 17);
+
+
             })
 
-            // circle.addTo(map);
         })
 
     }
@@ -224,7 +228,12 @@ for (let pharmacy of pharmacyData) {
 } // end of pharmacy loop
 
 
-
+function extractDetail(place, index){
+    let tmp = place.properties.Description.split("<td>")
+    tmp = tmp[index].split("</td>")
+    tmp = tmp[0]
+    return tmp
+}
 
 //Clicking on search suggestion zooms to map location
 document.querySelector("#innerSearchBtn").addEventListener("click", function () {
@@ -233,26 +242,15 @@ document.querySelector("#innerSearchBtn").addEventListener("click", function () 
     let innerSearch = document.querySelector("#innerTextBox").value;
 
     for (let clinic of clinicsData) {
+        
         // Clinic details
-        let clinicName = clinic.properties.Description.split("<td>")
-        clinicName = clinicName[2].split("</td>")
-        clinicName = clinicName[0]
+        let clinicName = extractDetail(clinic, 2);
+        let clinicTelephone = extractDetail(clinic, 4);
+        let clinicPostal = extractDetail(clinic, 5)
+        let clinicBlock = extractDetail(clinic, 7);
+        let clinicStreetName = extractDetail(clinic, 10);
+        
 
-        let clinicTelephone = clinic.properties.Description.split("<td>")
-        clinicTelephone = clinicTelephone[4].split("</td>")
-        clinicTelephone = clinicTelephone[0]
-
-        let clinicPostal = clinic.properties.Description.split("<td>")
-        clinicPostal = clinicPostal[5].split("</td>")
-        clinicPostal = clinicPostal[0]
-
-        let clinicBlock = clinic.properties.Description.split("<td>")
-        clinicBlock = clinicBlock[7].split("</td>")
-        clinicBlock = clinicBlock[0]
-
-        let clinicStreetName = clinic.properties.Description.split("<td>")
-        clinicStreetName = clinicStreetName[10].split("</td>")
-        clinicStreetName = clinicStreetName[0]
         let clinicLocation = clinic.geometry.coordinates
 
         // validation check
@@ -438,14 +436,14 @@ const debounce = (fn, delay) => {
         if (timeOutId) {
             clearTimeout(timeOutId)
         }
-        timeOutID = setTimeout(() => {
+        timeOutId = setTimeout(() => {
             console.log(" function ran")
             fn(...args)
         }, delay)
     }
 }
 
-document.querySelector("#innerTextBox").addEventListener("keyup", debounce(filter, 500))
+document.querySelector("#innerTextBox").addEventListener("keyup", debounce(filter, 300))
 
 
 
