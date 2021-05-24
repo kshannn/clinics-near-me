@@ -81,7 +81,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         let clinicMarker = L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon })
         clinicMarker.addTo(clinicClusterLayer).bindPopup(clinicName)
 
-        let circleLayer = L.layerGroup();
+        let clinicCircleLayer = L.layerGroup();
         // Show big description and focus on clinic when it is clicked
         clinicMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
@@ -103,7 +103,7 @@ window.addEventListener("DOMContentLoaded", async function () {
                 </div>
             </div>
             <p>Show CHAS clinics and pharmacies within:</p>
-            <button id="distanceBtn">500m</button>
+            <button id="clinicDistanceBtn">500m</button>
             `
             // Focus on clicked clinic 
             map.setView([clinicLocation[1], clinicLocation[0]], 20);
@@ -120,25 +120,24 @@ window.addEventListener("DOMContentLoaded", async function () {
             }
 
             // 1. Click on distance e.g. "500m"
-            
-
-                let circle = L.circle([clinicLocation[1], clinicLocation[0]], {
+        
+                let clinicCircle = L.circle([clinicLocation[1], clinicLocation[0]], {
                     color: 'red',
                     fillColor: "orange",
                     fillOpacity: 0.25,
                     radius: 500
-                }).addTo(circleLayer);
+                }).addTo(clinicCircleLayer);
 
-            document.querySelector("#distanceBtn").addEventListener("click", function () {
+            document.querySelector("#clinicDistanceBtn").addEventListener("click", function () {
                 // 2. For a selected coordinate, execute function to add circle around it
                 
                 
                 // add circle to the map
-                if (map.hasLayer(circleLayer)) {
+                if (map.hasLayer(clinicCircleLayer)) {
                     
-                    map.removeLayer(circleLayer);
+                    map.removeLayer(clinicCircleLayer);
                 } else {
-                    map.addLayer(circleLayer);
+                    map.addLayer(clinicCircleLayer);
                 }
 
 
@@ -194,7 +193,7 @@ for (let pharmacy of pharmacyData) {
     let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
     pharmacyMarker.addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
 
-
+    let pharmacyCircleLayer = L.layerGroup();
     // Show big description and focus on pharmacy when it is clicked
     pharmacyMarker.addEventListener("click", function () {
         document.querySelector("#descriptionBox").innerHTML = `
@@ -207,6 +206,7 @@ for (let pharmacy of pharmacyData) {
                     <p>${roadName}, Singapore ${postalCode}</p>
                 </div>
             </div>
+            <button id="pharmacyDistanceBtn">500m</button>
             `
 
         // Focus on clicked pharmacy
@@ -223,6 +223,42 @@ for (let pharmacy of pharmacyData) {
             // document.querySelector("#toggleLayer").classList.remove("show");
             // document.querySelector("#toggleLayer").classList.add("hidden")
         }
+
+        // 1. Click on distance e.g. "500m"
+        
+        let pharmacyCircle = L.circle([pharmacyLocation[1], pharmacyLocation[0]], {
+            color: 'red',
+            fillColor: "orange",
+            fillOpacity: 0.25,
+            radius: 500
+        }).addTo(pharmacyCircleLayer);
+
+    document.querySelector("#pharmacyDistanceBtn").addEventListener("click", function () {
+        // 2. For a selected coordinate, execute function to add circle around it
+        
+        
+        // add circle to the map
+        if (map.hasLayer(pharmacyCircleLayer)) {
+            
+            map.removeLayer(pharmacyCircleLayer);
+        } else {
+            map.addLayer(pharmacyCircleLayer);
+        }
+
+
+        //3. zoom out to view full circle
+        map.setView([pharmacyLocation[1], pharmacyLocation[0]], 16);
+
+
+    })
+
+
+
+
+        
+
+
+
     })
 } // end of pharmacy loop
 
