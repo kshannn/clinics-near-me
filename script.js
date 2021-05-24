@@ -81,7 +81,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         let clinicMarker = L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon })
         clinicMarker.addTo(clinicClusterLayer).bindPopup(clinicName)
 
-
+        let circleLayer = L.layerGroup();
         // Show big description and focus on clinic when it is clicked
         clinicMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
@@ -119,7 +119,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             }
 
             // 1. Click on distance e.g. "500m"
-            let circleLayer = L.layerGroup();
+            
 
                 let circle = L.circle([clinicLocation[1], clinicLocation[0]], {
                     color: 'red',
@@ -132,9 +132,7 @@ window.addEventListener("DOMContentLoaded", async function () {
                 // 2. For a selected coordinate, execute function to add circle around it
                 
                 
-
                 // add circle to the map
-               console.log(map.hasLayer(circleLayer));
                 if (map.hasLayer(circleLayer)) {
                     
                     map.removeLayer(circleLayer);
@@ -143,8 +141,8 @@ window.addEventListener("DOMContentLoaded", async function () {
                 }
 
 
-                //3. zoom out
-                map.setView([clinicLocation[1], clinicLocation[0]], 17);
+                //3. zoom out to view full circle
+                map.setView([clinicLocation[1], clinicLocation[0]], 16);
 
 
             })
@@ -437,7 +435,6 @@ const debounce = (fn, delay) => {
             clearTimeout(timeOutId)
         }
         timeOutId = setTimeout(() => {
-            console.log(" function ran")
             fn(...args)
         }, delay)
     }
