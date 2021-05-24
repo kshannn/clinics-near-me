@@ -81,9 +81,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         let clinicMarker = L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon })
         clinicMarker.addTo(clinicClusterLayer).bindPopup(clinicName)
 
-        let circleLayer500 = L.layerGroup();
-        let circleLayer1000 = L.layerGroup();
-
+        let circleLayer = L.layerGroup();
         // Show big description and focus on clinic when it is clicked
         clinicMarker.addEventListener("click", function () {
             document.querySelector("#descriptionBox").innerHTML = `
@@ -105,8 +103,7 @@ window.addEventListener("DOMContentLoaded", async function () {
                 </div>
             </div>
             <p>Show CHAS clinics and pharmacies within:</p>
-            <button id="distanceBtn500">500m</button>
-            <button id="distanceBtn1000">1000m</button>
+            <button id="distanceBtn">500m</button>
             `
             // Focus on clicked clinic 
             map.setView([clinicLocation[1], clinicLocation[0]], 20);
@@ -122,26 +119,26 @@ window.addEventListener("DOMContentLoaded", async function () {
                 // document.querySelector("#toggleLayer").classList.add("hidden")
             }
 
-            // 1. Click on distance "500m"
+            // 1. Click on distance e.g. "500m"
             
 
-                let circle500 = L.circle([clinicLocation[1], clinicLocation[0]], {
+                let circle = L.circle([clinicLocation[1], clinicLocation[0]], {
                     color: 'red',
                     fillColor: "orange",
-                    fillOpacity: 0.3,
+                    fillOpacity: 0.25,
                     radius: 500
-                }).addTo(circleLayer500);
+                }).addTo(circleLayer);
 
-            document.querySelector("#distanceBtn500").addEventListener("click", function () {
+            document.querySelector("#distanceBtn").addEventListener("click", function () {
                 // 2. For a selected coordinate, execute function to add circle around it
                 
                 
                 // add circle to the map
-                if (map.hasLayer(circleLayer500)) {
+                if (map.hasLayer(circleLayer)) {
                     
-                    map.removeLayer(circleLayer500);
+                    map.removeLayer(circleLayer);
                 } else {
-                    map.addLayer(circleLayer500);
+                    map.addLayer(circleLayer);
                 }
 
 
@@ -150,35 +147,6 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 
             })
-
-            // 1b. Click on distance "1000m"
-            let circle1000 = L.circle([clinicLocation[1], clinicLocation[0]], {
-                color: 'red',
-                fillColor: "orange",
-                fillOpacity: 0.3,
-                radius: 1000
-            }).addTo(circleLayer1000);
-
-            document.querySelector("#distanceBtn1000").addEventListener("click", function () {
-                // 2. For a selected coordinate, execute function to add circle around it
-                
-                
-                // add circle to the map
-                if (map.hasLayer(circleLayer1000)) {
-                    
-                    map.removeLayer(circleLayer1000);
-                } else {
-                    map.addLayer(circleLayer1000);
-                }
-
-
-                //3. zoom out to view full circle
-                map.setView([clinicLocation[1], clinicLocation[0]], 16);
-
-
-            })
-
-
 
         })
 
