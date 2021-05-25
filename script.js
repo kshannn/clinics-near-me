@@ -5,6 +5,46 @@ function extractDetail(place, index) {
     return tmp
 }
 
+function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone){
+    document.querySelector("#descriptionBox").innerHTML = `
+    <h2>${clinicName}</h2>
+    <div class="locationInfo">
+        <div class="icon">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="details">
+            <p>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
+        </div>
+    </div>
+    <div class="locationInfo">
+        <div class="icon">
+            <i class="fas fa-phone-alt"></i>
+        </div>
+        <div class="details">
+            <p>${clinicTelephone}</p>     
+        </div>
+    </div>
+    <p>Show CHAS clinics and pharmacies within:</p>
+    <button id="clinicDistanceBtn">500m</button>
+    `
+}
+
+function displayPharmacyDescription(pharmacyName,roadName,postalCode) {
+    document.querySelector("#descriptionBox").innerHTML = `
+    <h2>${pharmacyName}</h2>
+    <div class="locationInfo">
+        <div class="icon">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="details">
+            <p>${roadName}, Singapore ${postalCode}</p>
+        </div>
+    </div>
+    <p>Show CHAS clinics and pharmacies within:</p>
+    <button id="pharmacyDistanceBtn">500m</button>
+    `
+}
+
 
 // DOMContentLoaded
 window.addEventListener("DOMContentLoaded", async function () {
@@ -45,32 +85,12 @@ window.addEventListener("DOMContentLoaded", async function () {
         let clinicLocation = clinic.geometry.coordinates
         let clinicMarker = L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon })
         clinicMarker.addTo(clinicClusterLayer).bindPopup(clinicName)
-
         let clinicCircleLayer = L.layerGroup();
+
         // Show big description and focus on clinic when it is clicked
-        
         clinicMarker.addEventListener("click", function () {
-            document.querySelector("#descriptionBox").innerHTML = `
-            <h2>${clinicName}</h2>
-            <div class="locationInfo">
-                <div class="icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="details">
-                    <p>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
-                </div>
-            </div>
-            <div class="locationInfo">
-                <div class="icon">
-                    <i class="fas fa-phone-alt"></i>
-                </div>
-                <div class="details">
-                    <p>${clinicTelephone}</p>     
-                </div>
-            </div>
-            <p>Show CHAS clinics and pharmacies within:</p>
-            <button id="clinicDistanceBtn">500m</button>
-            `
+            displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
+            
             // Focus on clicked clinic 
             map.setView([clinicLocation[1], clinicLocation[0]], 20);
 
@@ -150,19 +170,8 @@ window.addEventListener("DOMContentLoaded", async function () {
         let pharmacyCircleLayer = L.layerGroup();
         // Show big description and focus on pharmacy when it is clicked
         pharmacyMarker.addEventListener("click", function () {
-            document.querySelector("#descriptionBox").innerHTML = `
-            <h2>${pharmacyName}</h2>
-            <div class="locationInfo">
-                <div class="icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="details">
-                    <p>${roadName}, Singapore ${postalCode}</p>
-                </div>
-            </div>
-            <p>Show CHAS clinics and pharmacies within:</p>
-            <button id="pharmacyDistanceBtn">500m</button>
-            `
+          
+            displayPharmacyDescription(pharmacyName,roadName,postalCode);
 
             // Focus on clicked pharmacy
             map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
@@ -203,12 +212,6 @@ window.addEventListener("DOMContentLoaded", async function () {
             })
 
 
-
-
-
-
-
-
         })
     } // end of pharmacy loop
 
@@ -239,25 +242,8 @@ window.addEventListener("DOMContentLoaded", async function () {
             } else if (innerSearch.toUpperCase() == clinicName.toUpperCase()) {
                 // Focus on clicked clinic 
                 map.setView([clinicLocation[1], clinicLocation[0]], 20);
-                document.querySelector("#descriptionBox").innerHTML = `
-            <h2>${clinicName}</h2>
-            <div class="locationInfo">
-                <div class="icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="details">
-                    <p>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
-                </div>
-            </div>
-            <div class="locationInfo">
-                <div class="icon">
-                    <i class="fas fa-phone-alt"></i>
-                </div>
-                <div class="details">
-                    <p>${clinicTelephone}</p>     
-                </div>
-            </div>
-            `
+                displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
+            
 
                 if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
                     document.querySelector("#descriptionBox").classList.remove("hidden");
@@ -291,17 +277,8 @@ window.addEventListener("DOMContentLoaded", async function () {
             } else if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
                 // Focus on clicked pharmacy
                 map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
-                document.querySelector("#descriptionBox").innerHTML = `
-                <h2>${pharmacyName}</h2>
-                <div class="locationInfo">
-                    <div class="icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="details">
-                        <p>${roadName}, Singapore ${postalCode}</p>
-                    </div>
-                </div>
-                `
+                
+                displayPharmacyDescription(pharmacyName,roadName,postalCode);
 
                 if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
                     document.querySelector("#descriptionBox").classList.remove("hidden");
