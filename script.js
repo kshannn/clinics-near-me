@@ -27,6 +27,9 @@ function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinic
     <p>Show CHAS clinics and pharmacies within:</p>
     <button id="clinicDistanceBtn">500m</button>
     `
+    document.querySelector("#descriptionBox").classList.remove("hidden");
+    document.querySelector("#descriptionBox").classList.add("show");
+
 }
 
 function displayPharmacyDescription(pharmacyName,roadName,postalCode) {
@@ -43,6 +46,8 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode) {
     <p>Show CHAS clinics and pharmacies within:</p>
     <button id="pharmacyDistanceBtn">500m</button>
     `
+    document.querySelector("#descriptionBox").classList.remove("hidden");
+    document.querySelector("#descriptionBox").classList.add("show");
 }
 
 
@@ -220,7 +225,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
     //Clicking on search suggestion zooms to map location
     document.querySelector("#innerSearchBtn").addEventListener("click", function () {
-        document.querySelector("#suggestedList").innerHTML = "";
+        document.querySelector("#suggestedList").style.display = "none";
 
         let innerSearch = document.querySelector("#innerTextBox").value;
 
@@ -245,21 +250,43 @@ window.addEventListener("DOMContentLoaded", async function () {
                 displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
             
 
-                if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
-                    document.querySelector("#descriptionBox").classList.remove("hidden");
-                    document.querySelector("#descriptionBox").classList.add("show");
-                    document.querySelector("#descriptionBox").classList.add("statusShown");
-                }
+                // if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
+                //     document.querySelector("#descriptionBox").classList.remove("hidden");
+                //     document.querySelector("#descriptionBox").classList.add("show");
+                //     document.querySelector("#descriptionBox").classList.add("statusShown");
+                // }
             
                 
             } else if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
-                newElement = document.createElement("li")
-                newElement.classList.add("suggestedResults")
-                newElement.innerHTML = clinicName
-                newElement.setAttribute('data-lat', clinicLocation[1]);
-                newElement.setAttribute('data-lon', clinicLocation[0]);
-                document.querySelector("#suggestedList").appendChild(newElement);
+                // Jump to first result
+                map.setView([clinicLocation[1], clinicLocation[0]], 20);
+                // console.log(document.querySelectorAll(".suggestedResults"))
+                // console.log(document.querySelector("#suggestedList"))
+                document.querySelector("#suggestedList").innerHTML = ""
+                console.log(1);
+                displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
+
+
+
+                // newElement = document.createElement("li")
+                // newElement.classList.add("suggestedResults")
+                // newElement.innerHTML = clinicName
+                // newElement.setAttribute('data-lat', clinicLocation[1]);
+                // newElement.setAttribute('data-lon', clinicLocation[0]);
+                // newElement.setAttribute('data-clinicName',clinicName)
+                // newElement.setAttribute('data-clinicTelephone',clinicTelephone)
+                // newElement.setAttribute('data-clinicPostal',clinicPostal)
+                // newElement.setAttribute('data-clinicBlock',clinicBlock)
+                // newElement.setAttribute('data-clinicStreetName',clinicStreetName)
+                // document.querySelector("#suggestedList").appendChild(newElement);
+                
             }
+
+            
+
+
+
+
         }
 
         for (let pharmacy of pharmacyData) {
@@ -292,6 +319,9 @@ window.addEventListener("DOMContentLoaded", async function () {
                 newElement.innerHTML = pharmacyName
                 newElement.setAttribute('data-lat', pharmacyLocation[1]);
                 newElement.setAttribute('data-lon', pharmacyLocation[0]);
+                newElement.setAttribute('data-pharmacyName',pharmacyName)
+                newElement.setAttribute('data-postalCode',postalCode)
+                newElement.setAttribute('data-roadName',roadName)
                 document.querySelector("#suggestedList").appendChild(newElement);
             }
         }
@@ -408,9 +438,11 @@ async function filter() {
 
     for (let clinic of clinicsData) {
         // Clinic details
-        let clinicName = clinic.properties.Description.split("<td>")
-        clinicName = clinicName[2].split("</td>")
-        clinicName = clinicName[0]
+        let clinicName = extractDetail(clinic, 2);
+        let clinicTelephone = extractDetail(clinic, 4);
+        let clinicPostal = extractDetail(clinic, 5)
+        let clinicBlock = extractDetail(clinic, 7);
+        let clinicStreetName = extractDetail(clinic, 10);
 
         let clinicLocation = clinic.geometry.coordinates
 
@@ -420,6 +452,11 @@ async function filter() {
             newElement.innerHTML = clinicName
             newElement.setAttribute('data-lat', clinicLocation[1]);
             newElement.setAttribute('data-lon', clinicLocation[0]);
+            newElement.setAttribute('data-clinicName',clinicName);
+            newElement.setAttribute('data-clinicTelephone',clinicTelephone)
+            newElement.setAttribute('data-clinicPostal',clinicPostal)
+            newElement.setAttribute('data-clinicBlock',clinicBlock)
+            newElement.setAttribute('data-clinicStreetName',clinicStreetName)
             document.querySelector("#suggestedList").appendChild(newElement);
             // combinedList.push(newElement)
         }
@@ -435,6 +472,8 @@ async function filter() {
 
         // Pharmacy details
         let pharmacyName = extractDetail(pharmacy,7);
+        let postalCode = extractDetail(pharmacy,1);
+        let roadName = extractDetail(pharmacy,5);
         
 
         let pharmacyLocation = pharmacy.geometry.coordinates
@@ -446,6 +485,9 @@ async function filter() {
             newElement.innerHTML = pharmacyName
             newElement.setAttribute('data-lat', pharmacyLocation[1]);
             newElement.setAttribute('data-lon', pharmacyLocation[0]);
+            newElement.setAttribute('data-pharmacyName',pharmacyName)
+            newElement.setAttribute('data-postalCode',postalCode)
+            newElement.setAttribute('data-roadName',roadName)
             document.querySelector("#suggestedList").appendChild(newElement);
             // combinedList.push(newElement)
         }
@@ -469,6 +511,7 @@ async function filter() {
             event.target.style.backgroundColor = "white"
         })
         each_suggestedResult.addEventListener("click", function (e) {
+            // console.log(e.target)
             map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
             document.querySelector("#suggestedList").innerHTML = ""
             document.querySelector("#innerTextBox").value = each_suggestedResult.innerHTML
@@ -476,9 +519,25 @@ async function filter() {
             // TODO: show description box when clicked
 
             // 1. show clinic desc
+            
+            let clinicName = e.target.getAttribute('data-clinicName')
 
+            if(clinicName != null){
+                let clinicBlock = e.target.getAttribute('data-clinicBlock')
+                let clinicStreetName = e.target.getAttribute('data-clinicStreetName')
+                let clinicPostal = e.target.getAttribute('data-clinicPostal')
+                let clinicTelephone = e.target.getAttribute('data-clinicTelephone')
+                displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
+    
+            } else{
+                 // 2. show pharmacy desc
+                let pharmacyName = e.target.getAttribute('data-pharmacyName')
+                let postalCode = e.target.getAttribute('data-postalCode')
+                let roadName = e.target.getAttribute('data-roadName')
+                displayPharmacyDescription(pharmacyName,roadName,postalCode);
+            }
 
-
+           
 
 
         })
