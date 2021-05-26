@@ -5,6 +5,26 @@ function extractDetail(place, index) {
     return tmp
 }
 
+function showCircle(lat, lon){
+    let circleLayer = L.layerGroup();
+    if (map.hasLayer(circleLayer)) {
+        map.removeLayer(circleLayer);
+        console.log(1) // Issue: if block not running
+    } else {
+        console.log(2)
+        let clinicCircle = L.circle([lat, lon], {
+            color: 'red',
+            fillColor: "orange",
+            fillOpacity: 0.25,
+            radius: 500
+        }).addTo(circleLayer);
+        map.addLayer(circleLayer);
+    }
+
+    //3. zoom out to view full circle
+    map.setView([lat, lon], 16);
+}
+
 function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone, lat,lon){
     document.querySelector("#descriptionBox").innerHTML = `
     <h2>${clinicName}</h2>
@@ -50,21 +70,3 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon) {
     document.querySelector("#descriptionBox").classList.add("show");
 }
 
-function showCircle(lat, lon){
-    let clinicCircleLayer = L.layerGroup();
-    if (map.hasLayer(clinicCircleLayer)) {
-        map.removeLayer(clinicCircleLayer);
-    } else {
-        console.log(1234);
-        let clinicCircle = L.circle([lat, lon], {
-            color: 'red',
-            fillColor: "orange",
-            fillOpacity: 0.25,
-            radius: 500
-        }).addTo(clinicCircleLayer);
-        map.addLayer(clinicCircleLayer);
-    }
-
-    //3. zoom out to view full circle
-    map.setView([lat, lon], 16);
-}

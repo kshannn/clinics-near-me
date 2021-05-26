@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         let lat = clinicLocation[1]
         let lon = clinicLocation[0]
-        // let clinicCircleLayer = L.layerGroup();
+        
 
         // Show big description and focus on clinic when it is clicked
         clinicMarker.addEventListener("click", function () {
