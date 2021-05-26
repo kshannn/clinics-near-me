@@ -25,11 +25,30 @@ function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinic
         </div>
     </div>
     <p>Show CHAS clinics and pharmacies within:</p>
-    <button id="clinicDistanceBtn">500m</button>
+    <button id="clinicDistanceBtn" onClick="showCircle(103.953586491461, 1.35226231434834)">500m</button>
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");
     document.querySelector("#descriptionBox").classList.add("show");
+}
 
+function showCircle(lon, lat){
+    let clinicCircleLayer = L.layerGroup();
+    if (map.hasLayer(clinicCircleLayer)) {
+        console.log("have")
+        map.removeLayer(clinicCircleLayer);
+    } else {
+        console.log(1234);
+        let clinicCircle = L.circle([lat, lon], {
+            color: 'red',
+            fillColor: "orange",
+            fillOpacity: 0.25,
+            radius: 500
+        }).addTo(clinicCircleLayer);
+        map.addLayer(clinicCircleLayer);
+    }
+
+    //3. zoom out to view full circle
+    map.setView([lat, lon], 16);
 }
 
 function displayPharmacyDescription(pharmacyName,roadName,postalCode) {
@@ -44,7 +63,7 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode) {
         </div>
     </div>
     <p>Show CHAS clinics and pharmacies within:</p>
-    <button id="pharmacyDistanceBtn">500m</button>
+    <button id="pharmacyDistanceBtn" onClick="showCircle(103.953586491461, 1.35226231434834)">500m</button>
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");
     document.querySelector("#descriptionBox").classList.add("show");
@@ -53,7 +72,6 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode) {
 
 // DOMContentLoaded
 window.addEventListener("DOMContentLoaded", async function () {
-
     
     // Clinic geojson data
     let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
@@ -74,8 +92,8 @@ window.addEventListener("DOMContentLoaded", async function () {
     let clinicGroup = L.layerGroup();
     clinicClusterLayer.addTo(clinicGroup);
     clinicGroup.addTo(map);
-
     let clinicCircleLayer = L.layerGroup();
+
     for (let clinic of clinicsData) {
 
         // Clinic details
@@ -114,24 +132,21 @@ window.addEventListener("DOMContentLoaded", async function () {
                 radius: 500
             }).addTo(clinicCircleLayer);
 
-            document.querySelector("#clinicDistanceBtn").addEventListener("click", function () {
-                // 2. For a selected coordinate, execute function to add circle around it
-                console.log(1);
+            // document.querySelector("#clinicDistanceBtn").addEventListener("click", function () {
+            //     // 2. For a selected coordinate, execute function to add circle around it
+            //     console.log(1);
 
-                // add circle to the map
-                if (map.hasLayer(clinicCircleLayer)) {
+            //     // add circle to the map
+            //     if (map.hasLayer(clinicCircleLayer)) {
 
-                    map.removeLayer(clinicCircleLayer);
-                } else {
-                    map.addLayer(clinicCircleLayer);
-                }
+            //         map.removeLayer(clinicCircleLayer);
+            //     } else {
+            //         map.addLayer(clinicCircleLayer);
+            //     }
 
-
-                //3. zoom out to view full circle
-                map.setView([clinicLocation[1], clinicLocation[0]], 16);
-
-
-            })
+            //     //3. zoom out to view full circle
+            //     map.setView([clinicLocation[1], clinicLocation[0]], 16);
+            // })
 
         })
 
@@ -249,7 +264,21 @@ window.addEventListener("DOMContentLoaded", async function () {
                 // Focus on clicked clinic 
                 map.setView([clinicLocation[1], clinicLocation[0]], 20);
                 displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
+                // document.querySelector("#clinicDistanceBtn").addEventListener("click", function () {
+                //     // 2. For a selected coordinate, execute function to add circle around it
+                //     console.log(1);
             
+                //     // add circle to the map
+                //     if (map.hasLayer(clinicCircleLayer)) {
+            
+                //         map.removeLayer(clinicCircleLayer);
+                //     } else {
+                //         map.addLayer(clinicCircleLayer);
+                //     }
+            
+                //     //3. zoom out to view full circle
+                //     map.setView([clinicLocation[1], clinicLocation[0]], 16);
+                // })
 
                 // if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
                 //     document.querySelector("#descriptionBox").classList.remove("hidden");
@@ -260,8 +289,26 @@ window.addEventListener("DOMContentLoaded", async function () {
                 
             } else if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
                 // Jump to region
-                map.setView([clinicLocation[1], clinicLocation[0]], 14);                
+                map.setView([clinicLocation[1], clinicLocation[0]], 20);
+                displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
+                // document.querySelector("#clinicDistanceBtn").addEventListener("click", function () {
+                //     // 2. For a selected coordinate, execute function to add circle around it
+                //     console.log(1);
+            
+                //     // add circle to the map
+                //     if (map.hasLayer(clinicCircleLayer)) {
+                //         map.removeLayer(clinicCircleLayer);
+                //     } else {
+                //         map.addLayer(clinicCircleLayer);
+                //     }
+            
+                //     //3. zoom out to view full circle
+                //     map.setView([clinicLocation[1], clinicLocation[0]], 16);
+                // })
+                                
             }
+
+            
 
             
     
@@ -295,7 +342,9 @@ window.addEventListener("DOMContentLoaded", async function () {
 
             } else if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
                 // Jump to region
-                map.setView([pharmacyLocation[1], pharmacyLocation[0]], 14);  
+                map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20); 
+                displayPharmacyDescription(pharmacyName,roadName,postalCode)
+                
                 // newElement = document.createElement("li")
                 // newElement.classList.add("suggestedResults")
                 // newElement.innerHTML = pharmacyName
