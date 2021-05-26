@@ -1,75 +1,3 @@
-function extractDetail(place, index) {
-    let tmp = place.properties.Description.split("<td>")
-    tmp = tmp[index].split("</td>")
-    tmp = tmp[0]
-    return tmp
-}
-
-function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone){
-    document.querySelector("#descriptionBox").innerHTML = `
-    <h2>${clinicName}</h2>
-    <div class="locationInfo">
-        <div class="icon">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="details">
-            <p>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
-        </div>
-    </div>
-    <div class="locationInfo">
-        <div class="icon">
-            <i class="fas fa-phone-alt"></i>
-        </div>
-        <div class="details">
-            <p>${clinicTelephone}</p>     
-        </div>
-    </div>
-    <p>Show CHAS clinics and pharmacies within:</p>
-    <button id="clinicDistanceBtn" onClick="showCircle(103.953586491461, 1.35226231434834)">500m</button>
-    `
-    document.querySelector("#descriptionBox").classList.remove("hidden");
-    document.querySelector("#descriptionBox").classList.add("show");
-}
-
-function showCircle(lon, lat){
-    let clinicCircleLayer = L.layerGroup();
-    if (map.hasLayer(clinicCircleLayer)) {
-        console.log("have")
-        map.removeLayer(clinicCircleLayer);
-    } else {
-        console.log(1234);
-        let clinicCircle = L.circle([lat, lon], {
-            color: 'red',
-            fillColor: "orange",
-            fillOpacity: 0.25,
-            radius: 500
-        }).addTo(clinicCircleLayer);
-        map.addLayer(clinicCircleLayer);
-    }
-
-    //3. zoom out to view full circle
-    map.setView([lat, lon], 16);
-}
-
-function displayPharmacyDescription(pharmacyName,roadName,postalCode) {
-    document.querySelector("#descriptionBox").innerHTML = `
-    <h2>${pharmacyName}</h2>
-    <div class="locationInfo">
-        <div class="icon">
-            <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="details">
-            <p>${roadName}, Singapore ${postalCode}</p>
-        </div>
-    </div>
-    <p>Show CHAS clinics and pharmacies within:</p>
-    <button id="pharmacyDistanceBtn" onClick="showCircle(103.953586491461, 1.35226231434834)">500m</button>
-    `
-    document.querySelector("#descriptionBox").classList.remove("hidden");
-    document.querySelector("#descriptionBox").classList.add("show");
-}
-
-
 // DOMContentLoaded
 window.addEventListener("DOMContentLoaded", async function () {
     
@@ -108,11 +36,14 @@ window.addEventListener("DOMContentLoaded", async function () {
         let clinicLocation = clinic.geometry.coordinates
         let clinicMarker = L.marker([clinicLocation[1], clinicLocation[0]], { icon: clinicIcon })
         clinicMarker.addTo(clinicClusterLayer).bindPopup(clinicName)
+
+        let lat = clinicLocation[1]
+        let lon = clinicLocation[0]
         // let clinicCircleLayer = L.layerGroup();
 
         // Show big description and focus on clinic when it is clicked
         clinicMarker.addEventListener("click", function () {
-            displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
+            displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone, lat, lon);
             
             // Focus on clicked clinic 
             map.setView([clinicLocation[1], clinicLocation[0]], 20);
@@ -132,21 +63,6 @@ window.addEventListener("DOMContentLoaded", async function () {
                 radius: 500
             }).addTo(clinicCircleLayer);
 
-            // document.querySelector("#clinicDistanceBtn").addEventListener("click", function () {
-            //     // 2. For a selected coordinate, execute function to add circle around it
-            //     console.log(1);
-
-            //     // add circle to the map
-            //     if (map.hasLayer(clinicCircleLayer)) {
-
-            //         map.removeLayer(clinicCircleLayer);
-            //     } else {
-            //         map.addLayer(clinicCircleLayer);
-            //     }
-
-            //     //3. zoom out to view full circle
-            //     map.setView([clinicLocation[1], clinicLocation[0]], 16);
-            // })
 
         })
 
@@ -187,11 +103,14 @@ window.addEventListener("DOMContentLoaded", async function () {
         let pharmacyMarker = L.marker([pharmacyLocation[1], pharmacyLocation[0]], { icon: pharmacyIcon })
         pharmacyMarker.addTo(pharmacyClusterLayer).bindPopup(pharmacyName)
 
+        let lat = pharmacyLocation[1]
+        let lon = pharmacyLocation[0]
+
         let pharmacyCircleLayer = L.layerGroup();
         // Show big description and focus on pharmacy when it is clicked
         pharmacyMarker.addEventListener("click", function () {
           
-            displayPharmacyDescription(pharmacyName,roadName,postalCode);
+            displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon);
 
             // Focus on clicked pharmacy
             map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
@@ -256,6 +175,8 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 
             let clinicLocation = clinic.geometry.coordinates
+            let lat = clinicLocation[1]
+            let lon = clinicLocation[0]
 
             // validation check
             if (innerSearch == "") {
@@ -263,53 +184,16 @@ window.addEventListener("DOMContentLoaded", async function () {
             } else if (innerSearch.toUpperCase() == clinicName.toUpperCase()) {
                 // Focus on clicked clinic 
                 map.setView([clinicLocation[1], clinicLocation[0]], 20);
-                displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
-                // document.querySelector("#clinicDistanceBtn").addEventListener("click", function () {
-                //     // 2. For a selected coordinate, execute function to add circle around it
-                //     console.log(1);
-            
-                //     // add circle to the map
-                //     if (map.hasLayer(clinicCircleLayer)) {
-            
-                //         map.removeLayer(clinicCircleLayer);
-                //     } else {
-                //         map.addLayer(clinicCircleLayer);
-                //     }
-            
-                //     //3. zoom out to view full circle
-                //     map.setView([clinicLocation[1], clinicLocation[0]], 16);
-                // })
-
-                // if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
-                //     document.querySelector("#descriptionBox").classList.remove("hidden");
-                //     document.querySelector("#descriptionBox").classList.add("show");
-                //     document.querySelector("#descriptionBox").classList.add("statusShown");
-                // }
-            
+                displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone,lat,lon);
+        
                 
             } else if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
                 // Jump to region
                 map.setView([clinicLocation[1], clinicLocation[0]], 20);
-                displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
-                // document.querySelector("#clinicDistanceBtn").addEventListener("click", function () {
-                //     // 2. For a selected coordinate, execute function to add circle around it
-                //     console.log(1);
-            
-                //     // add circle to the map
-                //     if (map.hasLayer(clinicCircleLayer)) {
-                //         map.removeLayer(clinicCircleLayer);
-                //     } else {
-                //         map.addLayer(clinicCircleLayer);
-                //     }
-            
-                //     //3. zoom out to view full circle
-                //     map.setView([clinicLocation[1], clinicLocation[0]], 16);
-                // })
+                displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone,lat,lon);
+               
                                 
             }
-
-            
-
             
     
         }
@@ -324,6 +208,8 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 
             let pharmacyLocation = pharmacy.geometry.coordinates
+            let lat = pharmacyLocation[1]
+            let lon = pharmacyLocation[0]
 
             // validation check
             if (innerSearch == "") {
@@ -332,7 +218,7 @@ window.addEventListener("DOMContentLoaded", async function () {
                 // Focus on clicked pharmacy
                 map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
                 
-                displayPharmacyDescription(pharmacyName,roadName,postalCode);
+                displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon);
 
                 // if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
                 //     document.querySelector("#descriptionBox").classList.remove("hidden");
@@ -343,7 +229,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             } else if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
                 // Jump to region
                 map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20); 
-                displayPharmacyDescription(pharmacyName,roadName,postalCode)
+                displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon)
                 
                 // newElement = document.createElement("li")
                 // newElement.classList.add("suggestedResults")
@@ -552,20 +438,22 @@ async function filter() {
             // 1. show clinic desc
             
             let clinicName = e.target.getAttribute('data-clinicName')
+            let lat = e.target.getAttribute('data-lat')
+            let lon = e.target.getAttribute('data-lon')
 
             if(clinicName != null){
                 let clinicBlock = e.target.getAttribute('data-clinicBlock')
                 let clinicStreetName = e.target.getAttribute('data-clinicStreetName')
                 let clinicPostal = e.target.getAttribute('data-clinicPostal')
                 let clinicTelephone = e.target.getAttribute('data-clinicTelephone')
-                displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone);
+                displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone,lat,lon);
     
             } else{
                  // 2. show pharmacy desc
                 let pharmacyName = e.target.getAttribute('data-pharmacyName')
                 let postalCode = e.target.getAttribute('data-postalCode')
                 let roadName = e.target.getAttribute('data-roadName')
-                displayPharmacyDescription(pharmacyName,roadName,postalCode);
+                displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon);
             }
 
            
