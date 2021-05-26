@@ -497,7 +497,7 @@ document.querySelector("#trackLocation").addEventListener("click", function(){
     document.querySelector("#brandBar").style.zIndex = "1";
 
     // 2. set view to current location
-    map.locate({setView: true, maxZoom: 18});
+    map.locate({setView: true, maxZoom: 19});
 
     // 3. Add "you are here" in current location
     function onLocationFound(e) {
@@ -505,13 +505,13 @@ document.querySelector("#trackLocation").addEventListener("click", function(){
         // Customize clinic icon
         let personIcon = L.icon({
             iconUrl: 'images/person.png',
-            iconSize: [45, 38], // size of the icon
+            iconSize: [50, 45], // size of the icon
             iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-            popupAnchor: [20, -10] // point from which the popup should open relative to the iconAnchor
+            popupAnchor: [23, -10] // point from which the popup should open relative to the iconAnchor
         });
-        // var radius = e.accuracy;
+    
         L.marker(e.latlng, {icon:personIcon}).addTo(map).bindPopup("You are here").openPopup();
-        // L.circle(e.latlng, radius).addTo(map);
+        
     }
     map.on('locationfound', onLocationFound);
     
