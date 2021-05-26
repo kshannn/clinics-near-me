@@ -472,20 +472,7 @@ async function filter() {
 
 
 // Close overlay
-document.querySelector("#closeBtn").addEventListener("click", function () {
-    document.querySelector("#content").style.display = "none";
-    document.querySelector("#contentContainer").style.display = "none";
-    document.querySelector("#map").style.zIndex = "0";
-    document.querySelector("#descriptionBox").style.zIndex = "1";
-    document.querySelector("#innerContainer").style.zIndex = "2";
-    document.querySelector("#innerContentBox").style.zIndex = "1";
-    document.querySelector("#toggleLayer").style.zIndex = "1";
-    document.querySelector("#brandBar").style.zIndex = "1";
-})
-
-// select location button
-document.querySelector("#trackLocation").addEventListener("click", function(){
-    
+setTimeout(function setCurrentLocation(){
     // 1. close overlay on click
     document.querySelector("#content").style.display = "none";
     document.querySelector("#contentContainer").style.display = "none";
@@ -514,9 +501,7 @@ document.querySelector("#trackLocation").addEventListener("click", function(){
         
     }
     map.on('locationfound', onLocationFound);
-    
-    
-})
+},2000)
 
 
 
