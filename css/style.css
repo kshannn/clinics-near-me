@@ -73,16 +73,16 @@ body {
     position: relative;
 }
 
-#textBox {
+/* #textBox {
     width: 60%;
-}
+} */
 
-#instruction {
+/* #instruction {
     width: 65%;
     text-align: center;
     color: rgba(255, 255, 255, 0.671);
     font-size: 2rem;
-}
+} */
 
 #closeBtn {
     position: absolute;
@@ -95,12 +95,12 @@ body {
     cursor: pointer;
 }
 
-#searchBox {
+/* #searchBox {
     height:100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 /* ========== Map ========== */
 #map {

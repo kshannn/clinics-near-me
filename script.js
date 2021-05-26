@@ -472,22 +472,6 @@ async function filter() {
 
 
 // Main search box disappear when clicked away
-document.querySelector("#contentContainer").addEventListener("click", function (event) {
-    if (document.querySelector("#content").contains(event.target)) {
-        // pass
-    } else {
-        // hide div
-        document.querySelector("#content").style.display = "none";
-        document.querySelector("#contentContainer").style.display = "none";
-        document.querySelector("#map").style.zIndex = "0";
-        document.querySelector("#descriptionBox").style.zIndex = "1";
-        document.querySelector("#innerContainer").style.zIndex = "2";
-        document.querySelector("#innerContentBox").style.zIndex = "1";
-        document.querySelector("#toggleLayer").style.zIndex = "1";
-        document.querySelector("#brandBar").style.zIndex = "1";
-    }
-
-})
 
 document.querySelector("#closeBtn").addEventListener("click", function () {
     document.querySelector("#content").style.display = "none";
