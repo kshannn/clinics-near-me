@@ -140,8 +140,10 @@ window.addEventListener("DOMContentLoaded", async function () {
         }
         if (similarResult == 0){
             showAlert();
+
         }
-    
+
+        
 
         // if no search term is keyed
         if (innerSearch == "") {
@@ -149,6 +151,10 @@ window.addEventListener("DOMContentLoaded", async function () {
             console.log("blank ran")
             return;
         } 
+
+        // If at least one li suggestion is shown
+        
+
 
             
         for (let clinic of clinicsData) {
@@ -348,6 +354,12 @@ async function filter() {
             newElement.setAttribute('data-clinicBlock',clinicBlock)
             newElement.setAttribute('data-clinicStreetName',clinicStreetName)
             document.querySelector("#suggestedList").appendChild(newElement);
+            if(document.querySelector(".suggestedResults")!= null){
+                console.log("if warning ran")
+                // Close Warning Alert
+                validationMsg.classList.remove("show")
+                validationMsg.classList.add("hidden")
+            }
             // combinedList.push(newElement)
         }
     }
@@ -379,6 +391,12 @@ async function filter() {
             newElement.setAttribute('data-postalCode',postalCode)
             newElement.setAttribute('data-roadName',roadName)
             document.querySelector("#suggestedList").appendChild(newElement);
+            if(document.querySelector(".suggestedResults")!= null){
+                console.log("if warning ran")
+                // Close Warning Alert
+                validationMsg.classList.remove("show")
+                validationMsg.classList.add("hidden")
+            }
             // combinedList.push(newElement)
         }
 

@@ -82,9 +82,9 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon) {
     $('#descriptionBox [data-toggle="toggle"]').bootstrapToggle();
 }
 
+let validationMsg = document.querySelector(".alert")
 function showAlert(){
     // Validation message appear
-    let validationMsg = document.querySelector(".alert")
     if(validationMsg.classList.contains("hidden")){
         validationMsg.classList.remove("hidden");
         validationMsg.classList.add("show")
