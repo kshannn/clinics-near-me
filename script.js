@@ -139,7 +139,17 @@ window.addEventListener("DOMContentLoaded", async function () {
 
             // validation check
             if (innerSearch == "") {
-
+                // Validation message appear
+                let validationMsg = document.querySelector(".alert")
+                if(validationMsg.classList.contains("hidden")){
+                    validationMsg.classList.remove("hidden");
+                    validationMsg.classList.add("show")
+                }
+                // Close Warning Alert
+                document.querySelector(".close").addEventListener("click",function(){
+                    validationMsg.classList.remove("show")
+                    validationMsg.classList.add("hidden")
+                })
             } else if (innerSearch.toUpperCase() == clinicName.toUpperCase()) {
                 // Focus on clicked clinic 
                 map.setView([clinicLocation[1], clinicLocation[0]], 20);
@@ -172,7 +182,17 @@ window.addEventListener("DOMContentLoaded", async function () {
 
             // validation check
             if (innerSearch == "") {
-
+                // Validation message appear
+                let validationMsg = document.querySelector(".alert")
+                if(validationMsg.classList.contains("hidden")){
+                    validationMsg.classList.remove("hidden");
+                    validationMsg.classList.add("show")
+                }
+                // Close Warning Alert
+                document.querySelector(".close").addEventListener("click",function(){
+                    validationMsg.classList.remove("show")
+                    validationMsg.classList.add("hidden")
+                })
             } else if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
                 // Focus on clicked pharmacy
                 map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
@@ -482,6 +502,7 @@ function setCurrentLocation(){
 
 
 }
+
 
 
 

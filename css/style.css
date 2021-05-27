@@ -252,6 +252,10 @@ input[type="text" i] {
     padding: 0px 20px;
 }
 
+.alert {
+    width: 100%;
+}
+
 /* ========== Toggle Layers ========== */
 
 #toggleLayer {
