@@ -494,8 +494,8 @@ function setCurrentLocation(){
         let personIcon = L.icon({
             iconUrl: 'images/person.png',
             iconSize: [50, 45], // size of the icon
-            iconAnchor: [0, 0], // point of the icon which will correspond to marker's location
-            popupAnchor: [23, -10] // point from which the popup should open relative to the iconAnchor
+            iconAnchor: [23, 20], // point of the icon which will correspond to marker's location
+            popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
         });
     
         L.marker(e.latlng, {icon:personIcon}).addTo(map).bindPopup("You are here").openPopup();
@@ -512,18 +512,23 @@ function setCurrentLocation(){
     }
     map.on('locationfound', youAreHere);
 
-    
-
-
 }
 
 
 
 
 // About Us Popup
-
 document.querySelector("#aboutUsBtn").addEventListener("click", function(){
-   alert('hi')
+    document.querySelector("#aboutUsOverlay").style.display = "flex"
+    document.querySelector("#innerContentBox").style.zIndex = "-1"
 })
+
+// Close About Us Popup
+document.querySelector("#aboutUsCloseBtn").addEventListener("click", function(){
+    document.querySelector("#aboutUsOverlay").style.display = "none"
+    document.querySelector("#innerContentBox").style.zIndex = "1"
+})
+
+
 
 

@@ -39,7 +39,7 @@ function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinic
             <i class="fas fa-map-marker-alt"></i>
         </div>
         <div class="details detailsLocation">
-            <p>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
+            <p>${clinicBlock} ${clinicStreetName}, SINGAPORE ${clinicPostal}</p>
         </div>
     </div>
     <div class="locationInfo">
@@ -71,7 +71,7 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon) {
             <i class="fas fa-map-marker-alt"></i>
         </div>
         <div class="details">
-            <p>${roadName}, Singapore ${postalCode}</p>
+            <p>${roadName}, SINGAPORE ${postalCode}</p>
         </div>
     </div>
     <p class="showNearby">Show CHAS clinics and pharmacies within 500m:</p>
