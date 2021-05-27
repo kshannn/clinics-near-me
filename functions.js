@@ -82,3 +82,16 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon) {
     $('#descriptionBox [data-toggle="toggle"]').bootstrapToggle();
 }
 
+function showAlert(){
+    // Validation message appear
+    let validationMsg = document.querySelector(".alert")
+    if(validationMsg.classList.contains("hidden")){
+        validationMsg.classList.remove("hidden");
+        validationMsg.classList.add("show")
+    }
+    // Close Warning Alert
+    document.querySelector(".close").addEventListener("click",function(){
+        validationMsg.classList.remove("show")
+        validationMsg.classList.add("hidden")
+    })
+}

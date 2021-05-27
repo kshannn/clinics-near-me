@@ -370,6 +370,7 @@ input[type="text" i] {
 
 .showNearby {
     font-style:italic;
+    margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
 

@@ -1,6 +1,7 @@
 // DOMContentLoaded
 window.addEventListener("DOMContentLoaded", async function () {
-    
+    let listOfLocations = [];
+
     // Clinic geojson data
     let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
     let clinicsData = clinicsResponse.data.features
@@ -25,6 +26,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         // Clinic details
         let clinicName = extractDetail(clinic, 2).toUpperCase();
+        listOfLocations.push(clinicName)
         let clinicTelephone = extractDetail(clinic, 4);
         let clinicPostal = extractDetail(clinic, 5)
         let clinicBlock = extractDetail(clinic, 7);
@@ -58,6 +60,8 @@ window.addEventListener("DOMContentLoaded", async function () {
     }
 
 
+
+
     // Pharmacy geojson Data
     let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
     var pharmacyData = pharmacyResponse.data.features
@@ -83,6 +87,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         // Pharmacy details
         let pharmacyName = extractDetail(pharmacy,7).toUpperCase();
+        listOfLocations.push(pharmacyName)
         let postalCode = extractDetail(pharmacy,1);
         let roadName = extractDetail(pharmacy,5);
 
@@ -113,7 +118,9 @@ window.addEventListener("DOMContentLoaded", async function () {
         })
     } // end of pharmacy loop
 
+   
 
+    
     
 
     //Clicking on search suggestion zooms to map location
@@ -121,7 +128,29 @@ window.addEventListener("DOMContentLoaded", async function () {
         document.querySelector("#suggestedList").innerHTML = ""
 
         let innerSearch = document.querySelector("#innerTextBox").value;
+        
+        // validation check
+        // if substring of search does not match any locations, 
+        let similarResult = 0;
+        for (each_location of listOfLocations){
+            // console.log(each_location)
+            if (each_location.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1){
+                similarResult ++
+            } 
+        }
+        if (similarResult == 0){
+            showAlert();
+        }
+    
 
+        // if no search term is keyed
+        if (innerSearch == "") {
+            showAlert();
+            console.log("blank ran")
+            return;
+        } 
+
+            
         for (let clinic of clinicsData) {
             
 
@@ -137,36 +166,25 @@ window.addEventListener("DOMContentLoaded", async function () {
             let lat = clinicLocation[1]
             let lon = clinicLocation[0]
 
-            // validation check
-            if (innerSearch == "") {
-                // Validation message appear
-                let validationMsg = document.querySelector(".alert")
-                if(validationMsg.classList.contains("hidden")){
-                    validationMsg.classList.remove("hidden");
-                    validationMsg.classList.add("show")
-                }
-                // Close Warning Alert
-                document.querySelector(".close").addEventListener("click",function(){
-                    validationMsg.classList.remove("show")
-                    validationMsg.classList.add("hidden")
-                })
-            } else if (innerSearch.toUpperCase() == clinicName.toUpperCase()) {
+            if (innerSearch.toUpperCase() == clinicName.toUpperCase()) {
                 // Focus on clicked clinic 
                 map.setView([clinicLocation[1], clinicLocation[0]], 20);
                 displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone,lat,lon);
-        
-                
             } else if (clinicName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
                 // Jump to region
                 map.setView([clinicLocation[1], clinicLocation[0]], 20);
                 displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone,lat,lon);
-               
+               console.log("else if ran")
                                 
             }
-            
-    
         }
 
+        // validation check
+        if (innerSearch == "") {
+            showAlert();
+            console.log("blank ran")
+            return
+        } 
 
 
         for (let pharmacy of pharmacyData) {
@@ -180,46 +198,22 @@ window.addEventListener("DOMContentLoaded", async function () {
             let lat = pharmacyLocation[1]
             let lon = pharmacyLocation[0]
 
-            // validation check
-            if (innerSearch == "") {
-                // Validation message appear
-                let validationMsg = document.querySelector(".alert")
-                if(validationMsg.classList.contains("hidden")){
-                    validationMsg.classList.remove("hidden");
-                    validationMsg.classList.add("show")
-                }
-                // Close Warning Alert
-                document.querySelector(".close").addEventListener("click",function(){
-                    validationMsg.classList.remove("show")
-                    validationMsg.classList.add("hidden")
-                })
-            } else if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
+            if (innerSearch.toUpperCase() == pharmacyName.toUpperCase()) {
                 // Focus on clicked pharmacy
                 map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20);
                 
                 displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon);
 
-                // if (document.querySelector("#descriptionBox").classList.contains("hidden")) {
-                //     document.querySelector("#descriptionBox").classList.remove("hidden");
-                //     document.querySelector("#descriptionBox").classList.add("show");
-                //     document.querySelector("#descriptionBox").classList.add("statusShown");
-                // } 
 
             } else if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1) {
                 // Jump to region
                 map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20); 
                 displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon)
+                console.log("else if ran")
                 
-                // newElement = document.createElement("li")
-                // newElement.classList.add("suggestedResults")
-                // newElement.innerHTML = pharmacyName
-                // newElement.setAttribute('data-lat', pharmacyLocation[1]);
-                // newElement.setAttribute('data-lon', pharmacyLocation[0]);
-                // newElement.setAttribute('data-pharmacyName',pharmacyName)
-                // newElement.setAttribute('data-postalCode',postalCode)
-                // newElement.setAttribute('data-roadName',roadName)
-                // document.querySelector("#suggestedList").appendChild(newElement);
-            }
+            
+            } 
+
         }
 
 
@@ -390,6 +384,7 @@ async function filter() {
 
     }
 
+    
     // for (let result of combinedList){
     //     console.log(result.innerHTML)
     // }
@@ -440,6 +435,7 @@ async function filter() {
 
         })
     }
+    
 
 }
 
