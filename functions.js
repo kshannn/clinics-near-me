@@ -22,7 +22,7 @@ function showCircle(lat, lon){
     }
 
     //3. zoom out to view full circle
-    map.setView([lat, lon], 16);
+    map.setView([lat, lon], 15);
 }
 
 function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone, lat,lon){
@@ -32,7 +32,7 @@ function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinic
         <div class="icon">
             <i class="fas fa-map-marker-alt"></i>
         </div>
-        <div class="details">
+        <div class="details detailsLocation">
             <p>${clinicBlock} ${clinicStreetName}, Singapore ${clinicPostal}</p>
         </div>
     </div>
@@ -40,15 +40,17 @@ function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinic
         <div class="icon">
             <i class="fas fa-phone-alt"></i>
         </div>
-        <div class="details">
+        <div class="details detailsTelephone">
             <p>${clinicTelephone}</p>     
         </div>
     </div>
-    <p>Show CHAS clinics and pharmacies within 500m:</p>
-    <button id="clinicDistanceBtn" onclick="showCircle(${lat}, ${lon})">500m</button>
+    <p class="showNearby">Show CHAS clinics and pharmacies within 500m:</p>
+    <input type="checkbox" data-toggle="toggle" id="clinicDistanceBtn" onchange="showCircle(${lat}, ${lon})">
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");
     document.querySelector("#descriptionBox").classList.add("show");
+    $('#descriptionBox [data-toggle="toggle"]').bootstrapToggle();
+    
 }
 
 
@@ -63,10 +65,11 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon) {
             <p>${roadName}, Singapore ${postalCode}</p>
         </div>
     </div>
-    <p>Show CHAS clinics and pharmacies within 500m:</p>
-    <button id="pharmacyDistanceBtn" onclick="showCircle(${lat},${lon})">500m</button>
+    <p class="showNearby">Show CHAS clinics and pharmacies within 500m:</p>
+    <input type="checkbox" data-toggle="toggle" id="pharmacyDistanceBtn" onchange="showCircle(${lat}, ${lon})">
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");
     document.querySelector("#descriptionBox").classList.add("show");
+    $('#descriptionBox [data-toggle="toggle"]').bootstrapToggle();
 }
 
