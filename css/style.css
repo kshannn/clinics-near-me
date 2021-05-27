@@ -55,19 +55,11 @@ body {
 }
 
 #brandName {
-    /* background: red; */
     color: white;
     cursor: pointer;
     line-height: 50px;
     margin-right:20px;
 }
-
-/* #brandBar p {
-    color: white;
-    cursor: pointer;
-    line-height: 50px;
-} */
-
 
 #aboutUs {
     width: 90px;
@@ -130,12 +122,14 @@ body {
 }
 
 #locator {
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
     line-height: 2;
-    padding: 150px 20%;
+    padding: 50px 20% 20px 20%;
 }
 
 
@@ -151,7 +145,7 @@ body {
 }
 
 #aboutUsContent {
-    width: 300px;
+    width: 250px;
     height: 300px;
     background-color: rgb(170, 131, 170);
 } */
@@ -236,7 +230,6 @@ body {
 }
 
 #suggestions li {
-    /* border-bottom: 1px solid grey; */
     box-shadow: 0 0 1px;
     padding-left: 20px;
     /* margin: 0px 40px; */
@@ -349,12 +342,21 @@ input[type="text" i] {
     flex: 19;
 }
 
+.details p {
+    margin-block-start: 1em;
+}
+
 
 
 /* ############## TABLET DISPLAY ############## */
 
 @media screen and (min-width:768px){
     
+    /* ========== Overlay box ========== */
+    #content {
+        width: 35%;
+    }
+
     /* ========== Inner Search Box/Suggestions ========== */
     #innerContentBox {
         width: 35%;
