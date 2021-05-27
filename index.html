@@ -35,7 +35,12 @@
                     <img src="images/brand.png" alt="brand icon">
                 </div>
             </a>
-            <p>CHAS Clinic Finder</p>
+            <a href="/">
+                <div id="brandName">CHAS Clinic Finder</div>    
+            </a>    
+            <div id="aboutUs">
+                <button>About Us</button>
+            </div>
         </div>
 
         <!-- Search bar -->
@@ -50,11 +55,13 @@
                 </a>
 
                 <!-- search suggestions -->
-            
                 <div id="suggestions">
                     <ul id="suggestedList"></ul>
                 </div>
-            
+            </div>
+
+            <div id="aboutUsContainer">
+                <div id="aboutUsContent"></div>
             </div>
         </div>
 
@@ -97,7 +104,7 @@
                 <button id="closeBtn">X</button>
                 <div id="locator">
                     <p>Turn on locator tracker to search for a CHAS clinic near you</p>
-                    <input id="trackLocation" type="checkbox" data-toggle="toggle" onchange="setCurrentLocation()">
+                    <input id="trackLocation" type="checkbox" data-toggle="toggle" onchange="setTimeout(setCurrentLocation,1000)">
                 </div>
             </div>
         </div>

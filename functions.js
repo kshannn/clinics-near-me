@@ -44,8 +44,8 @@ function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinic
             <p>${clinicTelephone}</p>     
         </div>
     </div>
-    <p>Show CHAS clinics and pharmacies within:</p>
-    <button id="clinicDistanceBtn" onClick="showCircle(${lat}, ${lon})">500m</button>
+    <p>Show CHAS clinics and pharmacies within 500m:</p>
+    <button id="clinicDistanceBtn" onclick="showCircle(${lat}, ${lon})">500m</button>
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");
     document.querySelector("#descriptionBox").classList.add("show");
@@ -63,8 +63,8 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon) {
             <p>${roadName}, Singapore ${postalCode}</p>
         </div>
     </div>
-    <p>Show CHAS clinics and pharmacies within:</p>
-    <button id="pharmacyDistanceBtn" onClick="showCircle(${lat},${lon})">500m</button>
+    <p>Show CHAS clinics and pharmacies within 500m:</p>
+    <button id="pharmacyDistanceBtn" onclick="showCircle(${lat},${lon})">500m</button>
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");
     document.querySelector("#descriptionBox").classList.add("show");

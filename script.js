@@ -466,13 +466,22 @@ async function filter() {
 
 
 
-
-
-
-
-
 // Close overlay
-setTimeout(function setCurrentLocation(){
+document.querySelector("#closeBtn").addEventListener("click",function(){
+    document.querySelector("#content").style.display = "none";
+    document.querySelector("#contentContainer").style.display = "none";
+    document.querySelector("#map").style.zIndex = "0";
+    document.querySelector("#descriptionBox").style.zIndex = "1";
+    document.querySelector("#innerContainer").style.zIndex = "2";
+    document.querySelector("#innerContentBox").style.zIndex = "1";
+    document.querySelector("#toggleLayer").style.zIndex = "1";
+    document.querySelector("#brandBar").style.zIndex = "1";
+})
+
+
+
+
+function setCurrentLocation(){
     // 1. close overlay on click
     document.querySelector("#content").style.display = "none";
     document.querySelector("#contentContainer").style.display = "none";
@@ -489,7 +498,6 @@ setTimeout(function setCurrentLocation(){
     // 3. Add "you are here" in current location
     function onLocationFound(e) {
         // 3a. Customize person icon
-        // Customize clinic icon
         let personIcon = L.icon({
             iconUrl: 'images/person.png',
             iconSize: [50, 45], // size of the icon
@@ -501,8 +509,14 @@ setTimeout(function setCurrentLocation(){
         
     }
     map.on('locationfound', onLocationFound);
-},2000)
+}
 
 
+
+// About Us Popup
+
+document.querySelector("#aboutUs").addEventListener("click", function(){
+   
+})
 
 
