@@ -5,14 +5,17 @@ function extractDetail(place, index) {
     return tmp
 }
 
+
+let circleLayer = L.layerGroup();
 function showCircle(lat, lon){
-    let circleLayer = L.layerGroup();
+    console.log(circleLayer)
     if (map.hasLayer(circleLayer)) {
         map.removeLayer(circleLayer);
-        console.log(1) // Issue: if block not running
+        console.log(1)
     } else {
         console.log(2)
-        let clinicCircle = L.circle([lat, lon], {
+        circleLayer.clearLayers();
+        let circles = L.circle([lat, lon], {
             color: 'red',
             fillColor: "orange",
             fillOpacity: 0.25,
@@ -26,6 +29,9 @@ function showCircle(lat, lon){
 }
 
 function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone, lat,lon){
+    if (map.hasLayer(circleLayer)) {
+        map.removeLayer(circleLayer);
+    } 
     document.querySelector("#descriptionBox").innerHTML = `
     <h2>${clinicName}</h2>
     <div class="locationInfo">
@@ -45,7 +51,7 @@ function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinic
         </div>
     </div>
     <p class="showNearby">Show CHAS clinics and pharmacies within 500m:</p>
-    <input type="checkbox" data-toggle="toggle" id="clinicDistanceBtn" onchange="showCircle(${lat}, ${lon})">
+    <input type="checkbox" data-toggle="toggle" onchange="showCircle(${lat}, ${lon})">
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");
     document.querySelector("#descriptionBox").classList.add("show");
@@ -55,6 +61,9 @@ function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinic
 
 
 function displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon) {
+    if (map.hasLayer(circleLayer)) {
+        map.removeLayer(circleLayer);
+    } 
     document.querySelector("#descriptionBox").innerHTML = `
     <h2>${pharmacyName}</h2>
     <div class="locationInfo">
@@ -66,7 +75,7 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon) {
         </div>
     </div>
     <p class="showNearby">Show CHAS clinics and pharmacies within 500m:</p>
-    <input type="checkbox" data-toggle="toggle" id="pharmacyDistanceBtn" onchange="showCircle(${lat}, ${lon})">
+    <input type="checkbox" data-toggle="toggle" onchange="showCircle(${lat}, ${lon})">
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");
     document.querySelector("#descriptionBox").classList.add("show");

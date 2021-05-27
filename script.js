@@ -20,12 +20,11 @@ window.addEventListener("DOMContentLoaded", async function () {
     let clinicGroup = L.layerGroup();
     clinicClusterLayer.addTo(clinicGroup);
     clinicGroup.addTo(map);
-    let clinicCircleLayer = L.layerGroup();
 
     for (let clinic of clinicsData) {
 
         // Clinic details
-        let clinicName = extractDetail(clinic, 2);
+        let clinicName = extractDetail(clinic, 2).toUpperCase();
         let clinicTelephone = extractDetail(clinic, 4);
         let clinicPostal = extractDetail(clinic, 5)
         let clinicBlock = extractDetail(clinic, 7);
@@ -53,16 +52,6 @@ window.addEventListener("DOMContentLoaded", async function () {
                 document.querySelector("#descriptionBox").classList.add("show");
                 document.querySelector("#descriptionBox").classList.add("statusShown");
             }
-
-            // 1. Click on distance e.g. "500m"
-
-            let clinicCircle = L.circle([clinicLocation[1], clinicLocation[0]], {
-                color: 'red',
-                fillColor: "orange",
-                fillOpacity: 0.25,
-                radius: 500
-            }).addTo(clinicCircleLayer);
-
 
         })
 
@@ -93,7 +82,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     for (let pharmacy of pharmacyData) {
 
         // Pharmacy details
-        let pharmacyName = extractDetail(pharmacy,7);
+        let pharmacyName = extractDetail(pharmacy,7).toUpperCase();
         let postalCode = extractDetail(pharmacy,1);
         let roadName = extractDetail(pharmacy,5);
 
@@ -106,7 +95,6 @@ window.addEventListener("DOMContentLoaded", async function () {
         let lat = pharmacyLocation[1]
         let lon = pharmacyLocation[0]
 
-        let pharmacyCircleLayer = L.layerGroup();
         // Show big description and focus on pharmacy when it is clicked
         pharmacyMarker.addEventListener("click", function () {
           
@@ -121,35 +109,6 @@ window.addEventListener("DOMContentLoaded", async function () {
                 document.querySelector("#descriptionBox").classList.add("show");
                 document.querySelector("#descriptionBox").classList.add("statusShown");
             }
-
-            // 1. Click on distance e.g. "500m"
-
-            let pharmacyCircle = L.circle([pharmacyLocation[1], pharmacyLocation[0]], {
-                color: 'red',
-                fillColor: "orange",
-                fillOpacity: 0.25,
-                radius: 500
-            }).addTo(pharmacyCircleLayer);
-
-            document.querySelector("#pharmacyDistanceBtn").addEventListener("click", function () {
-                // 2. For a selected coordinate, execute function to add circle around it
-
-
-                // add circle to the map
-                if (map.hasLayer(pharmacyCircleLayer)) {
-
-                    map.removeLayer(pharmacyCircleLayer);
-                } else {
-                    map.addLayer(pharmacyCircleLayer);
-                }
-
-
-                //3. zoom out to view full circle
-                map.setView([pharmacyLocation[1], pharmacyLocation[0]], 16);
-
-
-            })
-
 
         })
     } // end of pharmacy loop
@@ -167,7 +126,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             
 
             // Clinic details
-            let clinicName = extractDetail(clinic, 2);
+            let clinicName = extractDetail(clinic, 2).toUpperCase();
             let clinicTelephone = extractDetail(clinic, 4);
             let clinicPostal = extractDetail(clinic, 5)
             let clinicBlock = extractDetail(clinic, 7);
@@ -202,7 +161,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         for (let pharmacy of pharmacyData) {
             // Pharmacy details
-            let pharmacyName = extractDetail(pharmacy,7);
+            let pharmacyName = extractDetail(pharmacy,7).toUpperCase();
             let postalCode = extractDetail(pharmacy,1);
             let roadName = extractDetail(pharmacy,5);
 
@@ -355,7 +314,7 @@ async function filter() {
 
     for (let clinic of clinicsData) {
         // Clinic details
-        let clinicName = extractDetail(clinic, 2);
+        let clinicName = extractDetail(clinic, 2).toUpperCase();
         let clinicTelephone = extractDetail(clinic, 4);
         let clinicPostal = extractDetail(clinic, 5)
         let clinicBlock = extractDetail(clinic, 7);
@@ -369,7 +328,7 @@ async function filter() {
             newElement.innerHTML = clinicName
             newElement.setAttribute('data-lat', clinicLocation[1]);
             newElement.setAttribute('data-lon', clinicLocation[0]);
-            newElement.setAttribute('data-clinicName',clinicName);
+            newElement.setAttribute('data-clinicName',clinicName.toUpperCase());
             newElement.setAttribute('data-clinicTelephone',clinicTelephone)
             newElement.setAttribute('data-clinicPostal',clinicPostal)
             newElement.setAttribute('data-clinicBlock',clinicBlock)
@@ -388,7 +347,7 @@ async function filter() {
     for (let pharmacy of pharmacyData) {
 
         // Pharmacy details
-        let pharmacyName = extractDetail(pharmacy,7);
+        let pharmacyName = extractDetail(pharmacy,7).toUpperCase();
         let postalCode = extractDetail(pharmacy,1);
         let roadName = extractDetail(pharmacy,5);
         
@@ -402,7 +361,7 @@ async function filter() {
             newElement.innerHTML = pharmacyName
             newElement.setAttribute('data-lat', pharmacyLocation[1]);
             newElement.setAttribute('data-lon', pharmacyLocation[0]);
-            newElement.setAttribute('data-pharmacyName',pharmacyName)
+            newElement.setAttribute('data-pharmacyName',pharmacyName.toUpperCase())
             newElement.setAttribute('data-postalCode',postalCode)
             newElement.setAttribute('data-roadName',roadName)
             document.querySelector("#suggestedList").appendChild(newElement);
@@ -493,10 +452,10 @@ function setCurrentLocation(){
     document.querySelector("#brandBar").style.zIndex = "1";
 
     // 2. set view to current location
-    map.locate({setView: true, maxZoom: 19});
+    map.locate({setView: true, maxZoom: 20});
 
     // 3. Add "you are here" in current location
-    function onLocationFound(e) {
+    function youAreHere(e) {
         // 3a. Customize person icon
         let personIcon = L.icon({
             iconUrl: 'images/person.png',
@@ -506,17 +465,30 @@ function setCurrentLocation(){
         });
     
         L.marker(e.latlng, {icon:personIcon}).addTo(map).bindPopup("You are here").openPopup();
-        
+        L.circle(e.latlng).addTo(map);
+
+        // 3b. Description box popup
+        document.querySelector("#descriptionBox").innerHTML = `
+        <p class="showNearby">Show CHAS clinics and pharmacies within 500m:</p>
+        <input type="checkbox" data-toggle="toggle" onchange="showCircle(${e.latlng.lat}, ${e.latlng.lng})">
+        `
+        document.querySelector("#descriptionBox").classList.remove("hidden");
+        document.querySelector("#descriptionBox").classList.add("show");
+        $('#descriptionBox [data-toggle="toggle"]').bootstrapToggle();
     }
-    map.on('locationfound', onLocationFound);
+    map.on('locationfound', youAreHere);
+
+    
+
+
 }
 
 
 
 // About Us Popup
 
-document.querySelector("#aboutUs").addEventListener("click", function(){
-   
+document.querySelector("#aboutUsBtn").addEventListener("click", function(){
+   alert('hi')
 })
 
 
