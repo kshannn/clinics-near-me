@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         let clinicTelephone = extractDetail(clinic, 4);
         let clinicPostal = extractDetail(clinic, 5)
         let clinicBlock = extractDetail(clinic, 7);
-        let clinicStreetName = extractDetail(clinic, 10);
+        let clinicStreetName = extractDetail(clinic, 10).toUpperCase();
 
 
         // Add clinics into map via coordinates
@@ -89,7 +89,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         let pharmacyName = extractDetail(pharmacy,7).toUpperCase();
         listOfLocations.push(pharmacyName)
         let postalCode = extractDetail(pharmacy,1);
-        let roadName = extractDetail(pharmacy,5);
+        let roadName = extractDetail(pharmacy,5).toUpperCase();
 
 
         // Add pharmacies into map via coordinates
@@ -163,7 +163,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             let clinicTelephone = extractDetail(clinic, 4);
             let clinicPostal = extractDetail(clinic, 5)
             let clinicBlock = extractDetail(clinic, 7);
-            let clinicStreetName = extractDetail(clinic, 10);
+            let clinicStreetName = extractDetail(clinic, 10).toUpperCase();
 
 
             let clinicLocation = clinic.geometry.coordinates
@@ -193,7 +193,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             // Pharmacy details
             let pharmacyName = extractDetail(pharmacy,7).toUpperCase();
             let postalCode = extractDetail(pharmacy,1);
-            let roadName = extractDetail(pharmacy,5);
+            let roadName = extractDetail(pharmacy,5).toUpperCase();
 
 
             let pharmacyLocation = pharmacy.geometry.coordinates
@@ -327,7 +327,7 @@ async function filter() {
         let clinicTelephone = extractDetail(clinic, 4);
         let clinicPostal = extractDetail(clinic, 5)
         let clinicBlock = extractDetail(clinic, 7);
-        let clinicStreetName = extractDetail(clinic, 10);
+        let clinicStreetName = extractDetail(clinic, 10).toUpperCase();
 
         let clinicLocation = clinic.geometry.coordinates
 
@@ -363,7 +363,7 @@ async function filter() {
         // Pharmacy details
         let pharmacyName = extractDetail(pharmacy,7).toUpperCase();
         let postalCode = extractDetail(pharmacy,1);
-        let roadName = extractDetail(pharmacy,5);
+        let roadName = extractDetail(pharmacy,5).toUpperCase();
         
 
         let pharmacyLocation = pharmacy.geometry.coordinates
