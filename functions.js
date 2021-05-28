@@ -47,10 +47,11 @@ function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinic
             <i class="fas fa-phone-alt"></i>
         </div>
         <div class="details detailsTelephone">
-            <p>${clinicTelephone}</p>     
+            <p>${clinicTelephone}</p>
+            <div class="test"><i class="fas fa-phone-alt"></i></div>     
         </div>
     </div>
-    <p class="showNearby">Show CHAS clinics and pharmacies within 500m:</p>
+    <p class="showNearby">Show pharmacies within 500m:</p>
     <input type="checkbox" data-toggle="toggle" onchange="showCircle(${lat}, ${lon})">
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");
@@ -74,7 +75,7 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon) {
             <p>${roadName}, SINGAPORE ${postalCode}</p>
         </div>
     </div>
-    <p class="showNearby">Show CHAS clinics and pharmacies within 500m:</p>
+    <p class="showNearby">Show pharmacies within 500m:</p>
     <input type="checkbox" data-toggle="toggle" onchange="showCircle(${lat}, ${lon})">
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");

@@ -133,7 +133,6 @@ window.addEventListener("DOMContentLoaded", async function () {
         // if substring of search does not match any locations, 
         let similarResult = 0;
         for (each_location of listOfLocations){
-            // console.log(each_location)
             if (each_location.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1){
                 similarResult ++
             } 
@@ -148,7 +147,6 @@ window.addEventListener("DOMContentLoaded", async function () {
         // if no search term is keyed
         if (innerSearch == "") {
             showAlert();
-            console.log("blank ran")
             return;
         } 
 
@@ -180,7 +178,6 @@ window.addEventListener("DOMContentLoaded", async function () {
                 // Jump to region
                 map.setView([clinicLocation[1], clinicLocation[0]], 20);
                 displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinicPostal,clinicTelephone,lat,lon);
-               console.log("else if ran")
                                 
             }
         }
@@ -188,7 +185,6 @@ window.addEventListener("DOMContentLoaded", async function () {
         // validation check
         if (innerSearch == "") {
             showAlert();
-            console.log("blank ran")
             return
         } 
 
@@ -215,7 +211,6 @@ window.addEventListener("DOMContentLoaded", async function () {
                 // Jump to region
                 map.setView([pharmacyLocation[1], pharmacyLocation[0]], 20); 
                 displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon)
-                console.log("else if ran")
                 
             
             } 
@@ -305,12 +300,6 @@ const debounce = (fn, delay) => {
     }
 }
 
-// const debounce = function (func, delay){
-// 	let delayed = setTimeout(func, delay);
-//     return delayed
-// }
-
-
 
 
 document.querySelector("#innerTextBox").addEventListener("keyup", debounce(filter, 300))
@@ -355,7 +344,6 @@ async function filter() {
             newElement.setAttribute('data-clinicStreetName',clinicStreetName)
             document.querySelector("#suggestedList").appendChild(newElement);
             if(document.querySelector(".suggestedResults")!= null){
-                console.log("if warning ran")
                 // Close Warning Alert
                 validationMsg.classList.remove("show")
                 validationMsg.classList.add("hidden")
@@ -381,7 +369,6 @@ async function filter() {
         let pharmacyLocation = pharmacy.geometry.coordinates
 
         if (pharmacyName.toUpperCase().indexOf(innerSearch.toUpperCase()) > -1){
-            // console.log(pharmacyName)
             newElement = document.createElement("li")
             newElement.classList.add("suggestedResults")
             newElement.innerHTML = pharmacyName
@@ -392,7 +379,6 @@ async function filter() {
             newElement.setAttribute('data-roadName',roadName)
             document.querySelector("#suggestedList").appendChild(newElement);
             if(document.querySelector(".suggestedResults")!= null){
-                console.log("if warning ran")
                 // Close Warning Alert
                 validationMsg.classList.remove("show")
                 validationMsg.classList.add("hidden")
@@ -420,7 +406,6 @@ async function filter() {
             event.target.style.backgroundColor = "white"
         })
         each_suggestedResult.addEventListener("click", function (e) {
-            // console.log(e.target)
             map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
             document.querySelector("#suggestedList").innerHTML = ""
             document.querySelector("#innerTextBox").value = each_suggestedResult.innerText
