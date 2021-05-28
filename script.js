@@ -351,11 +351,10 @@ async function filter() {
             }
             // combinedList.push(newElement)
 
-            // if there is list suggestions, change border radius of bottom left to none
-            if (document.querySelector(".suggestedResults")){
-                console.log("list appeared")
-                document.querySelector("#innerTextBox").style.borderRadius = "5px 0 0 0px"
-            } 
+            // // if there is list suggestions, change border radius of bottom left to none
+            // if (document.querySelector(".suggestedResults")){
+            //     document.querySelector("#innerTextBox").style.borderRadius = "5px 0 0 0px"
+            // } 
         }
     }
 

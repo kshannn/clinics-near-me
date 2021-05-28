@@ -335,7 +335,7 @@ input[type="text" i] {
     justify-content: center;
     border-radius: 24px;
     cursor: pointer;
-    /* box-shadow: 0 0 3px #63585E; */
+    box-shadow: 0 0 5px rgb(37, 21, 41);
 }
 
 #toggleLayerBtn:hover {
@@ -460,10 +460,12 @@ input[type="text" i] {
     
     #innerTextBox {
         border-radius: 5px 0 0 5px;
+        box-shadow: 0 0 10px grey;
     }
     
     #innerSearchBtn {
         border-radius: 0 5px 5px 0;
+        box-shadow: 0 0 5px grey;
     }
 
     /* ========== Toggle Layers ========== */
