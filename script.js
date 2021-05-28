@@ -311,11 +311,14 @@ document.querySelector("#innerTextBox").addEventListener("keyup", debounce(filte
 
 
 async function filter() {
-    // let combinedList = [];
     document.querySelector("#suggestedList").innerHTML = "";
+    
+    if(!document.querySelector("#innerTextBox").value){
+        return;
+    }
+    // let combinedList = [];
 
     let innerSearch = document.querySelector("#innerTextBox").value;
-
     
     // Clinic geojson data
     let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
