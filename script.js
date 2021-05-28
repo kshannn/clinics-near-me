@@ -316,6 +316,7 @@ async function filter() {
 
     let innerSearch = document.querySelector("#innerTextBox").value;
 
+    
     // Clinic geojson data
     let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
     let clinicsData = clinicsResponse.data.features
@@ -349,6 +350,12 @@ async function filter() {
                 validationMsg.classList.add("hidden")
             }
             // combinedList.push(newElement)
+
+            // if there is list suggestions, change border radius of bottom left to none
+            if (document.querySelector(".suggestedResults")){
+                console.log("list appeared")
+                document.querySelector("#innerTextBox").style.borderRadius = "5px 0 0 0px"
+            } 
         }
     }
 
@@ -513,7 +520,6 @@ document.querySelector("#aboutUsCloseBtn").addEventListener("click", function(){
     document.querySelector("#aboutUsOverlay").style.display = "none"
     document.querySelector("#innerContentBox").style.zIndex = "1"
 })
-
 
 
 

@@ -43,6 +43,10 @@ body {
     font-family: 'PT Serif', serif;
 }
 
+#brandBar a {
+    text-decoration: none;
+}
+
 #brandIcon {
     width:50px;
     height: 50px;
@@ -266,6 +270,7 @@ body {
     width: 100%;
     max-height: 250px;
     overflow-y: scroll;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 }
 
 #suggestions ul{
@@ -364,10 +369,11 @@ input[type="text" i] {
     line-height: 0.8;
     padding: 10px 20px;
     background-color: rgb(255, 255, 255);
+    /* background-color: #b8adbe; */
     position:absolute;
     bottom: 0;
     font-size: 0.7rem;
-    box-shadow: 0px 0px 10px #888888;
+    box-shadow: 0px 0px 5px #646464;
 }
 
 #descriptionBox h2 {
@@ -414,6 +420,7 @@ input[type="text" i] {
 .showNearby {
     font-style:italic;
     margin-bottom: 0.5rem;
+    margin-top: 0.4rem;
 }
 
 #call{
