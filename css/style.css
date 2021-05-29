@@ -37,10 +37,10 @@ body {
 #brandBar {
     width: 100%;
     height: 50px;
-    background-color: #63585E;
+    background-color: #005275;
     position: absolute;
     display: flex;
-    font-family: 'PT Serif', serif;
+    /* font-family: 'PT Serif', serif; */
 }
 
 #brandBar a {
@@ -80,14 +80,14 @@ body {
     width: 100%;
     border: none;
     border-radius: 20px;
-    background-color: #998DA0;
+    background-color: #42788F;
     color: white;
     cursor: pointer;
 
 }
 
 #aboutUs button:hover {
-    background-color: #ae95bd;
+    background-color: #97B3BF;
 }
 
 
@@ -155,7 +155,7 @@ body {
     width: 80%;
     height: 50%;
     padding-bottom: 50px;
-    background-color: rgb(170, 131, 170);
+    background-color: white;
     border-radius: 24px;
     position: relative;
 }
@@ -169,7 +169,7 @@ body {
 }
 
 #aboutUsCloseBtn:hover {
-    color: #e0cfeb;
+    color: rgba(128, 128, 128, 0.479);
 }
 
 
@@ -193,7 +193,7 @@ body {
 }
 
 #aboutUsContent a:hover{
-    color: #e0cfeb;
+    color: #838383;
 }
 
 ::-webkit-scrollbar {
@@ -245,14 +245,14 @@ body {
 #innerSearchBtn {
     width: 50px;
     height: 50px;
-    background-color: #998DA0;
+    background-color: #42788F;
     text-align: center;
     font-size: 1.5rem;
     color: white;
 }
 
 #innerSearchBtn:hover {
-    background-color: #ae95bd;
+    background-color: #97B3BF;
 }
 
 
@@ -270,7 +270,7 @@ body {
     width: 100%;
     max-height: 250px;
     overflow-y: scroll;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    box-shadow: 0 4px 8px 0 rgb(0,0,0,0.2);
 }
 
 #suggestions ul{
@@ -315,18 +315,19 @@ input[type="text" i] {
     width: 100%;
     max-width: 300px;
     height: 100px;
-    background-color: #998DA0;
+    background-color: #42788F;
     border-radius: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     padding-left: 30px;
+    color:white;
 }
 
 #toggleLayerBtn {
     width:50px;
     height:50px;
-    background-color: #998DA0;
+    background-color: #42788F;
     position: absolute;
     right:0;
     top:0;
@@ -339,7 +340,7 @@ input[type="text" i] {
 }
 
 #toggleLayerBtn:hover {
-    background-color: #ae95bd;
+    background-color: #97B3BF;
 }
 
 #smallClinicToggle, #smallPharmacyToggle {

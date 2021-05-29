@@ -75,7 +75,7 @@ function displayPharmacyDescription(pharmacyName,roadName,postalCode,lat,lon) {
             <p>${roadName}, SINGAPORE ${postalCode}</p>
         </div>
     </div>
-    <p class="showNearby">Show pharmacies within 500m:</p>
+    <p class="showNearby">Show clinics within 500m:</p>
     <input type="checkbox" data-toggle="toggle" onchange="showCircle(${lat}, ${lon})">
     `
     document.querySelector("#descriptionBox").classList.remove("hidden");
