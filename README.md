@@ -66,6 +66,8 @@ _Non-functional requirements_
 
 #### **Skeleton**
 
+[Wireframes for mobile, tablet, and laptop display](https://github.com/kshannn/clinics-near-me/blob/a23464666e5f3c939614abe3e776bc484ec67397/wireframes/clinic_finder_mockup.pdf)
+
 #### **Surface**
 
 Colours
