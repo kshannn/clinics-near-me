@@ -289,13 +289,13 @@ document.querySelector("#toggleLayerBtn").addEventListener("click", function () 
 
 const debounce = (fn, delay) => {
     let timeOutId;
-    return function (...args) {
+    return function () {
 
         if (timeOutId) {
             clearTimeout(timeOutId)
         }
         timeOutId = setTimeout(() => {
-            fn(...args)
+            fn()
         }, delay)
     }
 }
