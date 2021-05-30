@@ -99,7 +99,7 @@ body {
 
 #content {
     width: 65%;
-    height: 50vh;
+    min-height: 200px;
     background-color: white;
     border-radius: 24px;
     position: relative;
@@ -144,6 +144,7 @@ body {
 #aboutUsContainer {
     width: 80%;
     height: 50%;
+    max-height: 350px;
     padding-bottom: 50px;
     background-color: white;
     border-radius: 24px;

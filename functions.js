@@ -17,9 +17,9 @@ function setCurrentLocation() {
         // 3a. Customize person icon
         let personIcon = L.icon({
             iconUrl: 'images/person.png',
-            iconSize: [50, 45], // size of the icon
-            iconAnchor: [23, 20], // point of the icon which will correspond to marker's location
-            popupAnchor: [0, -30] // point from which the popup should open relative to the iconAnchor
+            iconSize: [50, 45],
+            iconAnchor: [23, 20],
+            popupAnchor: [0, -30]
         });
 
         L.marker(e.latlng, { icon: personIcon }).addTo(map).bindPopup("You are here").openPopup();
@@ -43,7 +43,6 @@ function extractDetail(place, index) {
     tmp = tmp[0]
     return tmp
 }
-
 
 let circleLayer = L.layerGroup();
 function showCircle(lat, lon) {
@@ -95,7 +94,6 @@ function displayClinicDescription(clinicName, clinicBlock, clinicStreetName, cli
     $('#descriptionBox [data-toggle="toggle"]').bootstrapToggle();
 
 }
-
 
 function displayPharmacyDescription(pharmacyName, roadName, postalCode, lat, lon) {
     if (map.hasLayer(circleLayer)) {
