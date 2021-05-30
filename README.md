@@ -58,7 +58,7 @@ _Content requirements_
 
 _Non-functional requirements_
 * Mobile responsiveness
-    * Achieved via the use of appropriate media breakpoints and flex box
+    * Achieved via the use of appropriate media queries and flex box
 * Performance
 
 
@@ -98,12 +98,14 @@ Icons in place of markers
 [Test Cases](https://github.com/kshannn/clinics-near-me/blob/32189b39c441dcd88911985900f8c38e9e7f213d/scoring/test_cases.pdf)
 
 
-
 _Limitations and future implementations_
 * Due to leaflet clustering feature, when map is set to view a coordinate, the exact location at the coordinate is not shown but instead a cluster number is shown. Using a higher zoom setting only resolves the problem sometimes.
 * Currently, it takes some time to load the location tracking. In the future, I would like to improve the load time for location tracking or add a loading icon to indicate that location tracking is being loaded in the background.
 * Include waiting time and vacancies at each clinic. To my knowledge, there is currently no API that provides these details .
 * Some names of clinics/pharmarcies are the same as there are chain outlets. This causes repetition of search suggestions. In the future, I would like to differentiate this outlets by including their location details in the suggestions as well.
+
+**Testing for Mobile Responsiveness**
+ * Testing was done using chrome developer tool across iPhone X, Galaxy S5, iPad, iPad Pro, 13-inch MacBook Air
 
 
 ## **Technologies Used**

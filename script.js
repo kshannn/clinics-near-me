@@ -459,11 +459,11 @@ async function filter() {
 // Close overlay
 document.querySelector("#closeBtn").addEventListener("click",function(){
     document.querySelector("#content").style.display = "none";
-    document.querySelector("#contentContainer").style.display = "none";
+    document.querySelector("#locationTrackingContainer").style.display = "none";
     document.querySelector("#map").style.zIndex = "0";
     document.querySelector("#descriptionBox").style.zIndex = "1";
     document.querySelector("#innerContainer").style.zIndex = "2";
-    document.querySelector("#innerContentBox").style.zIndex = "1";
+    document.querySelector("#searchContentBox").style.zIndex = "1";
     document.querySelector("#toggleLayer").style.zIndex = "1";
     document.querySelector("#brandBar").style.zIndex = "1";
 })
@@ -474,11 +474,11 @@ document.querySelector("#closeBtn").addEventListener("click",function(){
 function setCurrentLocation(){
     // 1. close overlay on click
     document.querySelector("#content").style.display = "none";
-    document.querySelector("#contentContainer").style.display = "none";
+    document.querySelector("#locationTrackingContainer").style.display = "none";
     document.querySelector("#map").style.zIndex = "0";
     document.querySelector("#descriptionBox").style.zIndex = "1";
     document.querySelector("#innerContainer").style.zIndex = "2";
-    document.querySelector("#innerContentBox").style.zIndex = "1";
+    document.querySelector("#searchContentBox").style.zIndex = "1";
     document.querySelector("#toggleLayer").style.zIndex = "1";
     document.querySelector("#brandBar").style.zIndex = "1";
 
@@ -517,13 +517,13 @@ function setCurrentLocation(){
 // About Us Popup
 document.querySelector("#aboutUsBtn").addEventListener("click", function(){
     document.querySelector("#aboutUsOverlay").style.display = "flex"
-    document.querySelector("#innerContentBox").style.zIndex = "-1"
+    document.querySelector("#searchContentBox").style.zIndex = "-1"
 })
 
 // Close About Us Popup
 document.querySelector("#aboutUsCloseBtn").addEventListener("click", function(){
     document.querySelector("#aboutUsOverlay").style.display = "none"
-    document.querySelector("#innerContentBox").style.zIndex = "1"
+    document.querySelector("#searchContentBox").style.zIndex = "1"
 })
 
 
