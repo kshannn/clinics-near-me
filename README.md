@@ -1,4 +1,8 @@
 # CHAS Clinic Finder
+<img src='images/all_devices_display.png' style='display:block'>
+
+
+[Live Demo](https://kshannn.github.io/clinics-near-me/)
 
 ## Project Summary
 
@@ -19,11 +23,11 @@ The aim of users is to obtain subsidized healthcare services. The app seeks to h
 While there are location information of CHAS clinic online, the format in which the information are currently presented is not user-friendly (e.g. spreadsheet). Such hurdles could create unnecessary frustration especially for users that are seeking for medical attention urgently. As such, having an interactive map that allow users to see all the locations of CHAS clinics at a glance as well as having a built-in search bar could ease the search process.
 
 
-[Live Demo](https://kshannn.github.io/clinics-near-me/)
+
 
 ## Project Complexity
 
-
+[Project Complexity Matrix](https://github.com/kshannn/clinics-near-me/blob/e28a549dc7c0a7d06b959cba2dd1d22b4b90bd61/scoring/project_complexity.pdf)
 
 ## UX/UI
 
@@ -106,6 +110,7 @@ _Limitations and future implementations_
 * Due to leaflet clustering feature, when map is set to view a coordinate, the exact location at the coordinate is not shown but instead a cluster number is shown. Using a higher zoom setting only resolves the problem sometimes.
 * Currently, it takes some time to load the location tracking. In the future, I would like to improve the load time for location tracking or add a loading icon to indicate that location tracking is being loaded in the background.
 * Include waiting time and vacancies at each clinic. To my knowledge, there is currently no API that provides these details .
+* Some names of clinics/pharmarcies are the same as they are chain outlets. This causes repetition of search suggestions. In the future, I would like to differentiate this outlets by including their location details in the suggestions as well.
 
 
 ## **Technologies Used**
@@ -144,6 +149,8 @@ _Limitations and future implementations_
     * To deploy web app
 * [Google Font](https://fonts.google.com/)
     * To select font families used for web app (i.e. Noto Sans)
+* [Multi Device Website Mockup Generator](https://techsini.com/multi-mockup/index.php)
+    * To display screen-responsiveness of website across different devices
 
 ## **Deployment**
 
