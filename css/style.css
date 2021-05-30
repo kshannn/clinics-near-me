@@ -1,11 +1,15 @@
 /* ############## MOBILE DISPLAY ############## */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=PT+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 
 /* Header font */
-/* font-family: 'PT Serif', serif; */
+/* font-family: 'Open Sans', sans-serif; */
 
 /* Body font */
-/* font-family: 'Noto Sans TC', sans-serif; */
+/* font-family: 'Montserrat', sans-serif; */
+
+
+
+
 
 * {
     box-sizing: border-box;
@@ -14,7 +18,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #mainContainer {
@@ -40,7 +44,7 @@ body {
     background-color: #005275;
     position: absolute;
     display: flex;
-    /* font-family: 'PT Serif', serif; */
+    font-family: 'Open Sans', sans-serif;
 }
 
 #brandBar a {

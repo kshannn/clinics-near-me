@@ -28,6 +28,7 @@ window.addEventListener("DOMContentLoaded", async function () {
         let clinicName = extractDetail(clinic, 2).toUpperCase();
         listOfLocations.push(clinicName)
         let clinicTelephone = extractDetail(clinic, 4);
+        clinicTelephone = clinicTelephone.substring(0,4) + " " + clinicTelephone.substring(4,clinicTelephone.length)
         let clinicPostal = extractDetail(clinic, 5)
         let clinicBlock = extractDetail(clinic, 7);
         let clinicStreetName = extractDetail(clinic, 10).toUpperCase();
@@ -161,6 +162,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             // Clinic details
             let clinicName = extractDetail(clinic, 2).toUpperCase();
             let clinicTelephone = extractDetail(clinic, 4);
+            clinicTelephone = clinicTelephone.substring(0,4) + " " + clinicTelephone.substring(4,clinicTelephone.length)
             let clinicPostal = extractDetail(clinic, 5)
             let clinicBlock = extractDetail(clinic, 7);
             let clinicStreetName = extractDetail(clinic, 10).toUpperCase();
@@ -329,6 +331,7 @@ async function filter() {
         // Clinic details
         let clinicName = extractDetail(clinic, 2).toUpperCase();
         let clinicTelephone = extractDetail(clinic, 4);
+        clinicTelephone = clinicTelephone.substring(0,4) + " " + clinicTelephone.substring(4,clinicTelephone.length)
         let clinicPostal = extractDetail(clinic, 5)
         let clinicBlock = extractDetail(clinic, 7);
         let clinicStreetName = extractDetail(clinic, 10).toUpperCase();

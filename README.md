@@ -1,14 +1,13 @@
 # CHAS Clinic Finder
-<img src='images/all_devices_display.png' style='display:block'>
+<img src='images/all_devices_display.png' style='display:block'><br>
 
-
-[Live Demo](https://zealous-haibt-e1010f.netlify.app)
+Access the live demo of the website [here](https://zealous-haibt-e1010f.netlify.app)
 
 ## Project Summary
 
 **Project Context**
 
-The _CHAS Clinic Finder_ is an interactive map developed to allow its users to easily search for CHAS clinics around Singapore. CHAS refers to Community Health Assist Scheme (CHAS). Under this scheme, eligible citizens would be able to receive subsidized healthcare treatments in the participating clinic outlets.
+The _CHAS Clinic Finder_ is a mobile-responsive and interactive map developed to allow its users to easily search for CHAS clinics around Singapore. CHAS refers to Community Health Assist Scheme (CHAS). Under this scheme, eligible citizens would be able to receive subsidized healthcare treatments in the participating clinic outlets.
 
 **Organisational Goals**
 
@@ -59,6 +58,7 @@ _Content requirements_
 
 _Non-functional requirements_
 * Mobile responsiveness
+    * Achieved via the use of appropriate media breakpoints and flex box
 * Performance
 
 
@@ -148,6 +148,16 @@ _Limitations and future implementations_
 
 The web app is hosted using Netlify .
 
+**Steps to deployment**
+1. Any edits were added, commited, and pushed to GitHub via the terminal on Visual Studio Code.
+2. Go to https://www.netlify.com/ and log in with Github account. 
+3. Click on "New site from Git" button
+4. Select "GitHub" for continuous deployment
+5. Authorize access to GitHub should a pop-up appear 
+6. Select the repository that you want to deploy
+7. Click on "Deploy site" button to get a link for the deployed site
+
+
 **Dependencies**
 
 * [Data.gov.sg](https://data.gov.sg/)
@@ -166,8 +176,11 @@ The web app is hosted using Netlify .
     * Downloaded and edited from [Flaticon](https://www.flaticon.com/)
 
 * Brand logo
-    * Taken end edited from [CHAS website](https://www.chas.sg/default.aspx?type=public)
+    * Taken and edited from [CHAS website](https://www.chas.sg/default.aspx?type=public)
 
 * Details about Community Health Assist Scheme (CHAS)
     * Extracted from [CHAS website](https://www.chas.sg/content.aspx?id=303)
+* Deployment steps
+    * Extracted and edited based on [TGC's deployment guide](https://docs.google.com/document/d/1f_aYsk4qqjYjkrWMOK5E2wS6hlasZL-ov7Q05ccSv9c/edit?usp=sharing)
+
 
