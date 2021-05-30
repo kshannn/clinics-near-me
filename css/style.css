@@ -26,7 +26,6 @@ body {
     transform: translateX(0);
 }
 
-
 /* ========== Navigation BAr ========== */
 #brandBar {
     width: 100%;
@@ -63,7 +62,7 @@ body {
 }
 
 #aboutUs {
-    width: 90px;
+    min-width: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,7 +82,6 @@ body {
 #aboutUs button:hover {
     background-color: #97B3BF;
 }
-
 
 /* ========== Overlay box ========== */
 #locationTrackingContainer {
@@ -133,9 +131,7 @@ body {
     padding: 50px 15% 20px 15%;
 }
 
-
 /* ========== About Us ========== */
-
 #aboutUsOverlay {
     height: 100vh;
     width: 100%;
@@ -197,7 +193,7 @@ body {
 ::-webkit-scrollbar-thumb {
     background: rgba(128, 128, 128, 0.336);
     border-radius: 10px;
-  }
+}
 
 /* ========== Map ========== */
 #map {
@@ -213,7 +209,6 @@ body {
 }
 
 /* ========== Inner Search Box/Suggestions ========== */
-
 #innerContainer {
     width: 100%;
     position: absolute;
@@ -233,7 +228,6 @@ body {
     border: none;
 }
 
-
 #innerSearchBtn {
     width: 50px;
     height: 50px;
@@ -247,7 +241,6 @@ body {
     background-color: #97B3BF;
 }
 
-
 #suggestions {
     width: 100%;
     width: calc(100% - 50px);
@@ -256,7 +249,6 @@ body {
     display: flex;
     position: relative;
 }
-
 
 #suggestedList {
     width: 100%;
@@ -278,7 +270,6 @@ body {
 #suggestions li {
     box-shadow: 0 0 1px;
     padding-left: 20px;
-    /* margin: 0px 40px; */
 }
 
 input[type="text" i] {
@@ -290,7 +281,6 @@ input[type="text" i] {
 }
 
 /* ========== Toggle Layers ========== */
-
 #toggleLayer {
     width: 95%;
     margin: 0% 2.5%;
@@ -406,7 +396,6 @@ input[type="text" i] {
     text-decoration: none;
 }
 
-
 .showNearby {
     font-style:italic;
     margin-bottom: 0.5rem;
@@ -430,8 +419,6 @@ input[type="text" i] {
     background:rgba(151, 243, 151, 0.808);
     cursor: pointer;
 }
-
-
 
 /* ############## TABLET DISPLAY ############## */
 
@@ -465,7 +452,6 @@ input[type="text" i] {
         top: 70px;
     }
 
-
     /* ========== Big Description Box ========== */
     #descriptionBox {
         width: 37%;
@@ -480,4 +466,3 @@ input[type="text" i] {
 
 }
 
-}
