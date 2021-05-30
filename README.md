@@ -94,23 +94,15 @@ Icons in place of markers
 
 ## **Features**
 
-* User would be asked if they would allow the app access to their current location. Upon agreeing, the app would track their current location and immediatelly show where they are on the Leaflet map
-* When user does not search for anything or search for an input that does not exist, they would be prompted by an alert message to enter a valid input. The alert message can be dismissed using the close button or when the user re-enters a search term (This feature is implemented using the bootstrap alert class)
-* When user searches with the exact clinic or pharmacy name, the map would be set to the targeted place immediatelly.
-* When user searches for part of the clinic or pharmacy name, the map would be set to the most similar result available.
-* As user types in a search term, similar search results would be suggested and updated at every key press. This feature is paired together with the debounce function so that the function waits before firing instead of updating the search results at every key press.
-* Clicking directly on a suggested search result would set the map to the targeted location.
-* When a location is being searched, or when user clicks on a marker, a popup describing the name and details of the clinic or pharmacy would appear.
-* In each of the description box, users can toggle an on/off button to display a 500m radius circle around the location they are currently at or viewing. This circle allows them to estimate how far they are from other clinics or pharmacies. This can be useful for those who want to be able to easily see which clinics are closest to them, for those who want to find a nearby pharmacy to get additional healthcare supplies, or for those who want to try out other clinic outlets should there be a long queue for the one they are currently at.
-* Clicking from one marker to another marker would change the description displayed in the description box.
-* There is a feature on the right hand corner of the screen to toggle the clinic and pharmacy layers on and off depending on which markers users would like to view. (This is implemented using leaflet layer group feature)
-* Markers within close proximty are clustered together. (This is implemented with leaflet clustering feature)
+[Test Cases](https://github.com/kshannn/clinics-near-me/blob/32189b39c441dcd88911985900f8c38e9e7f213d/scoring/test_cases.pdf)
+
+
 
 _Limitations and future implementations_
 * Due to leaflet clustering feature, when map is set to view a coordinate, the exact location at the coordinate is not shown but instead a cluster number is shown. Using a higher zoom setting only resolves the problem sometimes.
 * Currently, it takes some time to load the location tracking. In the future, I would like to improve the load time for location tracking or add a loading icon to indicate that location tracking is being loaded in the background.
 * Include waiting time and vacancies at each clinic. To my knowledge, there is currently no API that provides these details .
-* Some names of clinics/pharmarcies are the same as they are chain outlets. This causes repetition of search suggestions. In the future, I would like to differentiate this outlets by including their location details in the suggestions as well.
+* Some names of clinics/pharmarcies are the same as there are chain outlets. This causes repetition of search suggestions. In the future, I would like to differentiate this outlets by including their location details in the suggestions as well.
 
 
 ## **Technologies Used**

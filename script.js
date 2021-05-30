@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     let listOfLocations = [];
 
     // Clinic geojson data
-    let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
+    let clinicsResponse = await axios.get("geojson/chas_clinics.geojson");
     let clinicsData = clinicsResponse.data.features
 
     // Customize clinic icon
@@ -63,7 +63,7 @@ window.addEventListener("DOMContentLoaded", async function () {
 
 
     // Pharmacy geojson Data
-    let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
+    let pharmacyResponse = await axios.get("geojson/retail_pharmacy.geojson");
     var pharmacyData = pharmacyResponse.data.features
 
     // Customize pharmacy icon
@@ -321,7 +321,7 @@ async function filter() {
     let innerSearch = document.querySelector("#innerTextBox").value;
     
     // Clinic geojson data
-    let clinicsResponse = await axios.get("geojson/chas-clinics.geojson");
+    let clinicsResponse = await axios.get("geojson/chas_clinics.geojson");
     let clinicsData = clinicsResponse.data.features
 
 
@@ -364,7 +364,7 @@ async function filter() {
     
 
     // // Pharmacy geojson Data
-    let pharmacyResponse = await axios.get("geojson/retail-pharmacy.geojson");
+    let pharmacyResponse = await axios.get("geojson/retail_pharmacy.geojson");
     let pharmacyData = pharmacyResponse.data.features
 
     for (let pharmacy of pharmacyData) {
