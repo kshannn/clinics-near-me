@@ -2,7 +2,7 @@
 <img src='images/all_devices_display.png' style='display:block'>
 
 
-[Live Demo](https://kshannn.github.io/clinics-near-me/)
+[Live Demo](https://zealous-haibt-e1010f.netlify.app)
 
 ## Project Summary
 
@@ -146,7 +146,7 @@ _Limitations and future implementations_
 
 ## **Deployment**
 
-The web app is hosted using _____ .
+The web app is hosted using Netlify .
 
 **Dependencies**
 
