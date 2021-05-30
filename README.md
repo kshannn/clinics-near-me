@@ -91,6 +91,7 @@ Font
 
 Icons in place of markers
 * Instead of using the custom marker designs provided by Leaflet, the markers are replaced with icons that matches the marker (e.g. pharmacy markers are represented with a pill icon).This makes it easier to make the association using the customized icons.
+* Colors used for the icons are also selected to match the brand logo for consistency.
 
 ## **Features**
 
@@ -182,5 +183,6 @@ The web app is hosted using Netlify .
     * Extracted from [CHAS website](https://www.chas.sg/content.aspx?id=303)
 * Deployment steps
     * Extracted and edited based on [TGC's deployment guide](https://docs.google.com/document/d/1f_aYsk4qqjYjkrWMOK5E2wS6hlasZL-ov7Q05ccSv9c/edit?usp=sharing)
+* Design inspired by [Google Maps](https://www.google.com.sg/maps/)
 
 

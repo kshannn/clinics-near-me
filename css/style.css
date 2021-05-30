@@ -428,20 +428,21 @@ input[type="text" i] {
     margin-top: 0.4rem;
 }
 
-#call{
-    background:rgba(124, 245, 124, 0.808);
-    width: 50px;
-    height: 20px;
+#call {
+    background: rgba(114, 252, 114, 0.808);
+    width: 65px;
+    height: 30px;
     border-radius: 24px;
     text-align: center;
-    line-height: 20px;
-    margin-top: 10px;
-    margin-left: 10px;
+    line-height: 30px;
+    margin-top: 3px;
+    margin-left: 12px;
     color: black;
+    font-size: 0.8rem;
 }
 
 #call:hover{
-    background:rgba(103, 255, 103, 0.808);
+    background:rgba(151, 243, 151, 0.808);
     cursor: pointer;
 }
 

@@ -48,7 +48,7 @@ function displayClinicDescription(clinicName,clinicBlock,clinicStreetName,clinic
         </div>
         <div class="details detailsTelephone">
             <p>${clinicTelephone}</p>
-            <a href="tel:${clinicTelephone}"><div id="call">CALL</div></a>
+            <a href="tel:${clinicTelephone}"><div id="call"><strong>CALL</strong></div></a>
         </div>
     </div>
     <p class="showNearby">Show pharmacies within 500m:</p>
