@@ -92,7 +92,7 @@ _Non-functional requirements_
 
 ### **Skeleton**
 
-Access the wireframes for mobile, tablet, and laptop display for the website [here](https://github.com/kshannn/clinics-near-me/blob/7645be2835efb507205d25dae4a1135530576186/wireframes/clinic_finder_mockup.pdf)
+Access the wireframes for mobile, tablet, and laptop display for the website [here](https://github.com/kshannn/clinics-near-me/blob/7f6946e5c7c984a972f44dd81a9fd51f1859b544/wireframes/clinic_finder_mockup.pdf)
 
 ### **Surface**
 
@@ -103,42 +103,50 @@ _Colours_
 
 * The main colour scheme of the app are the different shades of blue as depicted above. 
 As the colour blue is often associated with trust and stability, a blue colour scheme was chosen to associate feelings of trust towards the app. In times of emergency (e.g. urgent medical attention is required), it is important that users trust that the app would function properly in helping them search for clinics.
+
 * White font is generally used to contrast with the darker color scheme. This is to make it easier to read for users, where majority are presumed to be in their middle adulthood.
 
 
 _Font Choice_
-* The font used for the brand name is in san-serif to match the brand logo
+* The font used for the brand name is in san-serif to match the brand logo.
+
 * Font size is set to be big to allow users to see better.
-* The use of san-serif makes words easier to read, which can be important for users who are older and more likely to have declining eye sight.
+
+* The use of san-serif makes words easier to read, which can be important for users who are older and are more likely to have poorer eye sight.
 
 _Icons in place of markers_
-* Instead of using the marker designs provided by Leaflet, the markers are replaced with icons that matches the marker (e.g. pharmacy markers are represented with a pill icon).This makes it easier to make the association using customized icons.
-* Colors used for the icons are also selected to match the brand logo for consistency.
+* Instead of using the marker designs provided by Leaflet, the markers are replaced with icons that are closely associated to them (e.g. pharmacy markers are represented with a pill icon).This makes it easier to draw the connection when using customized icons.
+
+* Colors used for the icons (i.e. red, orange, yellow) were selected to match the brand logo for consistency.
 
 ## Features
-1. **Users can allow the map to access their current location**. This provide users with an idea of the available CHAS clinics and pharmacies that are close to them. User would be asked if they would allow the app access to their current location. Upon agreeing, the app would track their current location and immediatelly show where they are on the Leaflet map. 
+1. **Users can allow the map to access their current location**. This provide users with an idea of the available CHAS clinics and pharmacies that are close to them. Users would be asked if they would allow the app access to their current location. Upon agreeing, the app would track their current location and immediatelly show where they are on the Leaflet map. 
 
-2. **Search suggestions would appear as users type.** This feature makes the search process more efficient and intuitive as users can search without having to type out their entire search query. This feature is created using an event listener that updates search suggestion at every key press. The feature is also paired together with the debounce function so that the function waits before firing instead of updating the suggestions at every key press.
+2. **Search suggestions would appear as users type.** This feature makes the search process more efficient and intuitive as users can search without having to type out the full search query. This feature is created using an event listener that updates search suggestion at every key press. The feature is also paired together with the debounce function so that the function waits before firing instead of updating the suggestions at every key press.
 
-3. **Users can toggle on/off a 500m radius circle around a location.** This circle allows them to estimate how far they are from other clinics or pharmacies. This can be useful for those who want to be able to easily see which clinics are closest to them, for those who want to find a nearby pharmacy to get additional healthcare supplies, or for those who want to try out other clinic outlets should there be a long queue for the one they are currently at. This feature is implemented by creating a Leaflet circle layer.
+3. **Users can toggle on/off a 500m radius circle around a location.** This circle allows users to estimate how far they are from other clinics or pharmacies. This can be useful for those who want to be able to easily see which clinics are closest to them, for those who want to find a nearby pharmacy to get additional healthcare supplies, or for those who want to try out other clinic outlets should there be a long queue for the one they are currently at. This feature is implemented by creating Leaflet circle layers.
 
 4. **Clicking on a search suggestion or a marker displays the description of the clinic/pharmacy.** Useful information such as the address and telephone number of the clinics/pharmacies would be displayed for users' reference. This feature is implemented by attaching click event listeners to the search suggestion and markers, as well as showing and hiding the description box using CSS class properties.
 
-5. **Users can directly call the clinic by pressing on the call button next to the clinic hotline.** In the event that users need to contact medical staff from a particular CHAS clinic, they can do so easily by clicking or tapping on the call button. By tapping on the call button, they will be redirected to the call feature depending on the device they are using.
+5. **Users can directly call the clinic by clicking on the call button next to the clinic hotline.** In the event that users need to contact medical staff from a particular CHAS clinic, they can do so easily by clicking or tapping on the call button. By tapping on the call button, they will be redirected to the call feature depending on the device they are using.
 
-6. **Users would receive an alert prompt if they key in an invalid input.** When users search with an empty field or search for an input that does not exist, they would be prompted by an alert message to enter a valid input. The alert message can be dismissed using the close button or when the user re-enters a search term.This feature is implemented using the bootstrap alert class.
+6. **Users would receive an alert prompt if they key in an invalid input.** When users search with an empty field or search with an input that does not exist, they would be prompted by an alert message to enter a valid input. The alert message can be dismissed using the close button or when the user re-enters a valid search term. This feature is implemented using the bootstrap alert class.
 
-7. **Users can toggle the clinic and pharmacy layers.** This allow users to show and hide the layers they prefer to see. For example, users may want to view just the CHAS clinic on the map and thus choose to hide all the pharmacies. On the right hand corner of the screen, there is a button that allow users to toggle the clinic and pharmacy layers on and off depending on which markers they would like to view. This feature is implemented using leaflet layer group feature.
+7. **Users can toggle the clinic and pharmacy layers.** This allow users to show and hide the layers they prefer to see. For example, users may want to view just the CHAS clinic on the map and thus choose to hide all the pharmacies. On the top right corner of the screen, there is a button that allow users to toggle the clinic and pharmacy layers on and off depending on which markers they would like to view. This feature is implemented using leaflet layer group feature.
 
 8. **Markers within close proximty are clustered together.** With a clutter-free map, users would be able to view the location of each clinic and pharmacy more easily. This feature is implemented with leaflet clustering feature.
 
 
 _Limitations and future implementations_
 * Due to leaflet clustering feature, when map is set to view a coordinate, the exact location at the coordinate is not shown but instead a cluster number is shown. Using a higher zoom setting only resolves the problem sometimes.
+
 * Currently, it takes some time to load the location tracking. In the future, I would like to improve the load time for location tracking or add a loading icon to indicate that location tracking is being loaded in the background.
+
 * Include waiting time and vacancies at each clinic. To my knowledge, there is currently no API that provides these details .
+
 * Some names of clinics/pharmarcies are the same as there are chain outlets. This causes repetition of search suggestions. In the future, I would like to differentiate this outlets by including their location details in the search suggestions as well.
-* Unable to attach keyup event listener to ENTER key as it triggers other function
+
+* In the future, I would like to implement search using the ENTER key as well. Currently, I am unable to attach keyup event listener to ENTER key as it conflicts with other function.
 
 
 ## Testing
