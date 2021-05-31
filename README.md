@@ -43,13 +43,12 @@ _User_
     * Sufficient literacy in using technological devices
 * Pain point: Have to seek medical attention but information online cannot be easily accessed
 * User stories example:
-    1. As a person who is sick, I want to be able to access nearby CHAS clinics quickly so that I can seek immediate treatment.
-        * Acceptance criteria: Location tracking function
-    2. As a person who is stuck in a long queue at a CHAS clinic, I want to see if there are other clinics and pharmacies nearby so that I can consider seeking alternative treatment
-        * Acceptance criteria: Feature that can allow users to see nearby clinics and pharmacies
-    3. As a CHAS card holder, I want to clarify regarding the subsidies I am eligible for so that I can decide whether to visit the clinic.
-        * Acceptance criteria(s): A call feature to the clinic, information regarding the different subsidy levels on the website
-
+  
+User Stories | Acceptance Criteria(s)
+------------ | -------------
+As a person who is sick, I want to be able to access nearby CHAS clinics quickly so that I can seek immediate treatment. | Location tracking function
+As a person who is stuck in a long queue at a CHAS clinic, I want to see if there are other clinics and pharmacies nearby so that I can consider seeking alternative treatment | Feature that can allow users to see nearby clinics and pharmacies
+As a CHAS card holder, I want to clarify regarding the subsidies I am eligible for so that I can decide whether to visit the clinic.| A call feature to the clinic and information regarding the different subsidy levels on the website
 
 
 ### **Scope**
