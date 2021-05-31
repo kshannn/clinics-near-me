@@ -169,7 +169,7 @@ Access the test cases [here](https://github.com/kshannn/clinics-near-me/blob/283
 * [Netlify](https://www.netlify.com/)
     * To deploy web app
 * [Google Font](https://fonts.google.com/)
-    * To select font families used for web app (i.e. Noto Sans)
+    * To select font families used for web app (i.e. Montserrat, Open Sans)
 * [Multi Device Website Mockup Generator](https://techsini.com/multi-mockup/index.php)
     * To display screen-responsiveness of website across different devices
 
