@@ -11,11 +11,11 @@ The _CHAS Clinic Finder_ is a mobile-responsive and interactive map developed to
 
 **Organisational Goals**
 
-The app aims to provide a service to ease the process of users in their search for CHAS clinics through filtering out clinics that are not associated with CHAS.
+The app aims to provide a service to ease the process of users in their search for CHAS clinics.
 
 **User Goals**
 
-The aim of users is to obtain subsidized healthcare services. The app seeks to help users achieve their needs by providing a quick and user-friendly map to locate nearby CHAS clinic.
+The aim of users is to obtain subsidized healthcare services. The app thus seeks to help users achieve their needs by providing a quick and user-friendly map to locate nearby CHAS clinic.
 
 **Justification for the App**
 
@@ -26,11 +26,11 @@ While there are location information of CHAS clinic online, the format in which 
 
 ## Project Complexity
 
-[Project Complexity Matrix](https://github.com/kshannn/clinics-near-me/blob/e28a549dc7c0a7d06b959cba2dd1d22b4b90bd61/scoring/project_complexity.pdf)
+Access the Project Complexity Matrix [here](https://github.com/kshannn/clinics-near-me/blob/e28a549dc7c0a7d06b959cba2dd1d22b4b90bd61/scoring/project_complexity.pdf)
 
 ## UX/UI
 
-#### **Strategy**
+### **Strategy**
 _Organisation_
 * Objective: Provide a service to ease the process of users in their search for CHAS clinics
 
@@ -42,9 +42,17 @@ _User_
     * From lower-income family
     * Sufficient literacy in using technological devices
 * Pain point: Have to seek medical attention but information online cannot be easily accessed
+* User stories example:
+    1. As a person who is sick, I want to be able to access nearby CHAS clinics quickly so that I can seek immediate treatment.
+        * Acceptance criteria: Location tracking function
+    2. As a person who is stuck in a long queue at a CHAS clinic, I want to see if there are other clinics and pharmacies nearby so that I can consider seeking alternative treatment
+        * Acceptance criteria: Feature that can allow users to see nearby clinics and pharmacies
+    3. As a CHAS card holder, I want to clarify regarding the subsidies I am eligible for so that I can decide whether to visit the clinic.
+        * Acceptance criteria(s): A call feature to the clinic, information regarding the different subsidy levels on the website
 
 
-#### **Scope**
+
+### **Scope**
 
 _Functional Specifications_
 * Search for clinics
@@ -62,19 +70,19 @@ _Non-functional requirements_
 * Performance
 
 
-#### **Structure**
+### **Structure**
 
 * The CHAS Clinic Finder application is structured using a tree hierarchy.
 * The navigation bar includes "About Us" to provide more details about the application
 * The application uses language that is easy for users to understand and contains no technical jargons
 
-#### **Skeleton**
+### **Skeleton**
 
-[Wireframes for mobile, tablet, and laptop display](https://github.com/kshannn/clinics-near-me/blob/a23464666e5f3c939614abe3e776bc484ec67397/wireframes/clinic_finder_mockup.pdf)
+Access the wireframes for mobile, tablet, and laptop display for the website [here](https://github.com/kshannn/clinics-near-me/blob/a23464666e5f3c939614abe3e776bc484ec67397/wireframes/clinic_finder_mockup.pdf)
 
-#### **Surface**
+### **Surface**
 
-Colours
+_Colours_
 
 <img src='images/colour_palette.png' style='display:block'>
 <br>
@@ -84,13 +92,13 @@ As the colour blue is often associated with trust and stability, a blue colour s
 * White font is generally used to contrast with the darker color scheme. This is to make it easier to read for users, where majority are presumed to be in their middle adulthood.
 
 
-Font
+_Font Choice_
 * The font used for the brand name is in san-serif to match the brand logo
 * Font size is set to be big to allow users to see better.
 * The use of san-serif makes words easier to read, which can be important for older users.
 
-Icons in place of markers
-* Instead of using the custom marker designs provided by Leaflet, the markers are replaced with icons that matches the marker (e.g. pharmacy markers are represented with a pill icon).This makes it easier to make the association using the customized icons.
+_Icons in place of markers_
+* Instead of using the marker designs provided by Leaflet, the markers are replaced with icons that matches the marker (e.g. pharmacy markers are represented with a pill icon).This makes it easier to make the association using customized icons.
 * Colors used for the icons are also selected to match the brand logo for consistency.
 
 ## **Features**
@@ -102,7 +110,7 @@ _Limitations and future implementations_
 * Due to leaflet clustering feature, when map is set to view a coordinate, the exact location at the coordinate is not shown but instead a cluster number is shown. Using a higher zoom setting only resolves the problem sometimes.
 * Currently, it takes some time to load the location tracking. In the future, I would like to improve the load time for location tracking or add a loading icon to indicate that location tracking is being loaded in the background.
 * Include waiting time and vacancies at each clinic. To my knowledge, there is currently no API that provides these details .
-* Some names of clinics/pharmarcies are the same as there are chain outlets. This causes repetition of search suggestions. In the future, I would like to differentiate this outlets by including their location details in the suggestions as well.
+* Some names of clinics/pharmarcies are the same as there are chain outlets. This causes repetition of search suggestions. In the future, I would like to differentiate this outlets by including their location details in the search suggestions as well.
 
 **Testing for Mobile Responsiveness**
  * Testing was done using chrome developer tool across iPhone X, Galaxy S5, iPad, iPad Pro, 13-inch MacBook Air
@@ -128,7 +136,7 @@ _Limitations and future implementations_
 * [Font Awesome](https://fontawesome.com/)
     * For icons in the description box
 * [Flaticon](https://www.flaticon.com/)
-    * For customized marker icons
+    * For customizing marker icons
 * [Adobe Color](https://color.adobe.com/create/color-wheel)
     * To create a colour theme for the app
 * [Git](https://git-scm.com/)
@@ -149,9 +157,9 @@ _Limitations and future implementations_
 
 ## **Deployment**
 
-The web app is hosted using Netlify .
+The web app is hosted using Netlify.
 
-**Steps to deployment**
+**Steps to deployment using Netlify**
 1. Any edits were added, commited, and pushed to GitHub via the terminal on Visual Studio Code.
 2. Go to https://www.netlify.com/ and log in with Github account. 
 3. Click on "New site from Git" button
