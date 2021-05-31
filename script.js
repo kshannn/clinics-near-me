@@ -108,12 +108,6 @@ window.addEventListener("DOMContentLoaded", async function () {
             }
         })
     }
-    // === Searching using ENTER key === 
-    document.querySelector("#innerTextBox").addEventListener("keyup",function(e){
-        if (e.keyCode == 13){
-            document.querySelector("#innerSearchBtn").click();
-        }
-    })
 
     // === Clicking on search button ===
     document.querySelector("#innerSearchBtn").addEventListener("click", function () {
@@ -226,9 +220,9 @@ document.querySelector("#toggleLayerBtn").addEventListener("click", function () 
 
 // === Search on key change ===
 const debounce = (func, delay) => {
+    
     let timeOutId;
     return function () {
-
         if (timeOutId) {
             clearTimeout(timeOutId)
         }
@@ -327,12 +321,12 @@ async function filter() {
     // === Highlighting search suggestions on mouse interaction ===
     // === Clicking on suggestion sets map to location and show description ===
     for (let each_suggestedResult of document.querySelectorAll(".suggestedResults")) {
-        each_suggestedResult.addEventListener("mouseover", function (event) {
-            event.target.style.backgroundColor = "rgba(0,0,0,0.2)"
-            event.target.style.cursor = "pointer"
+        each_suggestedResult.addEventListener("mouseover", function (e) {
+            e.target.style.backgroundColor = "rgba(0,0,0,0.2)"
+            e.target.style.cursor = "pointer"
         })
-        each_suggestedResult.addEventListener("mouseout", function (event) {
-            event.target.style.backgroundColor = "white"
+        each_suggestedResult.addEventListener("mouseout", function (e) {
+            e.target.style.backgroundColor = "white"
         })
         each_suggestedResult.addEventListener("click", function (e) {
             map.setView([e.target.getAttribute('data-lat'), e.target.getAttribute('data-lon')], 20);
