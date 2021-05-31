@@ -151,7 +151,9 @@ _Limitations and future implementations_
 
 ## Testing
 
-Access the test cases [here](https://github.com/kshannn/clinics-near-me/blob/2838285a67468e1cad7c54d91751401bf9b9a09a/scoring/test_cases.pdf).
+**Test Cases**
+
+Access the test cases [here](https://github.com/kshannn/clinics-near-me/blob/de025924b7e888bd24ed85362eb7b295252b242f/scoring/test_cases.pdf).
 
 **Testing for Mobile Responsiveness**
  * Testing was done using chrome developer tool across iPhone X, Galaxy S5, iPad, iPad Pro, 13-inch MacBook Air
@@ -183,10 +185,10 @@ Access the test cases [here](https://github.com/kshannn/clinics-near-me/blob/283
 * [Git](https://git-scm.com/)
     * For version control
 * [GitHub](http://github.com)
-    * To store source code
+    * To create repository
 * [Visual Studio Code](https://code.visualstudio.com/)
-    * To edit source code
-    * To view changes made to source code live
+    * To edit code
+    * To view changes made to code live
 * [Balsamiq Mockups 3](https://balsamiq.com/)
     * To create wireframes
 * [Netlify](https://www.netlify.com/)
@@ -234,6 +236,6 @@ The web app is hosted using Netlify.
     * Extracted from [CHAS website](https://www.chas.sg/content.aspx?id=303)
 * Deployment steps
     * Extracted and edited based on [TGC's deployment guide](https://docs.google.com/document/d/1f_aYsk4qqjYjkrWMOK5E2wS6hlasZL-ov7Q05ccSv9c/edit?usp=sharing)
-* Design inspired by [Google Maps](https://www.google.com.sg/maps/)
+* Design of map inspired by [Google Maps](https://www.google.com.sg/maps/)
 
 
