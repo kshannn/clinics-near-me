@@ -108,7 +108,12 @@ window.addEventListener("DOMContentLoaded", async function () {
             }
         })
     }
-
+    // === Searching using ENTER key === 
+    document.querySelector("#innerTextBox").addEventListener("keyup",function(e){
+        if (e.keyCode == 13){
+            document.querySelector("#innerSearchBtn").click();
+        }
+    })
 
     // === Clicking on search button ===
     document.querySelector("#innerSearchBtn").addEventListener("click", function () {
@@ -117,7 +122,7 @@ window.addEventListener("DOMContentLoaded", async function () {
             document.querySelector("#innerTextBox").style.borderRadius = "5px 0 0 5px"
         } 
         let innerSearch = document.querySelector("#innerTextBox").value;
-
+        
         // === Field Validation ===
         // if substring of search does not match any location
         let similarResult = 0;
@@ -216,6 +221,7 @@ document.querySelector("#toggleLayerBtn").addEventListener("click", function () 
         document.querySelector("#expandedToggle").classList.add("show")
     }
 })
+
 
 
 // === Search on key change ===
@@ -383,6 +389,7 @@ document.querySelector("#aboutUsCloseBtn").addEventListener("click", function ()
     document.querySelector("#aboutUsOverlay").style.display = "none"
     document.querySelector("#searchContentBox").style.zIndex = "1"
 })
+
 
 
 

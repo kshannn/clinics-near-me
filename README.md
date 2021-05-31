@@ -7,11 +7,11 @@ Access the live demo of the website [here](https://zealous-haibt-e1010f.netlify.
 
 **Project Context**
 
-The _CHAS Clinic Finder_ is a mobile-responsive and interactive map developed to allow its users to easily search for CHAS clinics around Singapore. CHAS refers to Community Health Assist Scheme (CHAS). Under this scheme, eligible citizens would be able to receive subsidized healthcare treatments in the participating clinic outlets.
+The _CHAS Clinic Finder_ is a mobile-responsive and interactive map developed to allow its users to easily search for CHAS clinics around Singapore. CHAS refers to the Community Health Assist Scheme (CHAS). Under this scheme, eligible citizens will be able to receive subsidized healthcare treatments in the participating clinic outlets.
 
 **Organisational Goals**
 
-The app aims to provide a service to ease the process of users in their search for CHAS clinics through the use of current location tracking and responsive search feature.
+The app aims to provide a service to ease the process of users in their search for CHAS clinics through the use of current location tracking and responsive search features.
 
 **User Goals**
 
@@ -73,9 +73,12 @@ _Non-functional requirements_
 
 <img src='images/site_map_clinic_finder.png'><br>
 
-* The CHAS Clinic Finder application is structured using a tree hierarchy. For example, when a user enters a search term (e.g. bedok) into the search bar, the search suggestions will be narrowed down to only displaying those that contains "bedok" as the substring. Upon clicking one of the search suggestion, the map will zoom to the location of the clicked search suggestion and display a description box of the location details. Clicking on any marker on the map also result in the same outcome. User can click on the call button beside the telephone number to make a call. Users can also click on the toggle button in the description box to toggle a 500m circle radius around the active coordinates on and off.
+* The CHAS Clinic Finder application is structured using a tree hierarchy. 
+* When user loads the website, they will see a popup asking if they would like to turn on their location service for the map to track their current location. Choosing to turn on their location service would set the map to their current location while choosing not to do so would direct the user to the map showing an overview of Singapore.
 
 * The navigation bar includes "About Us" to provide more details about the application including an external link to more information about the CHAS subsidy details. 
+
+* When a user enters a search term (e.g. bedok) into the search bar, the search suggestions will be narrowed down to only displaying those that contains "bedok" as the substring. Upon clicking one of the search suggestion, the map will zoom to the location of the clicked search suggestion and display a description box of the location details. Clicking on any marker on the map also result in the same outcome. User can click on the call button beside the telephone number to make a call. Users can also click on the toggle button in the description box to toggle a 500m circle radius around the active coordinates on and off.
 
 * Users can toggle the clinic layer and the pharmacy layer on and off when they click to expand the toggle button on the top right corner of the map site.
 
@@ -129,6 +132,7 @@ _Limitations and future implementations_
 * Currently, it takes some time to load the location tracking. In the future, I would like to improve the load time for location tracking or add a loading icon to indicate that location tracking is being loaded in the background.
 * Include waiting time and vacancies at each clinic. To my knowledge, there is currently no API that provides these details .
 * Some names of clinics/pharmarcies are the same as there are chain outlets. This causes repetition of search suggestions. In the future, I would like to differentiate this outlets by including their location details in the search suggestions as well.
+* Unable to attach keyup event listener to ENTER key as it triggers other function
 
 
 ## Testing

@@ -470,6 +470,7 @@ input[type="text" i] {
     #innerSearchBtn {
         border-radius: 0 5px 5px 0;
         box-shadow: 0 0 5px grey;
+        cursor: pointer;
     }
 
     /* ========== Toggle Layers ========== */
