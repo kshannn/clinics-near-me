@@ -92,7 +92,7 @@ _Non-functional requirements_
 
 ### **Skeleton**
 
-Access the wireframes for mobile, tablet, and laptop display for the website [here](https://github.com/kshannn/clinics-near-me/blob/a23464666e5f3c939614abe3e776bc484ec67397/wireframes/clinic_finder_mockup.pdf)
+Access the wireframes for mobile, tablet, and laptop display for the website [here](https://github.com/kshannn/clinics-near-me/blob/7645be2835efb507205d25dae4a1135530576186/wireframes/clinic_finder_mockup.pdf)
 
 ### **Surface**
 
