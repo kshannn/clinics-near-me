@@ -43,7 +43,7 @@ _User_
     * Individuals in their middle adulthood (more prone to health issues)
     * From lower-income family (heavily subsidised under CHAS)
     * Sufficient literacy in using technological devices
-    
+
 * Pain point: Have to seek medical attention but information online cannot be easily accessed
 
   
