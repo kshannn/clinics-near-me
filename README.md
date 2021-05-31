@@ -36,31 +36,38 @@ _Organisation_
 
 _User_
 * Objective: To receive medical attention and/or healthcare service
+
 * Needs: Quick way to locate nearby CHAS clinic 
+
 * Demographics:
-    * Individuals in their middle adulthood
-    * From lower-income family
+    * Individuals in their middle adulthood (more prone to health issues)
+    * From lower-income family (heavily subsidised under CHAS)
     * Sufficient literacy in using technological devices
+    
 * Pain point: Have to seek medical attention but information online cannot be easily accessed
 
   
 User Stories | Acceptance Criteria(s)
 ------------ | -------------
 As a person who is sick, I want to be able to access nearby CHAS clinics quickly so that I can seek immediate treatment. | Location tracking function
-As a person who is stuck in a long queue at a CHAS clinic, I want to see if there are other clinics and pharmacies nearby so that I can consider seeking alternative treatment | Feature that can allow users to see nearby clinics and pharmacies
-As a CHAS card holder, I want to clarify regarding the subsidies I am eligible for so that I can decide whether to visit the clinic.| A call feature to the clinic and information regarding the different subsidy levels on the website
+As a person who is stuck in a long queue at a CHAS clinic, I want to see if there are other clinics and pharmacies nearby so that I can consider seeking alternative treatment. | Feature that can allow users to see nearby clinics and pharmacies
+As a CHAS card user, I want to clarify regarding the subsidies I am eligible for so that I can decide whether to visit the clinic.| A call feature to the clinic and information regarding the different subsidy levels on the website
 
 
 ### **Scope**
 
 _Functional Specifications_
 * Search for clinics
+
 * Turn on location service to detect nearby clinics
+
 * Make call to clinics
 
 _Content requirements_
-* Information about the application
+* Information about the app
+
 * Information about CHAS
+
 * Details of clinic and pharmacies
 
 _Non-functional requirements_
@@ -68,21 +75,20 @@ _Non-functional requirements_
     * Achieved via the use of appropriate media queries and flex box
 * Performance
 
-
 ### **Structure**
 
 <img src='images/site_map_clinic_finder.png'><br>
 
 * The CHAS Clinic Finder application is structured using a tree hierarchy. 
-* When user loads the website, they will see a popup asking if they would like to turn on their location service for the map to track their current location. Choosing to turn on their location service would set the map to their current location while choosing not to do so would direct the user to the map showing an overview of Singapore.
+* When user loads the website, they will see a popup asking if they would like to turn on their location service for the map to track their current location. Choosing to turn on their location service would set the map to their current location while choosing not to do so would direct the user to the map that shows an overview of Singapore.
 
 * The navigation bar includes "About Us" to provide more details about the application including an external link to more information about the CHAS subsidy details. 
 
-* When a user enters a search term (e.g. bedok) into the search bar, the search suggestions will be narrowed down to only displaying those that contains "bedok" as the substring. Upon clicking one of the search suggestion, the map will zoom to the location of the clicked search suggestion and display a description box of the location details. Clicking on any marker on the map also result in the same outcome. User can click on the call button beside the telephone number to make a call. Users can also click on the toggle button in the description box to toggle a 500m circle radius around the active coordinates on and off.
+* When a user enters a search term (e.g. bedok) into the search bar, the search suggestions will be narrowed down to only displaying those that contains "bedok" as the substring. Upon clicking one of the search suggestion, the map will zoom to the location of the clicked search suggestion and display a description box containing the location details. Clicking on any marker on the map also result in the same outcome. Users can click on the call button beside the telephone number to make a call. Users can also click on the toggle button in the description box to toggle a 500m circle radius around the active coordinates.
 
 * Users can toggle the clinic layer and the pharmacy layer on and off when they click to expand the toggle button on the top right corner of the map site.
 
-* The application uses language that is easy for users to understand and contains no technical jargons
+* The app uses language that is easy for users to understand and contains no technical jargons
 
 ### **Skeleton**
 
