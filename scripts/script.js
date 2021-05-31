@@ -166,7 +166,6 @@ window.addEventListener("DOMContentLoaded", async function () {
             let postalCode = extractDetail(pharmacy, 1);
             let roadName = extractDetail(pharmacy, 5).toUpperCase();
 
-
             let pharmacyLocation = pharmacy.geometry.coordinates
             let lat = pharmacyLocation[1]
             let lon = pharmacyLocation[0]
@@ -217,10 +216,8 @@ document.querySelector("#toggleLayerBtn").addEventListener("click", function () 
 })
 
 
-
 // === Search on key change ===
 const debounce = (func, delay) => {
-    
     let timeOutId;
     return function () {
         if (timeOutId) {
@@ -314,8 +311,6 @@ async function filter() {
             } 
         }
     }
-
-
 
 
     // === Highlighting search suggestions on mouse interaction ===

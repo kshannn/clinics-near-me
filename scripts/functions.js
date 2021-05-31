@@ -119,12 +119,12 @@ function displayPharmacyDescription(pharmacyName, roadName, postalCode, lat, lon
 
 let validationMsg = document.querySelector(".alert")
 function showAlert() {
-    // Validation message appear
+    // === Validation message appear ===
     if (validationMsg.classList.contains("hidden")) {
         validationMsg.classList.remove("hidden");
         validationMsg.classList.add("show")
     }
-    // Close Warning Alert
+    // === Close Warning Alert ===
     document.querySelector(".close").addEventListener("click", function () {
         validationMsg.classList.remove("show")
         validationMsg.classList.add("hidden")
