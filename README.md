@@ -42,7 +42,7 @@ _User_
     * From lower-income family
     * Sufficient literacy in using technological devices
 * Pain point: Have to seek medical attention but information online cannot be easily accessed
-* User stories example:
+
   
 User Stories | Acceptance Criteria(s)
 ------------ | -------------
@@ -71,8 +71,14 @@ _Non-functional requirements_
 
 ### **Structure**
 
-* The CHAS Clinic Finder application is structured using a tree hierarchy.
-* The navigation bar includes "About Us" to provide more details about the application
+<img src='images/site_map_clinic_finder.png'><br>
+
+* The CHAS Clinic Finder application is structured using a tree hierarchy. For example, when a user enters a search term (e.g. bedok) into the search bar, the search suggestions will be narrowed down to only displaying those that contains "bedok" as the substring. Upon clicking one of the search suggestion, the map will zoom to the location of the clicked search suggestion and display a description box of the location details. Clicking on any marker on the map also result in the same outcome. User can click on the call button beside the telephone number to make a call. Users can also click on the toggle button in the description box to toggle a 500m circle radius around the active coordinates on and off.
+
+* The navigation bar includes "About Us" to provide more details about the application including an external link to more information about the CHAS subsidy details. 
+
+* Users can toggle the clinic layer and the pharmacy layer on and off when they click to expand the toggle button on the top right corner of the map site.
+
 * The application uses language that is easy for users to understand and contains no technical jargons
 
 ### **Skeleton**
